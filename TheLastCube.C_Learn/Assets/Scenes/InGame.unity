@@ -123,6 +123,71 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &318083648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2047095555208990788, guid: 7344106a29d272a4d8a62bdf67d3ecf8, type: 3}
+  m_PrefabInstance: {fileID: 1244565602}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &318083653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318083648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b918659e106554cab87beb493f7bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving: 0
+--- !u!114 &318083654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318083648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaf0519dbeeb0647be721696556a1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundlayerMask:
+    serializedVersion: 2
+    m_Bits: 16
+  rotateSpeed: 3
+  rotateRate: 0
+--- !u!114 &318083655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318083648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1de523f10eb282344959612d4c632028, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Cube
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &675807929
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +611,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2047095555208990788, guid: 7344106a29d272a4d8a62bdf67d3ecf8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 318083654}
+    - targetCorrespondingSourceObject: {fileID: 2047095555208990788, guid: 7344106a29d272a4d8a62bdf67d3ecf8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 318083653}
+    - targetCorrespondingSourceObject: {fileID: 2047095555208990788, guid: 7344106a29d272a4d8a62bdf67d3ecf8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 318083655}
   m_SourcePrefab: {fileID: 100100000, guid: 7344106a29d272a4d8a62bdf67d3ecf8, type: 3}
 --- !u!1 &1390341761
 GameObject:
