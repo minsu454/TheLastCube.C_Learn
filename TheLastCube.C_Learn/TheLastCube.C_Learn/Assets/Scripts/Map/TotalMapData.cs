@@ -37,14 +37,13 @@ public class TotalMapData : MonoBehaviour
         Camera.main.transform.position = new Vector3((mapScaleX / 2) - 1, 20, (mapScaleZ / 2) - 1);
     }
 
-    public void ShowUpFloor()
+    public int ShowUpFloor()
     {
         int curFloorIdx = depth.Peek();
 
         if (curFloorIdx == mapScaleY - 1)
         {
-            Debug.LogError("This Is MaxFloor");
-            return;
+            return curFloorIdx;
         }
 
         int upFloorIdx = curFloorIdx + 1;
@@ -52,21 +51,24 @@ public class TotalMapData : MonoBehaviour
         depth.Push(upFloorIdx);
 
         mapFloorList[upFloorIdx].gameObject.SetActive(true);
+
+        return upFloorIdx;
     }
 
-    public void ShowDownFloor()
+    public int HideCurFloor()
     {
         int curFloorIdx = depth.Pop();
         int downFloorIdx = depth.Peek();
 
         if (downFloorIdx == -1)
         {
-            Debug.LogError("Is Not See DownFloor");
             depth.Push(curFloorIdx);
-            return;
+            return curFloorIdx;
         }
 
         mapFloorList[curFloorIdx].gameObject.SetActive(false);
         mapFloorList[downFloorIdx].gameObject.SetActive(true);
+
+        return downFloorIdx;
     }
 }
