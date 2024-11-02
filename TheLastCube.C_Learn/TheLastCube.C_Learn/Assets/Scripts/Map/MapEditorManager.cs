@@ -1,3 +1,4 @@
+using ObjectPool;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,8 +17,7 @@ public class MapEditorManager : MonoBehaviour
 
                 if (instance == null)
                 {
-                    GameObject go = new GameObject("MapManager");
-                    instance = go.AddComponent<MapEditorManager>();
+                    throw new UnityException("MapEditorManager");
                 }
             }
             return instance;
@@ -25,9 +25,16 @@ public class MapEditorManager : MonoBehaviour
     }
 
     public TotalMapData MapData { get; private set; }
+    public ObjectPoolContainer pool { get; private set; }
+
+    [SerializeField] private GameObject mapBlockPrefab;
 
     private void Awake()
     {
-        MapData = instance.GetComponent<TotalMapData>();
+        MapData = GetComponent<TotalMapData>();
+
+        mapBlockPrefab.CreateObjectPool(mapBlockPrefab.name, 9000);
+
+        Managers.UI.CreateUI(UIType.MapEditorUI);
     }
 }

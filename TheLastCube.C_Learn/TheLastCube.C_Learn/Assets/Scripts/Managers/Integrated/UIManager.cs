@@ -1,45 +1,66 @@
+using Common.Scene;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour, IManager
 {
-
     private readonly Dictionary<UIType, GameObject> UIContainer = new Dictionary<UIType, GameObject>();
-    private readonly Stack<GameObject> _stack = new Stack<GameObject>();
+    private readonly Stack<BaseUI> depth = new Stack<BaseUI>();
     //UI를 열게될 때마다 Stack에 추가됨.
-
 
     public void Init() // 생성 초기값
     {
         foreach (UIType type in Enum.GetValues(typeof(UIType)))
         {
-            GameObject gameObject = Resources.Load<GameObject>($"{type.ToString()}");
+            GameObject gameObject = Resources.Load<GameObject>($"Prefabs/Popup/{type.ToString()}");
             UIContainer.Add(type, gameObject);
         }
     }
 
-    public void CreateUI(UIType type)
+    public void CreateUI(UIType type, bool curPopupActive = true)
     {
-        if (UIContainer.TryGetValue(type, out GameObject prefab))
+        if (!UIContainer.TryGetValue(type, out GameObject prefab))
         {
-            GameObject createdGameObject = Instantiate(prefab);
-            _stack.Push(createdGameObject);
+            Debug.LogWarning($"Is Not Scene base UI : {type}");
+            return;
         }
+
+        GameObject clone = Instantiate(prefab);
+
+        if (depth.TryPeek(out BaseUI beforeUI) && curPopupActive)
+        {
+            beforeUI.gameObject.SetActive(false);
+        }
+
+        BaseUI afterUI = clone.GetComponent<BaseUI>();
+        afterUI.Init();
+
+        depth.Push(beforeUI);
     }
 
-    public void CloseUI()
+    public void CloseUI(Action LoadScene = null)
     {
-        if (_stack.Count > 0)
+
+        if (LoadScene != null)
         {
-            GameObject uiClose = _stack.Pop(); // 스택에서 가장 최근의 UI를 꺼냄 - 후입선출
-            Destroy(uiClose); // UI 오브젝트를 파괴하여 닫음
+            depth.Clear();
+            LoadScene();
+            return;
         }
-        else
+
+        if (depth.Count == 1)
         {
-            Debug.Log("Close UI is not exist.");
+            return;
+        }
+
+        Destroy(depth.Pop());
+
+        if (depth.TryPeek(out BaseUI baseUI))
+        {
+            baseUI.Init();
+            baseUI.gameObject.SetActive(true);
         }
     }
 

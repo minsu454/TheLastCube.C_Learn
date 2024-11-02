@@ -1,18 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
+using ObjectPool;
 
-public class MapFloor
+public class MapFloor : MonoBehaviour
 {
-    public readonly List<List<MapGroundPoint>> mapfloorLists = new List<List<MapGroundPoint>>();
+    public readonly List<List<MapBlock>> mapfloorLists = new List<List<MapBlock>>();
 
-    public void Create(int mapScaleX, int mapScaleY)
+    private const string poolName = "MapBlock";
+
+    public void Create(int mapScaleX, int mapScaleZ, int curfloor, Transform parent)
     {
-        List<MapGroundPoint> list = new List<MapGroundPoint>();
+        List<MapBlock> list = new List<MapBlock>();
         for (int x = 0; x < mapScaleX; x++)
         {
-            for (int y = 0; y < mapScaleY; y++)
+            for (int y = 0; y < mapScaleZ; y++)
             {
-                MapGroundPoint mapGroundPoint = new MapGroundPoint(new Vector2(x, y), mapfloorLists.Count);
+                GameObject go = ObjectPoolContainer.Instance.Pop(poolName);
+                MapBlock mapBlock = go.GetComponent<MapBlock>();
+
+                mapBlock.Init(new Vector3(mapScaleX, curfloor, mapScaleZ));
+                go.SetActive(true);
             }
         }
 

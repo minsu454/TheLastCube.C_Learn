@@ -9,31 +9,25 @@ public class TotalMapData : MonoBehaviour
 {
     private readonly List<MapFloor> mapFloorList = new List<MapFloor>();
 
-    public int limitXZScale { get; private set; } = 40;
-    public int limitYScale { get; private set; } = 3;
+    [Range(1, 30)] public int mapScaleX = 10;      //left, right
+    [Range(1, 30)] public int mapScaleZ = 10;      //forward, back
 
-    [SerializeField] private int mapScaleX;
-    [SerializeField] private int mapScaleY;
+    [Range(1, 10)] public int mapScaleY = 10;      //up, down
 
-    [SerializeField] private GameObject mapGroundPrefab;
-
-    public void SetMapScale(int mapScaleX, int mapScaleY)
+    public void Init()
     {
-        this.mapScaleX = mapScaleX;
-        this.mapScaleY = mapScaleY;
+        GameObject go = new GameObject("TotalMap");
 
-        if (mapFloorList.Count == 0)
+        for (int i = 0; i < mapScaleY; i++)
         {
-            AddFloor();
+            GameObject floorGo = new GameObject($"Floor{i}");
+            MapFloor floor = floorGo.AddComponent<MapFloor>();
+            floor.Create(mapScaleX, mapScaleZ, mapFloorList.Count, floorGo.transform);
+
+            floorGo.transform.parent = go.transform;
+            
+            mapFloorList.Add(floor);
         }
-    }
-
-    public void AddFloor()
-    {
-        MapFloor floor = new MapFloor();
-        floor.Create(mapScaleX, mapScaleY);
-
-        mapFloorList.Add(floor);
     }
 
     public void RemoveFloor()
