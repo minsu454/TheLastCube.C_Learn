@@ -4,13 +4,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MapEditorUI : BaseUI
+public class MapEditorUI : BasePopup
 {
-    public Button BackButton;
-    public Button StartButton;
+    [SerializeField] public UIArrowButton inspectorUI;
+    [SerializeField] public UIArrowButton floorInteractionUI;
 
-    public void MapEditorClose()
+    public override void Init()
     {
-        Close(SceneType.InGame);
+        base.Init();
+
+        inspectorUI.Init();
+        floorInteractionUI.Init();
     }
 }

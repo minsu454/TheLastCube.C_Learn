@@ -1,7 +1,7 @@
 using Common.Scene;
 using UnityEngine;
 
-public class BaseUI : MonoBehaviour
+public class BasePopup : MonoBehaviour
 {
     /// <summary>
     /// 초기화 함수

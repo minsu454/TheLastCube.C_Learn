@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class TotalMapData : MonoBehaviour
 {
     private readonly List<MapFloor> mapFloorList = new List<MapFloor>();
+    private readonly Stack<int> depth = new Stack<int>();
 
     [Range(1, 30)] public int mapScaleX = 10;      //left, right
     [Range(1, 30)] public int mapScaleZ = 10;      //forward, back
@@ -25,23 +27,46 @@ public class TotalMapData : MonoBehaviour
             floor.Create(mapScaleX, mapScaleZ, mapFloorList.Count, floorGo.transform);
 
             floorGo.transform.parent = go.transform;
-            
+            floorGo.gameObject.SetActive(false);
+
             mapFloorList.Add(floor);
         }
+
+        depth.Push(-1);
+        ShowUpFloor();
+        Camera.main.transform.position = new Vector3((mapScaleX / 2) - 1, 20, (mapScaleZ / 2) - 1);
     }
 
-    public void RemoveFloor()
+    public void ShowUpFloor()
     {
+        int curFloorIdx = depth.Peek();
 
+        if (curFloorIdx == mapScaleY - 1)
+        {
+            Debug.LogError("This Is MaxFloor");
+            return;
+        }
+
+        int upFloorIdx = curFloorIdx + 1;
+
+        depth.Push(upFloorIdx);
+
+        mapFloorList[upFloorIdx].gameObject.SetActive(true);
     }
 
-    public void RemoveAllFloor()
+    public void ShowDownFloor()
     {
+        int curFloorIdx = depth.Pop();
+        int downFloorIdx = depth.Peek();
 
-    }
+        if (downFloorIdx == -1)
+        {
+            Debug.LogError("Is Not See DownFloor");
+            depth.Push(curFloorIdx);
+            return;
+        }
 
-    public void ChangeMapScale()
-    {
-
+        mapFloorList[curFloorIdx].gameObject.SetActive(false);
+        mapFloorList[downFloorIdx].gameObject.SetActive(true);
     }
 }

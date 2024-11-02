@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour, IManager
 {
     private readonly Dictionary<UIType, GameObject> UIContainer = new Dictionary<UIType, GameObject>();
-    private readonly Stack<BaseUI> depth = new Stack<BaseUI>();
+    private readonly Stack<BasePopup> depth = new Stack<BasePopup>();
     //UI를 열게될 때마다 Stack에 추가됨.
 
     public void Init() // 생성 초기값
@@ -29,12 +29,12 @@ public class UIManager : MonoBehaviour, IManager
 
         GameObject clone = Instantiate(prefab);
 
-        if (depth.TryPeek(out BaseUI beforeUI) && curPopupActive)
+        if (depth.TryPeek(out BasePopup beforeUI) && curPopupActive)
         {
             beforeUI.gameObject.SetActive(false);
         }
 
-        BaseUI afterUI = clone.GetComponent<BaseUI>();
+        BasePopup afterUI = clone.GetComponent<BasePopup>();
         afterUI.Init();
 
         depth.Push(beforeUI);
@@ -42,7 +42,6 @@ public class UIManager : MonoBehaviour, IManager
 
     public void CloseUI(Action LoadScene = null)
     {
-
         if (LoadScene != null)
         {
             depth.Clear();
@@ -57,7 +56,7 @@ public class UIManager : MonoBehaviour, IManager
 
         Destroy(depth.Pop());
 
-        if (depth.TryPeek(out BaseUI baseUI))
+        if (depth.TryPeek(out BasePopup baseUI))
         {
             baseUI.Init();
             baseUI.gameObject.SetActive(true);

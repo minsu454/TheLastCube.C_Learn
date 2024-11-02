@@ -2,5 +2,5 @@
 public enum UIType
 {
     MapEditorUI = 0,
-
+    InGameUI,
 }
