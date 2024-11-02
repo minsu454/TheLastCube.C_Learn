@@ -6,9 +6,39 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : TopDownController
 {
+    [SerializeField] private int skillCount;
+    private Vector2 direction = Vector2.zero;
+    public bool skillActive = false;
+
+
+    private void FixedUpdate()
+    {
+        if (!isPressing)
+        {
+            return;            
+        }
+
+        CallMoveEvent(direction);
+    }
+
     public void OnMove(InputValue value)
     {
-        Vector2 dir = value.Get<Vector2>();
-        CallMoveEvent(dir);
+        direction = value.Get<Vector2>();
+        if (direction == Vector2.zero)
+        {
+            isPressing = false;
+            return;
+        }
+        isPressing = true;
+    }
+
+    public void OnSkill(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            Debug.Log("Skill Active");
+            skillActive = !skillActive;
+            CallSkillEvent(skillActive);
+        }
     }
 }
