@@ -6,11 +6,5 @@ using UnityEngine.UI;
 
 public class MapEditorUI : BaseUI
 {
-    public Button BackButton;
-    public Button StartButton;
-
-    public void MapEditorClose()
-    {
-        Close(SceneType.InGame);
-    }
+    
 }

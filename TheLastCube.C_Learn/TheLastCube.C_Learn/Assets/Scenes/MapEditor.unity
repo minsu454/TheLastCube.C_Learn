@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6bc8db7e51d3843b69c7ce7240be85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapScaleX: 10
-  mapScaleZ: 10
+  mapScaleX: 30
+  mapScaleZ: 30
   mapScaleY: 10
 --- !u!114 &92469987
 MonoBehaviour:
@@ -409,7 +409,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

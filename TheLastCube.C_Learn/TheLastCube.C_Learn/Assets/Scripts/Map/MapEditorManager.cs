@@ -32,9 +32,13 @@ public class MapEditorManager : MonoBehaviour
     private void Awake()
     {
         MapData = GetComponent<TotalMapData>();
-
-        mapBlockPrefab.CreateObjectPool(mapBlockPrefab.name, 9000);
+        mapBlockPrefab.CreateObjectPool(9000);
 
         Managers.UI.CreateUI(UIType.MapEditorUI);
+    }
+
+    private void Start()
+    {
+        MapData.Init();
     }
 }
