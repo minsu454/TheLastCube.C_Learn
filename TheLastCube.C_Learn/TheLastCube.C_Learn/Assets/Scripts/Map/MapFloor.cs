@@ -6,7 +6,7 @@ public class MapFloor : MonoBehaviour
 {
     private readonly List<List<MapBlock>> mapfloorLists = new List<List<MapBlock>>();
 
-    private const string poolName = "MapBlock";
+    private const string poolName = "NoneMapBlock";
 
     public void Create(int mapScaleX, int mapScaleZ, int curfloor, Transform parent)
     {

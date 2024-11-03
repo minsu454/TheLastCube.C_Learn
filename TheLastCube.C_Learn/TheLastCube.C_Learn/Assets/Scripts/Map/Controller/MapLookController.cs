@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MapController : MonoBehaviour
+public class MapLookController : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] private float moveSpeed;
+    [SerializeField] private Vector3 StartLookPos;
     private Vector2 moveDir;
     private float moveY = 0;
 
     [Header("Look")]
     [SerializeField] private float lookSensitivity;
-    [SerializeField] private Vector3 StartLookPos;
     [SerializeField] private Vector3 StartLookRot;
     private bool lookKeyDown;
     private Vector2 mouseDelta;
@@ -21,7 +21,6 @@ public class MapController : MonoBehaviour
     {
         transform.position = StartLookPos;
         transform.rotation = Quaternion.Euler(StartLookRot);
-
     }
 
     private void FixedUpdate()
