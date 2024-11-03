@@ -22,7 +22,7 @@ public class BasePopup : MonoBehaviour
     /// <summary>
     /// 닫으면서 다음 씬 불러오는 함수
     /// </summary>
-    protected virtual void Close(SceneType type)
+    private void Close(SceneType type)
     {
         Managers.UI.CloseUI(() => SceneManagerEx.LoadScene(type));
     }

@@ -1,9 +1,11 @@
 using ObjectPool;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class MapEditorManager : MonoBehaviour
 {
@@ -27,10 +29,16 @@ public class MapEditorManager : MonoBehaviour
 
     public TotalMapData MapData { get; private set; }
 
+    [Header("ObjectPool")]
+    [SerializeField] private GameObject mapBlockPrefab;
+
+    [Header("Map")]
     public GameObject MapEditorGo;
     public GameObject MapLookGo;    
 
-    [SerializeField] private GameObject mapBlockPrefab;
+
+    public Enum EnumType { get; private set; }
+    public Material CurMaterial { get; private set; }
 
     private void Awake()
     {
@@ -44,5 +52,11 @@ public class MapEditorManager : MonoBehaviour
     private void Start()
     {
         MapData.Init();
+    }
+
+    public void SetMaterial(Enum type)
+    {
+        EnumType = type;
+        CurMaterial = Managers.Material.Return(type);
     }
 }

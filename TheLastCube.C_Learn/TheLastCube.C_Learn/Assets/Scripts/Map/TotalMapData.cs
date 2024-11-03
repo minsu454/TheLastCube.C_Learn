@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 
 public class TotalMapData : MonoBehaviour
 {
+    private readonly HashSet<MapBlock> saveHashSet = new HashSet<MapBlock>();
+
     private readonly List<MapFloor> mapFloorList = new List<MapFloor>();
     private readonly Stack<int> depth = new Stack<int>();
 
@@ -70,5 +72,15 @@ public class TotalMapData : MonoBehaviour
         mapFloorList[downFloorIdx].gameObject.SetActive(true);
 
         return downFloorIdx;
+    }
+
+    public void AddSave(MapBlock block)
+    {
+        saveHashSet.Add(block);
+    }
+
+    public void RemoveSave(MapBlock block)
+    {
+        saveHashSet.Remove(block);
     }
 }

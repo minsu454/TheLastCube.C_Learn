@@ -6,8 +6,10 @@ public sealed class Managers : MonoBehaviour
     private static Managers instance;
 
     public static UIManager UI { get { return instance.uiManager; } }
+    public static MaterialContainer Material { get { return instance.materialContainer; } }
 
     private UIManager uiManager;
+    private MaterialContainer materialContainer;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     //위 생성자보다 먼저 실행하게 됨 생명주기에서 awake보다 우선 실행
@@ -29,6 +31,7 @@ public sealed class Managers : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         instance.uiManager = CreateManager<UIManager>(gameObject.transform);
+        instance.materialContainer = CreateManager<MaterialContainer>(gameObject.transform);
     }
 
 

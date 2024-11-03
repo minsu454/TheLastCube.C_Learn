@@ -5,6 +5,6 @@ using UnityEngine;
 public class SaveBlockData
 {
     public Vector3 pos;
-    public MapBlockType mapBlockType;
+    public BlockColorType mapBlockType;
 
 }

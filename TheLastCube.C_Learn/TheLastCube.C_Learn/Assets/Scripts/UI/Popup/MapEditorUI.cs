@@ -12,15 +12,24 @@ public class MapEditorUI : BasePopup
     [SerializeField] private GameObject NotSeeMapUI;
 
     [SerializeField] private TMP_Text floorText;
-    [SerializeField] private UIArrowButton inspectorUI;
+
+    [Header("UIArrow")]
+    [SerializeField] private UIArrowButton saveDataUI;
     [SerializeField] private UIArrowButton floorInteractionUI;
+    [SerializeField] private UIArrowButton blockPaletteUI;
+
+    [Header("UIScreenView")]
+    [SerializeField] private UIScreenView blockColorScreenView;
 
     public override void Init()
     {
         base.Init();
 
-        inspectorUI.Init();
+        saveDataUI.Init();
         floorInteractionUI.Init();
+        blockPaletteUI.Init();
+
+        blockColorScreenView.CreateItem<BlockColorType>();
     }
 
     public void OnSeeUpFloor()

@@ -8,3 +8,14 @@ public enum UIType
     FileBrowserPopup = 10,
 
 }
+
+public enum GroundType
+{
+    MapEditorUI = 0,
+    MapLookUI,
+    InGameUI,
+
+    FileBrowserPopup = 10,
+
+}
+

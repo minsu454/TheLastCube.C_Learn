@@ -202,7 +202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &186245140
 Transform:
   m_ObjectHideFlags: 0
@@ -480,7 +480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1055833415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,6 +587,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 13fb1a9d-6dbe-47d8-9b9c-621b45bfa8c5
     m_ActionName: MapEditor/Look[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a35dfd92-247a-4639-ba5e-1bafd00801ae
+    m_ActionName: MapEditor/MouseLeftButton[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MapEditor
@@ -997,6 +1001,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 13fb1a9d-6dbe-47d8-9b9c-621b45bfa8c5
     m_ActionName: MapEditor/Look[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1638579281}
+        m_TargetAssemblyTypeName: MapEidtorController, Assembly-CSharp
+        m_MethodName: OnMouseLeftBtn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a35dfd92-247a-4639-ba5e-1bafd00801ae
+    m_ActionName: MapEditor/MouseLeftButton[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MapEditor
@@ -1031,6 +1051,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  curMaterial: {fileID: 2100000, guid: 7198f66fa91972442a2586300d7d043e, type: 2}
 --- !u!1 &1653082963
 GameObject:
   m_ObjectHideFlags: 0

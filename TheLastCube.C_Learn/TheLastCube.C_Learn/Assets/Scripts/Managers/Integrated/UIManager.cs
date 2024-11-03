@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour, IManager
             return;
         }
 
-        Destroy(depth.Pop());
+        Destroy(depth.Pop().gameObject);
 
         if (depth.TryPeek(out BasePopup baseUI))
         {

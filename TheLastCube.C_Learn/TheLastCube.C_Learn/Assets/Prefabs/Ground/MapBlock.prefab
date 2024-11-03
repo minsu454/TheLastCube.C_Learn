@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1899499895437588437}
   - component: {fileID: 3474726134755202711}
   - component: {fileID: 32673509803661286}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: -8799510197141976709}
   - component: {fileID: 1591070446557597255}
   - component: {fileID: 906496764958965446}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MapBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 8095755667452603233}
   - component: {fileID: 8690756432657861221}
   - component: {fileID: 3554135813829456857}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
