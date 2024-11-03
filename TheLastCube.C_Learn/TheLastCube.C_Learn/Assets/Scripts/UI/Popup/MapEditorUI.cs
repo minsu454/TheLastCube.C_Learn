@@ -19,7 +19,9 @@ public class MapEditorUI : BasePopup
     [SerializeField] private UIArrowButton blockPaletteUI;
 
     [Header("UIScreenView")]
-    [SerializeField] private UIScreenView blockColorScreenView;
+    [SerializeField] private UIScreenView blockBaseColorScreenView;
+    [SerializeField] private UIScreenView blockMoveScreenView;
+    [SerializeField] private UIScreenView blockPaintScreenView;
 
     public override void Init()
     {
@@ -29,7 +31,9 @@ public class MapEditorUI : BasePopup
         floorInteractionUI.Init();
         blockPaletteUI.Init();
 
-        blockColorScreenView.CreateItem<BlockColorType>();
+        blockBaseColorScreenView.CreateItem<BlockColorType>();
+        blockMoveScreenView.CreateItem<BlockMoveType>();
+        blockPaintScreenView.CreateItem<BlockInteractionType>();
     }
 
     public void OnSeeUpFloor()

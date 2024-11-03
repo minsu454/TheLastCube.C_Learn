@@ -76,11 +76,17 @@ public class TotalMapData : MonoBehaviour
 
     public void AddSave(MapBlock block)
     {
+        if (!saveHashSet.Contains(block))
+            return;
+
         saveHashSet.Add(block);
     }
 
     public void RemoveSave(MapBlock block)
     {
+        if (!saveHashSet.Contains(block))
+            return;
+
         saveHashSet.Remove(block);
     }
 }

@@ -3,35 +3,79 @@ using UnityEngine;
 
 public class MapBlock : MonoBehaviour
 {
-    public Vector2 Pos;
-    public int Floor;
-    public MeshRenderer MyRenderer;
+    private BlockData data = new BlockData();
 
-    public BlockColorType ColorType = BlockColorType.None;
-    public BlockInteractionType InteractionType = BlockInteractionType.None;
+    [SerializeField] private MeshRenderer GroundRenderer;
+    [SerializeField] private MeshRenderer MoveRenderer;
+    [SerializeField] private MeshRenderer InteractionRenderer;
 
     public void Init(Vector3 pos)
     {
+        data.Pos = pos;
         transform.position = pos;
+
+        ResetBlock();
     }
 
-    public void SetGroundMaterial(Material material, BlockColorType colorType = BlockColorType.None)
+    public void SetGroundMaterial(Material material, BlockColorType colorType)
     {
         if (material == null)
-            MyRenderer.materials = new Material[0];
+        {
+            MapEditorManager.Instance.MapData.RemoveSave(this);
+            ResetBlock();
+        }
         else
-            MyRenderer.material = material;
+        {
+            MapEditorManager.Instance.MapData.AddSave(this);
+            GroundRenderer.material = material;
+        }
 
-        ColorType = colorType;
+        data.ColorType = colorType;
     }
 
-    public void SetUpMaterial(Material material)
+    public void SetGroundMaterial(Material material, BlockMoveType moveType)
     {
-        MyRenderer.material = material;
+        if (data.ColorType == BlockColorType.None)
+            return;
+
+        if (material == null)
+        {
+            MoveRenderer.materials = new Material[0];
+        }
+        else
+        {
+            MoveRenderer.material = material;
+        }
+
+
+        data.MoveType = moveType;
     }
 
-    public void SetInteractionMaterial(Material material)
+    public void SetGroundMaterial(Material material, BlockInteractionType interactionType)
     {
-        MyRenderer.material = material;
+        if (data.ColorType == BlockColorType.None)
+            return;
+
+        if (material == null)
+        {
+            InteractionRenderer.materials = new Material[0];
+        }
+        else
+        {
+            InteractionRenderer.material = material;
+        }
+
+        data.InteractionType = interactionType;
+    }
+
+    public void ResetBlock()
+    {
+        GroundRenderer.materials = new Material[0];
+        MoveRenderer.materials = new Material[0];
+        InteractionRenderer.materials = new Material[0];
+
+        data.ColorType = BlockColorType.None;
+        data.MoveType = BlockMoveType.None;
+        data.InteractionType = BlockInteractionType.None;
     }
 }

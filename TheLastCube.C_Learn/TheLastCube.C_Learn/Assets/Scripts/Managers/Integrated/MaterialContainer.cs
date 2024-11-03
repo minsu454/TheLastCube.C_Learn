@@ -11,6 +11,7 @@ public sealed class MaterialContainer : MonoBehaviour, IManager
     public void Init() // 생성 초기값
     {
         CreateDic<BlockColorType>();
+        CreateDic<BlockMoveType>();
         CreateDic<BlockInteractionType>();
     }
 
