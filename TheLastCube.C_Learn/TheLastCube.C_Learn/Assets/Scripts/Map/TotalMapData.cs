@@ -13,20 +13,22 @@ public class TotalMapData : MonoBehaviour
     private readonly List<MapFloor> mapFloorList = new List<MapFloor>();
     private readonly Stack<int> depth = new Stack<int>();
 
-    [Range(1, 30)] public int mapScaleX = 10;      //left, right
-    [Range(1, 30)] public int mapScaleZ = 10;      //forward, back
+    public MapBlock StartBlock;
+    public MapBlock EndBlock;
 
-    [Range(1, 10)] public int mapScaleY = 10;      //up, down
+    [Range(1, 30)] public int MapScaleX = 10;      //left, right
+    [Range(1, 30)] public int MapScaleZ = 10;      //forward, back
+    [Range(1, 10)] public int MapScaleY = 10;      //up, down
 
     public void Init()
     {
         GameObject go = new GameObject("TotalMap");
 
-        for (int i = 0; i < mapScaleY; i++)
+        for (int i = 0; i < MapScaleY; i++)
         {
             GameObject floorGo = new GameObject($"Floor{i}");
             MapFloor floor = floorGo.AddComponent<MapFloor>();
-            floor.Create(mapScaleX, mapScaleZ, mapFloorList.Count, floorGo.transform);
+            floor.Create(MapScaleX, MapScaleZ, mapFloorList.Count, floorGo.transform);
 
             floorGo.transform.parent = go.transform;
             floorGo.gameObject.SetActive(false);
@@ -36,14 +38,14 @@ public class TotalMapData : MonoBehaviour
 
         depth.Push(-1);
         ShowUpFloor();
-        Camera.main.transform.position = new Vector3((mapScaleX / 2) - 1, 20, (mapScaleZ / 2) - 1);
+        Camera.main.transform.position = new Vector3((MapScaleX / 2) - 1, 20, (MapScaleZ / 2) - 1);
     }
 
     public int ShowUpFloor()
     {
         int curFloorIdx = depth.Peek();
 
-        if (curFloorIdx == mapScaleY - 1)
+        if (curFloorIdx == MapScaleY - 1)
         {
             return curFloorIdx;
         }

@@ -41,17 +41,20 @@ public class MapEidtorController : MonoBehaviour
             return;
 
         MapBlock block = curhitblock.GetComponent<MapBlock>();
-
         Enum type = MapEditorManager.Instance.EnumType;
+
         if (type is BlockColorType colorType)
         {
-            block.SetGroundMaterial(MapEditorManager.Instance.CurMaterial, colorType);
+            block.SetGround(MapEditorManager.Instance.CurMaterial, colorType);
         }
         else if (type is BlockMoveType moveType)
         {
-            block.SetGroundMaterial(MapEditorManager.Instance.CurMaterial, moveType);
+            block.SetMove(MapEditorManager.Instance.CurMaterial, moveType);
         }
-
+        else if (type is BlockInteractionType interactionType)
+        {
+            block.SetInteraction(MapEditorManager.Instance.CurMaterial, interactionType);
+        }
     }
 
     private void GetSelectedMapPosition()
