@@ -27,8 +27,8 @@ public class MapEditorManager : MonoBehaviour
 
     public TotalMapData MapData { get; private set; }
 
-    public GameObject MapLookController;    
-    public GameObject MapEditorController;
+    public GameObject MapEditorGo;
+    public GameObject MapLookGo;    
 
     [SerializeField] private GameObject mapBlockPrefab;
 

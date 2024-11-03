@@ -8,14 +8,14 @@ public class MapLookUI : BasePopup
     {
         base.Init();
 
-        MapEditorManager.Instance.MapEditorController.SetActive(false);
-        MapEditorManager.Instance.MapLookController.SetActive(true);
+        MapEditorManager.Instance.MapEditorGo.SetActive(false);
+        MapEditorManager.Instance.MapLookGo.SetActive(true);
     }
 
     public override void Close()
     {
-        MapEditorManager.Instance.MapLookController.SetActive(false);
-        MapEditorManager.Instance.MapEditorController.SetActive(true);
+        MapEditorManager.Instance.MapLookGo.SetActive(false);
+        MapEditorManager.Instance.MapEditorGo.SetActive(true);
             
         base.Close();
     }
