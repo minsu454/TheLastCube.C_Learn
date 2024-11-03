@@ -45,6 +45,11 @@ public class MapEidtorController : MonoBehaviour
 
         if (type is BlockColorType colorType)
         {
+            if (colorType == BlockColorType.None)
+                MapEditorManager.Instance.MapData.RemoveSave(block);
+            else
+                MapEditorManager.Instance.MapData.AddSave(block);
+
             block.SetGround(MapEditorManager.Instance.CurMaterial, colorType);
         }
         else if (type is BlockMoveType moveType)

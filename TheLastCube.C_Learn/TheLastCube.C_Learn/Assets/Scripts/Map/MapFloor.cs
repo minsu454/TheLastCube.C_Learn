@@ -4,13 +4,12 @@ using ObjectPool;
 
 public class MapFloor : MonoBehaviour
 {
-    private readonly List<List<MapBlock>> mapfloorLists = new List<List<MapBlock>>();
+    private readonly Dictionary<Vector3, MapBlock> mapfloorDic = new Dictionary<Vector3, MapBlock>();
 
     private const string poolName = "NoneMapBlock";
 
     public void Create(int mapScaleX, int mapScaleZ, int curfloor, Transform parent)
     {
-        List<MapBlock> list = new List<MapBlock>();
         for (int x = 0; x < mapScaleX; x++)
         {
             for (int z = 0; z < mapScaleZ; z++)
@@ -18,12 +17,12 @@ public class MapFloor : MonoBehaviour
                 GameObject go = ObjectPoolContainer.Instance.Pop(poolName);
                 MapBlock mapBlock = go.GetComponent<MapBlock>();
                 mapBlock.transform.parent = parent;
+                Vector3 pos = new Vector3(x, curfloor, z);
+                mapBlock.Init(pos);
 
-                mapBlock.Init(new Vector3(x, curfloor, z));
                 go.SetActive(true);
+                mapfloorDic.Add(pos, mapBlock);
             }
         }
-
-        mapfloorLists.Add(list);
     }
 }

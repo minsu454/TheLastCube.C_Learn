@@ -4,6 +4,7 @@
 public enum BlockInteractionType
 {
     None = 0,
+    Delete,
 
     KeyRed = 10,
     KeyBlue,

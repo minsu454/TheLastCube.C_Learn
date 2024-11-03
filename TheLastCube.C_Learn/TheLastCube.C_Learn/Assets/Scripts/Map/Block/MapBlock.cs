@@ -19,7 +19,15 @@ public class MapBlock : MonoBehaviour
 
     public void SetGround(Material material, BlockColorType colorType)
     {
-        SetGroundMaterial(GroundRenderer, material);
+        if (material == null)
+        {
+            ResetBlock();
+        }
+        else
+        {
+            GroundRenderer.material = material;
+        }
+
         data.ColorType = colorType;
     }
 
@@ -33,24 +41,6 @@ public class MapBlock : MonoBehaviour
 
         SetGroundMaterial(MoveRenderer, material);
         data.MoveType = moveType;
-    }
-
-    public void OnlyOneBlock(BlockMoveType curType, BlockMoveType compareType, ref MapBlock compare)
-    {
-        if (curType == compareType)
-        {
-            if (compare != null)
-                compare.SetMove(null, BlockMoveType.None);
-
-            compare = this;
-        }
-        else
-        {
-            if (compare == this)
-            {
-                compare = null;
-            }
-        }
     }
 
     public void SetInteraction(Material material, BlockInteractionType interactionType)
@@ -71,6 +61,24 @@ public class MapBlock : MonoBehaviour
         else
         {
             renderer.material = material;
+        }
+    }
+
+    private void OnlyOneBlock(BlockMoveType curType, BlockMoveType compareType, ref MapBlock compare)
+    {
+        if (curType == compareType)
+        {
+            if (compare != null)
+                compare.SetMove(null, BlockMoveType.None);
+
+            compare = this;
+        }
+        else
+        {
+            if (compare == this)
+            {
+                compare = null;
+            }
         }
     }
 
