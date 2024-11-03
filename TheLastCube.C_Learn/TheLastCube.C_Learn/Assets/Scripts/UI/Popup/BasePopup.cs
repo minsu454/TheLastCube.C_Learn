@@ -14,7 +14,7 @@ public class BasePopup : MonoBehaviour
     /// <summary>
     /// 닫는 함수
     /// </summary>
-    protected virtual void Close()
+    public virtual void Close()
     {
         Managers.UI.CloseUI();
     }

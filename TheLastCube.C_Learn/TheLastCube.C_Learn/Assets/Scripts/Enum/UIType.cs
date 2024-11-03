@@ -2,4 +2,9 @@
 public enum UIType
 {
     MapEditorUI = 0,
+    MapLookUI,
+    InGameUI,
+
+    FileBrowserPopup = 10,
+
 }

@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour, IManager
         BasePopup afterUI = clone.GetComponent<BasePopup>();
         afterUI.Init();
 
-        depth.Push(beforeUI);
+        depth.Push(afterUI);
     }
 
     public void CloseUI(Action LoadScene = null)
@@ -58,7 +58,6 @@ public class UIManager : MonoBehaviour, IManager
 
         if (depth.TryPeek(out BasePopup baseUI))
         {
-            baseUI.Init();
             baseUI.gameObject.SetActive(true);
         }
     }
