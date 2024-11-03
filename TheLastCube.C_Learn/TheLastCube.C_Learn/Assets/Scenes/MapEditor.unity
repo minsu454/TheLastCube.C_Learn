@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapLookController: {fileID: 1055833414}
   MapEditorController: {fileID: 1638579277}
-  mapBlockPrefab: {fileID: 4253095573737902073, guid: 9c96464e03c86fa4caba5903e7e010a1,
+  mapBlockPrefab: {fileID: 4253095573737902073, guid: bfa2ba526cf903c44899bf7744bf0d59,
     type: 3}
 --- !u!1 &203844586
 GameObject:
@@ -440,7 +440,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1638579280}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1055833414
 GameObject:
@@ -600,8 +600,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  lookSensitivity: 0.3
   StartLookPos: {x: 0, y: 10, z: 0}
+  lookSensitivity: 0.3
   StartLookRot: {x: 0, y: 45, z: 0}
 --- !u!1 &1152781431
 GameObject:
@@ -878,6 +878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1638579280}
+  - component: {fileID: 1638579281}
   - component: {fileID: 1638579278}
   m_Layer: 0
   m_Name: MapEditorController
@@ -898,7 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 1b5794509480c5c46b85db9781970028,
+  m_Actions: {fileID: -944628639613478452, guid: 7d111bbf7749ac545851b3be93e7f3ba,
     type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
@@ -914,8 +915,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MapController, Assembly-CSharp
+      - m_Target: {fileID: 1638579281}
+        m_TargetAssemblyTypeName: MapEidtorController, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -929,67 +930,19 @@ MonoBehaviour:
     m_ActionId: 38708688-80ae-4c8e-a25c-521b6645a3c1
     m_ActionName: MapEditor/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MapController, Assembly-CSharp
-        m_MethodName: MouseDelta
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 9f13e034-4a37-40ad-9b3f-8a5552a2bb36
     m_ActionName: MapEditor/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MapController, Assembly-CSharp
-        m_MethodName: OnUp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 93ede29c-1831-4908-847e-d7b8ec22a0b0
     m_ActionName: MapEditor/Up[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MapController, Assembly-CSharp
-        m_MethodName: OnDown
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 0bfabf4e-3b36-4a2b-b63d-9893bd520d60
     m_ActionName: MapEditor/Down[/Keyboard/leftShift]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MapController, Assembly-CSharp
-        m_MethodName: OnLook
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 13fb1a9d-6dbe-47d8-9b9c-621b45bfa8c5
     m_ActionName: MapEditor/Look[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
@@ -1009,9 +962,23 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 961739753}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1638579281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638579277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9562f6f272c6eb549b23f79a109989fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1021,5 +988,4 @@ SceneRoots:
   - {fileID: 92469985}
   - {fileID: 1152781434}
   - {fileID: 1638579280}
-  - {fileID: 961739753}
   - {fileID: 1055833417}
