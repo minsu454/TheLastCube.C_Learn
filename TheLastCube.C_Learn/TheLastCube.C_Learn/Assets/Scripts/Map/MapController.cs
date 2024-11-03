@@ -6,21 +6,21 @@ using UnityEngine.InputSystem;
 public class MapController : MonoBehaviour
 {
     [Header("Move")]
-    public float moveSpeed;
-    private Vector2 curMovementInput;
+    [SerializeField] private float moveSpeed;
+    private Vector2 moveDir;
 
     [Header("Look")]
-    public Transform cameraContainer;
-    public float minXLook;
-    public float maxXLook;
+    [SerializeField] private Transform cameraContainer;
+    [SerializeField] private float minXLook;
+    [SerializeField] private float maxXLook;
+    [SerializeField] private float lookSensitivity;
+    [SerializeField] private Vector3 StartLookPos;
     private float camCurXRot;
-    public float lookSensitivity;
     private Vector2 mouseDelta;
-    private Vector2 StartLookPos;
 
     private void OnEnable()
     {
-        transform.position = Vector3.zero;
+        cameraContainer.position = StartLookPos;
     }
 
     private void FixedUpdate()
@@ -35,7 +35,9 @@ public class MapController : MonoBehaviour
 
     private void Move()
     {
+        Vector3 dir = cameraContainer.forward * moveDir.y + cameraContainer.right * moveDir.x;
 
+        cameraContainer.position += dir * moveSpeed * Time.fixedDeltaTime;
     }
 
     private void Look()
@@ -44,18 +46,18 @@ public class MapController : MonoBehaviour
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
         cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
-        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+        cameraContainer.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            curMovementInput = context.ReadValue<Vector2>();
+            moveDir = context.ReadValue<Vector2>();
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            curMovementInput = Vector2.zero;
+            moveDir = Vector2.zero;
         }
     }
 

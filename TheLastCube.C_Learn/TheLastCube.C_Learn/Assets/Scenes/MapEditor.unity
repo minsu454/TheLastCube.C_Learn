@@ -501,11 +501,35 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1055833416}
+        m_TargetAssemblyTypeName: MapController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 38708688-80ae-4c8e-a25c-521b6645a3c1
     m_ActionName: MapEditor/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1055833416}
+        m_TargetAssemblyTypeName: MapController, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 9f13e034-4a37-40ad-9b3f-8a5552a2bb36
     m_ActionName: MapEditor/Look[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
@@ -525,11 +549,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eea7f460be5eea44bd54f19d44278c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  cameraContainer: {fileID: 0}
-  minXLook: 0
-  maxXLook: 0
-  lookSensitivity: 0
+  moveSpeed: 3
+  cameraContainer: {fileID: 1325536087}
+  minXLook: -85
+  maxXLook: 85
+  lookSensitivity: 0.05
+  StartLookPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1055833417
 Transform:
   m_ObjectHideFlags: 0
