@@ -41,10 +41,13 @@ public class MapEidtorController : MonoBehaviour
 
         MapBlock block = curhitblock.GetComponent<MapBlock>();
 
-        Debug.Log(MapEditorManager.Instance.CurMaterial);
-
         block.SetGroundMaterial(MapEditorManager.Instance.CurMaterial);
     }
+
+    //private bool IfType()
+    //{
+
+    //}
 
     private void GetSelectedMapPosition()
     {
