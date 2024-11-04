@@ -18,6 +18,8 @@ public class MapEidtorController : MonoBehaviour
     private bool mouseLeftBtn = false;
     private bool mouseRightBtn = false;
 
+    private BasePopup basePopup;
+
     private void OnEnable()
     {
         transform.position = Vector2.zero;
@@ -78,6 +80,10 @@ public class MapEidtorController : MonoBehaviour
         else if (type is BlockInteractionType interactionType)
         {
             block.SetInteraction(material, interactionType);
+        }
+        else if (type is BlockEventType eventType)
+        {
+            block.SetEvent(material, eventType);
         }
     }
 
@@ -140,7 +146,19 @@ public class MapEidtorController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            //Managers.UI.CreateUI(UIType.)
+            if (basePopup != null)
+                return;
+
+            GetSelectedMapPosition();
+
+            if (curhitblock == null)
+                return;
+
+            MapEditorBlock block = curhitblock.GetComponent<MapEditorBlock>();
+            if ((int)block.Data.InteractionType < 100)
+                return;
+
+            basePopup = Managers.UI.CreateUI(UIType.MapInteractionEditorUI);
         }
     }
 }
