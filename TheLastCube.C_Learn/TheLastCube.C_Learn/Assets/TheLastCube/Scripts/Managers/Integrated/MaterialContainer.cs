@@ -13,6 +13,7 @@ public sealed class MaterialContainer : MonoBehaviour, IManager
         CreateDic<BlockColorType>();
         CreateDic<BlockMoveType>();
         CreateDic<BlockInteractionType>();
+        CreateDic<BlockEventType>();
     }
 
     /// <summary>
