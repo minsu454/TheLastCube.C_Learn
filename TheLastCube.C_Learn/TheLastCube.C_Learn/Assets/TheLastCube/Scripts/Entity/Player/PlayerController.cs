@@ -8,9 +8,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : TopDownController
 {
     [SerializeField] private int skillCount;
+    public PlayerQuadController playerQuadController;
     private Vector2 direction = Vector2.zero;
     public bool skillActive = false;
-
 
     private void FixedUpdate()
     {
@@ -26,6 +26,11 @@ public class PlayerController : TopDownController
     {
         direction = value.Get<Vector2>();
         if (direction == Vector2.zero)
+        {
+            isPressing = false;
+            return;
+        }
+        if (direction.x * direction.y != 0f)
         {
             isPressing = false;
             return;
