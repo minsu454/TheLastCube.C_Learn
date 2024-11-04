@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,7 +9,8 @@ using UnityEngine.UIElements;
 
 public class TotalMapData : MonoBehaviour
 {
-    private readonly Dictionary<int, List<MapBlock>> saveDic = new Dictionary<int, List<MapBlock>>();
+    private readonly Dictionary<int, HashSet<MapBlock>> saveDic = new Dictionary<int, HashSet<MapBlock>>();
+    public Dictionary<int, HashSet<MapBlock>> SaveDic { get { return saveDic; } }
 
     private readonly List<MapFloor> mapFloorList = new List<MapFloor>();
     private readonly Stack<int> depth = new Stack<int>();
@@ -76,24 +78,59 @@ public class TotalMapData : MonoBehaviour
         return downFloorIdx;
     }
 
-    public void AddSave(MapBlock block)
+    public int ReturnCurFloor()
     {
-        int floor = depth.Peek();
-        if (!saveDic.TryGetValue(floor, out var list))
-        {
-            list = new List<MapBlock>();
-            saveDic[floor] = list;
-        }
-
-        list.Add(block);
+        return depth.Peek();
     }
 
-    public void RemoveSave(MapBlock block)
+    public void AddSave(int floor, MapBlock block)
     {
-        int floor = depth.Peek();
-        if (!saveDic.TryGetValue(floor, out var list))
+        if (!saveDic.TryGetValue(floor, out var hashSet))
+        {
+            hashSet = new HashSet<MapBlock>();
+            saveDic[floor] = hashSet;
+        }
+
+        if (hashSet.Contains(block))
+            return;
+
+        saveDic[floor].Add(block);
+    }
+
+    public void RemoveSave(int floor, MapBlock block)
+    {
+        if (!saveDic.TryGetValue(floor, out var hashSet))
             return;
 
         saveDic[floor].Remove(block);
+    }
+
+    public void Clear()
+    {
+        foreach (var list in saveDic.Values)
+        {
+            foreach (var mapBlock in list)
+            {
+                mapBlock.ResetBlock();
+            }
+        }
+
+        StartBlock = null;
+        EndBlock = null;
+
+        saveDic.Clear();
+    }
+
+    public void LoadData(BlockListData blockListData)
+    {
+        Clear();
+
+        foreach (var blockData in blockListData.list)
+        {
+            MapBlock mapBlock = mapFloorList[blockData.floor].Return(blockData.Pos);
+            mapBlock.SetData(blockData);
+
+            AddSave(blockData.floor, mapBlock);
+        }
     }
 }

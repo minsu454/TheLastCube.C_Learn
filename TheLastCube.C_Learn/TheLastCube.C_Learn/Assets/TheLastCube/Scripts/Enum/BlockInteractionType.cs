@@ -8,7 +8,9 @@ public enum BlockInteractionType
 
     KeyRed = 10,
     KeyBlue,
+    KeyYellow,
 
     LockRed = 100,
     LockBlue,
+    LockYellow, 
 }

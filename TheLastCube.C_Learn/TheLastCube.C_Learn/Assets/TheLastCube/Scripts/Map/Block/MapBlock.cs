@@ -4,17 +4,36 @@ using UnityEngine;
 public class MapBlock : MonoBehaviour
 {
     private BlockData data = new BlockData();
+    public BlockData Data { get {return data;} }
 
     [SerializeField] private MeshRenderer GroundRenderer;
     [SerializeField] private MeshRenderer MoveRenderer;
     [SerializeField] private MeshRenderer InteractionRenderer;
 
-    public void Init(Vector3 pos)
+    public void Init(int floor, Vector3 pos)
     {
+        data.floor = floor;
         data.Pos = pos;
         transform.position = pos;
 
         ResetBlock();
+    }
+
+    public void SetData(BlockData data)
+    {
+        this.data = data;
+
+        GroundRenderer.material = Managers.Material.Return(data.ColorType);
+        
+        if (data.MoveType != BlockMoveType.None)
+        {
+            MoveRenderer.material = Managers.Material.Return(data.MoveType);
+        }
+
+        if (data.InteractionType != BlockInteractionType.None)
+        {
+            InteractionRenderer.material = Managers.Material.Return(data.InteractionType);
+        }
     }
 
     public void SetGround(Material material, BlockColorType colorType)

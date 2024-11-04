@@ -18,11 +18,22 @@ public class MapFloor : MonoBehaviour
                 MapBlock mapBlock = go.GetComponent<MapBlock>();
                 mapBlock.transform.parent = parent;
                 Vector3 pos = new Vector3(x, curfloor, z);
-                mapBlock.Init(pos);
+                mapBlock.Init(curfloor, pos);
 
                 go.SetActive(true);
                 mapfloorDic.Add(pos, mapBlock);
             }
         }
+    }
+
+    public MapBlock Return(Vector3 keyVec)
+    {
+        if (!mapfloorDic.TryGetValue(keyVec, out MapBlock mapBlock))
+        {
+            Debug.LogError($"Is Not Found MapBlock : {keyVec}");
+            return null;
+        }
+
+        return mapBlock;
     }
 }

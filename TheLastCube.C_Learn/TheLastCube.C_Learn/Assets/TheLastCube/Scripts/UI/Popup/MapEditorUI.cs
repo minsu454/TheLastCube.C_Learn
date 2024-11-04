@@ -17,6 +17,7 @@ public class MapEditorUI : BasePopup
     [SerializeField] private UIArrowButton saveDataUI;
     [SerializeField] private UIArrowButton floorInteractionUI;
     [SerializeField] private UIArrowButton blockPaletteUI;
+    [SerializeField] private UIArrowButton blockInteractionPaletteUI;
 
     [Header("UIScreenView")]
     [SerializeField] private UIScreenView blockBaseColorScreenView;
@@ -30,6 +31,7 @@ public class MapEditorUI : BasePopup
         saveDataUI.Init();
         floorInteractionUI.Init();
         blockPaletteUI.Init();
+        blockInteractionPaletteUI.Init();
 
         blockBaseColorScreenView.CreateItem<BlockColorType>();
         blockMoveScreenView.CreateItem<BlockMoveType>();
@@ -51,6 +53,9 @@ public class MapEditorUI : BasePopup
     /// </summary>
     public void Save()
     {
+        if (!MapEditorManager.Instance.CanSave())
+            return;
+
         Managers.UI.CreateUI(UIType.FileBrowserPopup, false);
 
         string initialFilename = "SaveData_" + DateTime.Now.ToString(("MM_dd_HH_mm_ss")) + ".json";
@@ -85,8 +90,9 @@ public class MapEditorUI : BasePopup
             string path = FileBrowser.Result[0];
 
             string name = Path.GetFileNameWithoutExtension(path);           //파일명만 따오는 함수
+            string json = MapEditorManager.Instance.DataToJson(path);
 
-            //System.IO.File.WriteAllText(path, json);
+            System.IO.File.WriteAllText(path, json);
         }
     }
 
@@ -99,7 +105,7 @@ public class MapEditorUI : BasePopup
 
         if (FileBrowser.Success)
         {
-            //PattenGenerator.Instance.LoadData(FileBrowser.Result[0]);
+            MapEditorManager.Instance.LoadData(FileBrowser.Result[0]);
         }
     }
 }

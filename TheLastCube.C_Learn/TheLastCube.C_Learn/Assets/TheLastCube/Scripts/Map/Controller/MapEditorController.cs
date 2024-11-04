@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MapEidtorController : MonoBehaviour
 {
@@ -32,6 +34,9 @@ public class MapEidtorController : MonoBehaviour
 
     private void SetMaterial()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) //UI 반환
+            return;
+
         if (!isDraw)
             return;
 
@@ -42,13 +47,14 @@ public class MapEidtorController : MonoBehaviour
 
         MapBlock block = curhitblock.GetComponent<MapBlock>();
         Enum type = MapEditorManager.Instance.EnumType;
+        int floor = MapEditorManager.Instance.MapData.ReturnCurFloor();
 
         if (type is BlockColorType colorType)
         {
             if (colorType == BlockColorType.None)
-                MapEditorManager.Instance.MapData.RemoveSave(block);
+                MapEditorManager.Instance.MapData.RemoveSave(floor, block);
             else
-                MapEditorManager.Instance.MapData.AddSave(block);
+                MapEditorManager.Instance.MapData.AddSave(floor, block);
 
             block.SetGround(MapEditorManager.Instance.CurMaterial, colorType);
         }
