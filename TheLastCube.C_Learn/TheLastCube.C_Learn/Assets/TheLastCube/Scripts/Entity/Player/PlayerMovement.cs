@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rotateRate = 90 / rotateSpeed;
-        moveAfterPosition = transform.position;
+        moveAfterPosition = transform.position;//보류
 
         cubeController.OnMoveEvent += Move;
     }
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isMoving)
         {
-            Debug.Log("Err Moving!");
+            //Debug.Log("Err Moving!");
             return;
         }
         //Debug.Log(direction);
@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Physics.Raycast(ray, 0.6f, groundlayerMask))
         {
+            //cubeController.playerQuadController.BlockInteract(BlockInteractionType.None);
             return true;
         }
 

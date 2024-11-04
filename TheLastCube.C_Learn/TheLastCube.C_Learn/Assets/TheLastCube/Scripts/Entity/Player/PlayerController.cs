@@ -8,9 +8,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : TopDownController
 {
     [SerializeField] private int skillCount;
+    public PlayerQuadController playerQuadController;
     private Vector2 direction = Vector2.zero;
     public bool skillActive = false;
-
 
     private void FixedUpdate()
     {
