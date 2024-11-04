@@ -15,7 +15,8 @@ public class MapEidtorController : MonoBehaviour
 
     [Header("Draw")]
     private GameObject curhitblock;
-    private bool isDraw = false;
+    private bool mouseLeftBtn = false;
+    private bool mouseRightBtn = false;
 
     private void OnEnable()
     {
@@ -29,15 +30,15 @@ public class MapEidtorController : MonoBehaviour
 
     private void Update()
     {
-        SetMaterial();
+        CanDrawMaterial();
     }
 
-    private void SetMaterial()
+    private void CanDrawMaterial()
     {
         if (EventSystem.current.IsPointerOverGameObject()) //UI 반환
             return;
 
-        if (!isDraw)
+        if (!mouseLeftBtn && !mouseRightBtn)
             return;
 
         GetSelectedMapPosition();
@@ -45,8 +46,20 @@ public class MapEidtorController : MonoBehaviour
         if (curhitblock == null)
             return;
 
-        MapBlock block = curhitblock.GetComponent<MapBlock>();
-        Enum type = MapEditorManager.Instance.EnumType;
+        if (mouseLeftBtn)
+        {
+            Enum type = MapEditorManager.Instance.EnumType;
+            SetMaterial(type, MapEditorManager.Instance.CurMaterial);
+        }
+        else
+        {
+            SetMaterial(BlockColorType.None, null);
+        }
+    }
+
+    private void SetMaterial(Enum type, Material material)
+    {
+        MapEditorBlock block = curhitblock.GetComponent<MapEditorBlock>();
         int floor = MapEditorManager.Instance.MapData.ReturnCurFloor();
 
         if (type is BlockColorType colorType)
@@ -56,15 +69,15 @@ public class MapEidtorController : MonoBehaviour
             else
                 MapEditorManager.Instance.MapData.AddSave(floor, block);
 
-            block.SetGround(MapEditorManager.Instance.CurMaterial, colorType);
+            block.SetGround(material, colorType);
         }
         else if (type is BlockMoveType moveType)
         {
-            block.SetMove(MapEditorManager.Instance.CurMaterial, moveType);
+            block.SetMove(material, moveType);
         }
         else if (type is BlockInteractionType interactionType)
         {
-            block.SetInteraction(MapEditorManager.Instance.CurMaterial, interactionType);
+            block.SetInteraction(material, interactionType);
         }
     }
 
@@ -102,11 +115,12 @@ public class MapEidtorController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            isDraw = true;
+            mouseLeftBtn = true;
+            
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            isDraw = false;
+            mouseLeftBtn = false;
         }
     }
 
@@ -114,11 +128,11 @@ public class MapEidtorController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            isDraw = true;
+            mouseRightBtn = true;
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            isDraw = false;
+            mouseRightBtn = false;
         }
     }
 }

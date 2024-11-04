@@ -4,7 +4,7 @@ using ObjectPool;
 
 public class MapFloor : MonoBehaviour
 {
-    private readonly Dictionary<Vector3, MapBlock> mapfloorDic = new Dictionary<Vector3, MapBlock>();
+    private readonly Dictionary<Vector3, MapEditorBlock> mapfloorDic = new Dictionary<Vector3, MapEditorBlock>();
 
     private const string poolName = "NoneMapBlock";
 
@@ -15,7 +15,7 @@ public class MapFloor : MonoBehaviour
             for (int z = 0; z < mapScaleZ; z++)
             {
                 GameObject go = ObjectPoolContainer.Instance.Pop(poolName);
-                MapBlock mapBlock = go.GetComponent<MapBlock>();
+                MapEditorBlock mapBlock = go.GetComponent<MapEditorBlock>();
                 mapBlock.transform.parent = parent;
                 Vector3 pos = new Vector3(x, curfloor, z);
                 mapBlock.Init(curfloor, pos);
@@ -26,9 +26,9 @@ public class MapFloor : MonoBehaviour
         }
     }
 
-    public MapBlock Return(Vector3 keyVec)
+    public MapEditorBlock Return(Vector3 keyVec)
     {
-        if (!mapfloorDic.TryGetValue(keyVec, out MapBlock mapBlock))
+        if (!mapfloorDic.TryGetValue(keyVec, out MapEditorBlock mapBlock))
         {
             Debug.LogError($"Is Not Found MapBlock : {keyVec}");
             return null;

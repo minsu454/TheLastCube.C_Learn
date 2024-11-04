@@ -3,19 +3,9 @@ public enum UIType
 {
     MapEditorUI = 0,
     MapLookUI,
-    InGameUI,
+    FileBrowserPopup,
+    ChoiceFloorPopup,
 
-    FileBrowserPopup = 10,
-
-}
-
-public enum GroundType
-{
-    MapEditorUI = 0,
-    MapLookUI,
-    InGameUI,
-
-    FileBrowserPopup = 10,
+    InGameUI = 10,
 
 }
-

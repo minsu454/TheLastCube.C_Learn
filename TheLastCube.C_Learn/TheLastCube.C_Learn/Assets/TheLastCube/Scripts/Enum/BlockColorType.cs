@@ -5,5 +5,4 @@ public enum BlockColorType
 {
     None = 0,
     Block = 1,
-    Air = 2,
 }

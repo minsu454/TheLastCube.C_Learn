@@ -9,14 +9,14 @@ using UnityEngine.UIElements;
 
 public class TotalMapData : MonoBehaviour
 {
-    private readonly Dictionary<int, HashSet<MapBlock>> saveDic = new Dictionary<int, HashSet<MapBlock>>();
-    public Dictionary<int, HashSet<MapBlock>> SaveDic { get { return saveDic; } }
+    private readonly Dictionary<int, HashSet<MapEditorBlock>> saveDic = new Dictionary<int, HashSet<MapEditorBlock>>();
+    public Dictionary<int, HashSet<MapEditorBlock>> SaveDic { get { return saveDic; } }
 
     private readonly List<MapFloor> mapFloorList = new List<MapFloor>();
     private readonly Stack<int> depth = new Stack<int>();
 
-    public MapBlock StartBlock;
-    public MapBlock EndBlock;
+    public MapEditorBlock StartBlock;
+    public MapEditorBlock EndBlock;
 
     [Range(1, 30)] public int MapScaleX = 10;      //left, right
     [Range(1, 30)] public int MapScaleZ = 10;      //forward, back
@@ -83,11 +83,11 @@ public class TotalMapData : MonoBehaviour
         return depth.Peek();
     }
 
-    public void AddSave(int floor, MapBlock block)
+    public void AddSave(int floor, MapEditorBlock block)
     {
         if (!saveDic.TryGetValue(floor, out var hashSet))
         {
-            hashSet = new HashSet<MapBlock>();
+            hashSet = new HashSet<MapEditorBlock>();
             saveDic[floor] = hashSet;
         }
 
@@ -97,7 +97,7 @@ public class TotalMapData : MonoBehaviour
         saveDic[floor].Add(block);
     }
 
-    public void RemoveSave(int floor, MapBlock block)
+    public void RemoveSave(int floor, MapEditorBlock block)
     {
         if (!saveDic.TryGetValue(floor, out var hashSet))
             return;
@@ -127,8 +127,13 @@ public class TotalMapData : MonoBehaviour
 
         foreach (var blockData in blockListData.list)
         {
-            MapBlock mapBlock = mapFloorList[blockData.floor].Return(blockData.Pos);
+            MapEditorBlock mapBlock = mapFloorList[blockData.floor].Return(blockData.Pos);
             mapBlock.SetData(blockData);
+
+            if (blockData.MoveType == BlockMoveType.Start)
+                StartBlock = mapBlock;
+            else if (blockData.MoveType == BlockMoveType.End)
+                EndBlock = mapBlock;
 
             AddSave(blockData.floor, mapBlock);
         }
