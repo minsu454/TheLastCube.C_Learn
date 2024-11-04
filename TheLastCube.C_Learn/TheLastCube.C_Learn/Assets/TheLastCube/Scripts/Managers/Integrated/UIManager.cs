@@ -19,12 +19,12 @@ public class UIManager : MonoBehaviour, IManager
         }
     }
 
-    public void CreateUI(UIType type, bool curPopupActive = true)
+    public BasePopup CreateUI(UIType type, bool curPopupActive = true)
     {
         if (!UIContainer.TryGetValue(type, out GameObject prefab))
         {
             Debug.LogWarning($"Is Not Scene base UI : {type}");
-            return;
+            return null;
         }
 
         GameObject clone = Instantiate(prefab);
@@ -38,6 +38,8 @@ public class UIManager : MonoBehaviour, IManager
         afterUI.Init();
 
         depth.Push(afterUI);
+
+        return afterUI;
     }
 
     public void CloseUI(Action LoadScene = null)

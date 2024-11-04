@@ -27,7 +27,7 @@ public class UIInputField : MonoBehaviour
 
     private void OnInputField(string s)
     {
-        if (SetValueEvent != null)
+        if (SetValueEvent == null)
             return;
 
         value = SetValueEvent.Invoke(s);

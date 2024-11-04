@@ -11,7 +11,7 @@ public class PlayerSkill : MonoBehaviour
 
     private void Awake()
     {
-        cubeController = GetComponent<PlayerController>();
+        cubeController = GetComponent<PlayerController>();        
     }
 
     // Start is called before the first frame update

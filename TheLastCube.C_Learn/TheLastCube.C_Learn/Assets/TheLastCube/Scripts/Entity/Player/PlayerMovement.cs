@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector3 fixPosition;
+    private Vector3 moveAfterPosition;
 
     private PlayerController cubeController;
     public LayerMask groundlayerMask;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rotateRate = 90 / rotateSpeed;
-        fixPosition = transform.position;
+        moveAfterPosition = transform.position;//보류
 
         cubeController.OnMoveEvent += Move;
     }
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isMoving)
         {
-            Debug.Log("Err Moving!");
+            //Debug.Log("Err Moving!");
             return;
         }
         //Debug.Log(direction);
@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Physics.Raycast(ray, 0.6f, groundlayerMask))
         {
+            //cubeController.playerQuadController.BlockInteract(BlockInteractionType.None);
             return true;
         }
 
@@ -102,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isMoving = false;
+        //블록 정보 필요*******************************************
+        cubeController.playerQuadController.BlockInteract(BlockInteractionType.KeyRed);
     }
 
     IEnumerator RollBack(Vector3 ancher, Vector3 axis)
@@ -127,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
         isMoving = true;
 
         Vector3 downVec = ((transform.position -  ancher) * 2) / rotateRate;
-        fixPosition = transform.position + ancher * 2;
+        moveAfterPosition = transform.position + ancher * 2;
 
         for (int i = 0; i < rotateRate; i++)
         {
