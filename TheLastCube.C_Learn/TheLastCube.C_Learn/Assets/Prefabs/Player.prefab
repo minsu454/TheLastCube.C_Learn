@@ -648,6 +648,7 @@ GameObject:
   - component: {fileID: 2457458297961241018}
   - component: {fileID: 2578501388449521154}
   - component: {fileID: 1739935843478075865}
+  - component: {fileID: 1787884343005097465}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -692,7 +693,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rotateSpeed: 3
-  rotateRate: 3
+  skillCount: 0
 --- !u!114 &2578501388449521154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,7 +706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b918659e106554cab87beb493f7bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMoving: 0
+  skillCount: 0
+  skillActive: 0
 --- !u!114 &1739935843478075865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,3 +739,15 @@ MonoBehaviour:
   m_DefaultActionMap: Cube
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1787884343005097465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9145631087019377776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffc0a182d1701244a28ec966038930a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
