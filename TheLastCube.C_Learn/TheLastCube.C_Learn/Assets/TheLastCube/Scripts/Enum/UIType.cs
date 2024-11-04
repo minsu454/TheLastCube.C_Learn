@@ -9,4 +9,9 @@ public enum UIType
 
     InGameUI = 10,
 
+    MapChoicePopup,
+    OptionPopup,
+    StartSceneUI,
+    HelpPopup
+
 }

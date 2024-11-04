@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartSceneUI : MonoBehaviour
+public class StartSceneUI : BasePopup
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Init()
     {
-        
+        base.Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickStartBtn()
     {
-        
+        Managers.UI.CreateUI(UIType.MapChoicePopup);
     }
+
+    public void OnClickHelpBtn()
+    {
+        Managers.UI.CreateUI(UIType.HelpPopup);
+    }
+
+
+    public void OnClickOptionBtn()
+    {
+        Managers.UI.CreateUI(UIType.OptionPopup);
+    }
+
+    
+
+    
 }
