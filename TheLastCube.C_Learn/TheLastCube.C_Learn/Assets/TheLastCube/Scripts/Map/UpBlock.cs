@@ -6,36 +6,44 @@ using UnityEngine;
 public class UpBlock : MonoBehaviour
 {
     [Header("UpBlock Value Setting")]
-    [SerializeField] private float UpValue;
+    [SerializeField] private int UpValue;
     [SerializeField] private int Speed;
     [SerializeField] private LayerMask playerLayer;
 
     private Vector3 targetPosition;
+    private Vector3 originalPosition;
     private bool Move = false;
+
+    private void Start()
+    {
+        originalPosition = transform.position;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("올라옴");
-        if (other.CompareTag("Player"))
+        if (IsPlayer(other))
         {
-            targetPosition = new Vector3(transform.position.x, UpValue, transform.position.z);
+            targetPosition = new Vector3(transform.position.x, transform.position.y + UpValue, transform.position.z);
             Move = true;
-            other.transform.SetParent(transform);
+            other.transform.SetParent(transform); 
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (IsPlayer(other))
         {
             other.transform.SetParent(null);
+            targetPosition = originalPosition;
+            Move = true;
         }
     }
 
-    //private bool IsPlayer(Col other)
-    //{
-    //    return playerLayer == (playerLayer | (1 << other.gameObject.layer));
-    //}
+    private bool IsPlayer(Collider other)
+    {
+        return playerLayer == (playerLayer | (1 << other.gameObject.layer));
+    }
 
     private void Update()
     {
