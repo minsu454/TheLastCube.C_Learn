@@ -36,16 +36,20 @@ public class MapEditorUI : BasePopup
         blockBaseColorScreenView.CreateItem<BlockColorType>();
         blockMoveScreenView.CreateItem<BlockMoveType>();
         blockPaintScreenView.CreateItem<BlockInteractionType>();
+
+        MapEditorManager.Instance.MapData.ShowUpFloorEvent += OnSeeUpFloor;
+        MapEditorManager.Instance.MapData.HideCurFloorEvent += OnHideCurFloor;
+
     }
 
-    public void OnSeeUpFloor()
+    public void OnSeeUpFloor(int value)
     {
-        floorText.text = (MapEditorManager.Instance.MapData.ShowUpFloor() + 1).ToString();
+        floorText.text = (value + 1).ToString();
     }
 
-    public void OnHideCurFloor()
+    public void OnHideCurFloor(int value)
     {
-        floorText.text = (MapEditorManager.Instance.MapData.HideCurFloor() + 1).ToString();
+        floorText.text = (value + 1).ToString();
     }
 
     /// <summary>

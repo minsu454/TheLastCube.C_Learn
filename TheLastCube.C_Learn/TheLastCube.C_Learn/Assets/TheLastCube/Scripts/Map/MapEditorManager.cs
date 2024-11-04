@@ -80,6 +80,7 @@ public class MapEditorManager : MonoBehaviour
         blockListData.list = new List<BlockData>();
         
         blockListData.name = name;
+        blockListData.maxFloor = MapData.ReturnCurFloor();
 
         foreach (var list in MapData.SaveDic.Values)
         {

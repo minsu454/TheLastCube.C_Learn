@@ -22,6 +22,9 @@ public class TotalMapData : MonoBehaviour
     [Range(1, 30)] public int MapScaleZ = 10;      //forward, back
     [Range(1, 10)] public int MapScaleY = 10;      //up, down
 
+    public event Action<int> ShowUpFloorEvent;
+    public event Action<int> HideCurFloorEvent;
+
     public void Init()
     {
         GameObject go = new GameObject("TotalMap");
@@ -43,13 +46,13 @@ public class TotalMapData : MonoBehaviour
         Camera.main.transform.position = new Vector3((MapScaleX / 2) - 1, 20, (MapScaleZ / 2) - 1);
     }
 
-    public int ShowUpFloor()
+    public void ShowUpFloor()
     {
         int curFloorIdx = depth.Peek();
 
         if (curFloorIdx == MapScaleY - 1)
         {
-            return curFloorIdx;
+            return;
         }
 
         int upFloorIdx = curFloorIdx + 1;
@@ -58,10 +61,10 @@ public class TotalMapData : MonoBehaviour
 
         mapFloorList[upFloorIdx].gameObject.SetActive(true);
 
-        return upFloorIdx;
+        ShowUpFloorEvent?.Invoke(upFloorIdx);
     }
 
-    public int HideCurFloor()
+    public void HideCurFloor()
     {
         int curFloorIdx = depth.Pop();
         int downFloorIdx = depth.Peek();
@@ -69,13 +72,13 @@ public class TotalMapData : MonoBehaviour
         if (downFloorIdx == -1)
         {
             depth.Push(curFloorIdx);
-            return curFloorIdx;
+            return;
         }
 
         mapFloorList[curFloorIdx].gameObject.SetActive(false);
         mapFloorList[downFloorIdx].gameObject.SetActive(true);
 
-        return downFloorIdx;
+        HideCurFloorEvent?.Invoke(downFloorIdx);
     }
 
     public int ReturnCurFloor()
@@ -124,6 +127,11 @@ public class TotalMapData : MonoBehaviour
     public void LoadData(BlockListData blockListData)
     {
         Clear();
+
+        for (int i = 0; i < blockListData.maxFloor; i++)
+        {
+            ShowUpFloor();
+        }
 
         foreach (var blockData in blockListData.list)
         {

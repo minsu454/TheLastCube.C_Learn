@@ -5,5 +5,6 @@ using System.Collections.Generic;
 public class BlockListData
 {
     public string name;
+    public int maxFloor;
     public List<BlockData> list;
 }
