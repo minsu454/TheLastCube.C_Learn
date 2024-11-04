@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -142.5002, y: 0}
+  m_AnchoredPosition: {x: -142.50008, y: 0}
   m_SizeDelta: {x: 284, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8175565516714188328
@@ -2041,9 +2041,10 @@ MonoBehaviour:
   saveDataUI: {fileID: 7428104322456076224}
   floorInteractionUI: {fileID: 5489980573968629760}
   blockPaletteUI: {fileID: 3798071175279113761}
+  blockInteractionPaletteUI: {fileID: 5459272715033503188}
   blockBaseColorScreenView: {fileID: 740153604340095220}
   blockMoveScreenView: {fileID: 5958795997222237800}
-  blockPaintScreenView: {fileID: 8175565516714188328}
+  blockInteractionScreenView: {fileID: 8175565516714188328}
 --- !u!223 &5321423341306079484
 Canvas:
   m_ObjectHideFlags: 0
@@ -2792,7 +2793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -142.50041, y: 0}
+  m_AnchoredPosition: {x: -142.5001, y: 0}
   m_SizeDelta: {x: 284, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &740153604340095220
@@ -3848,7 +3849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -142.5002, y: -0.0000076293945}
+  m_AnchoredPosition: {x: -142.50008, y: -0.0000076293945}
   m_SizeDelta: {x: 284, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5958795997222237800

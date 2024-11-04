@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,17 +9,21 @@ using UnityEngine.UIElements;
 
 public class TotalMapData : MonoBehaviour
 {
-    private readonly Dictionary<int, List<MapBlock>> saveDic = new Dictionary<int, List<MapBlock>>();
+    private readonly Dictionary<int, HashSet<MapEditorBlock>> saveDic = new Dictionary<int, HashSet<MapEditorBlock>>();
+    public Dictionary<int, HashSet<MapEditorBlock>> SaveDic { get { return saveDic; } }
 
     private readonly List<MapFloor> mapFloorList = new List<MapFloor>();
     private readonly Stack<int> depth = new Stack<int>();
 
-    public MapBlock StartBlock;
-    public MapBlock EndBlock;
+    public MapEditorBlock StartBlock;
+    public MapEditorBlock EndBlock;
 
     [Range(1, 30)] public int MapScaleX = 10;      //left, right
     [Range(1, 30)] public int MapScaleZ = 10;      //forward, back
     [Range(1, 10)] public int MapScaleY = 10;      //up, down
+
+    public event Action<int> ShowUpFloorEvent;
+    public event Action<int> HideCurFloorEvent;
 
     public void Init()
     {
@@ -41,13 +46,13 @@ public class TotalMapData : MonoBehaviour
         Camera.main.transform.position = new Vector3((MapScaleX / 2) - 1, 20, (MapScaleZ / 2) - 1);
     }
 
-    public int ShowUpFloor()
+    public void ShowUpFloor()
     {
         int curFloorIdx = depth.Peek();
 
         if (curFloorIdx == MapScaleY - 1)
         {
-            return curFloorIdx;
+            return;
         }
 
         int upFloorIdx = curFloorIdx + 1;
@@ -56,10 +61,10 @@ public class TotalMapData : MonoBehaviour
 
         mapFloorList[upFloorIdx].gameObject.SetActive(true);
 
-        return upFloorIdx;
+        ShowUpFloorEvent?.Invoke(upFloorIdx);
     }
 
-    public int HideCurFloor()
+    public void HideCurFloor()
     {
         int curFloorIdx = depth.Pop();
         int downFloorIdx = depth.Peek();
@@ -67,33 +72,78 @@ public class TotalMapData : MonoBehaviour
         if (downFloorIdx == -1)
         {
             depth.Push(curFloorIdx);
-            return curFloorIdx;
+            return;
         }
 
         mapFloorList[curFloorIdx].gameObject.SetActive(false);
         mapFloorList[downFloorIdx].gameObject.SetActive(true);
 
-        return downFloorIdx;
+        HideCurFloorEvent?.Invoke(downFloorIdx);
     }
 
-    public void AddSave(MapBlock block)
+    public int ReturnCurFloor()
     {
-        int floor = depth.Peek();
-        if (!saveDic.TryGetValue(floor, out var list))
+        return depth.Peek();
+    }
+
+    public void AddSave(int floor, MapEditorBlock block)
+    {
+        if (!saveDic.TryGetValue(floor, out var hashSet))
         {
-            list = new List<MapBlock>();
-            saveDic[floor] = list;
+            hashSet = new HashSet<MapEditorBlock>();
+            saveDic[floor] = hashSet;
         }
 
-        list.Add(block);
+        if (hashSet.Contains(block))
+            return;
+
+        saveDic[floor].Add(block);
     }
 
-    public void RemoveSave(MapBlock block)
+    public void RemoveSave(int floor, MapEditorBlock block)
     {
-        int floor = depth.Peek();
-        if (!saveDic.TryGetValue(floor, out var list))
+        if (!saveDic.TryGetValue(floor, out var hashSet))
             return;
 
         saveDic[floor].Remove(block);
+    }
+
+    public void Clear()
+    {
+        foreach (var list in saveDic.Values)
+        {
+            foreach (var mapBlock in list)
+            {
+                mapBlock.ResetBlock();
+            }
+        }
+
+        StartBlock = null;
+        EndBlock = null;
+
+        saveDic.Clear();
+    }
+
+    public void LoadData(BlockListData blockListData)
+    {
+        Clear();
+
+        for (int i = 0; i < blockListData.maxFloor; i++)
+        {
+            ShowUpFloor();
+        }
+
+        foreach (var blockData in blockListData.list)
+        {
+            MapEditorBlock mapBlock = mapFloorList[blockData.floor].Return(blockData.Pos);
+            mapBlock.SetData(blockData);
+
+            if (blockData.MoveType == BlockMoveType.Start)
+                StartBlock = mapBlock;
+            else if (blockData.MoveType == BlockMoveType.End)
+                EndBlock = mapBlock;
+
+            AddSave(blockData.floor, mapBlock);
+        }
     }
 }

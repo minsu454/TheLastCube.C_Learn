@@ -1019,6 +1019,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a35dfd92-247a-4639-ba5e-1bafd00801ae
     m_ActionName: MapEditor/MouseLeftButton[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1638579281}
+        m_TargetAssemblyTypeName: MapEidtorController, Assembly-CSharp
+        m_MethodName: OnMouseRightBtn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 86dc7c72-8128-4fb9-8145-b5a09014a226
+    m_ActionName: MapEditor/MouseRightButton
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1638579281}
+        m_TargetAssemblyTypeName: MapEidtorController, Assembly-CSharp
+        m_MethodName: OnMouseMiddleBtn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8f30dc18-1d30-420d-bfb4-c374dfdfcf35
+    m_ActionName: MapEditor/MouseMiddleButton[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MapEditor
