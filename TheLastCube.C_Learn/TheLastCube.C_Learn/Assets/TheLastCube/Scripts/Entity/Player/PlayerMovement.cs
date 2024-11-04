@@ -103,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isMoving = false;
+        //블록 정보 필요*******************************************
+        cubeController.playerQuadController.BlockInteract(BlockInteractionType.KeyRed);
     }
 
     IEnumerator RollBack(Vector3 ancher, Vector3 axis)
