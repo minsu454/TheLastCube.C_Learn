@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector3 fixPosition;
+    private Vector3 moveAfterPosition;
 
     private PlayerController cubeController;
     public LayerMask groundlayerMask;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rotateRate = 90 / rotateSpeed;
-        fixPosition = transform.position;
+        moveAfterPosition = transform.position;
 
         cubeController.OnMoveEvent += Move;
     }
@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         isMoving = true;
 
         Vector3 downVec = ((transform.position -  ancher) * 2) / rotateRate;
-        fixPosition = transform.position + ancher * 2;
+        moveAfterPosition = transform.position + ancher * 2;
 
         for (int i = 0; i < rotateRate; i++)
         {

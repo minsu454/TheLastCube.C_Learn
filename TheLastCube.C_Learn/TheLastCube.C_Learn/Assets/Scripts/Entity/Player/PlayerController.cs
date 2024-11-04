@@ -30,6 +30,11 @@ public class PlayerController : TopDownController
             isPressing = false;
             return;
         }
+        if (direction.x * direction.y != 0f)
+        {
+            isPressing = false;
+            return;
+        }
         isPressing = true;
     }
 
