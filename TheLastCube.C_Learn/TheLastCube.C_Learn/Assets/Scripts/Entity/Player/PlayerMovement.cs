@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rotateRate = 90 / rotateSpeed;
+        fixPosition = transform.position;
 
         cubeController.OnMoveEvent += Move;
     }
@@ -66,10 +67,10 @@ public class PlayerMovement : MonoBehaviour
     private bool CheckWall(Vector2 direction)
     {
         Vector3 dir = new Vector3(direction.x, 0, direction.y);
-        Ray ray = new Ray(transform.position + dir * 0.5f, dir);
-        //Debug.DrawRay(transform.position - (new Vector3(0,0.5f,0)), Vector3.down, Color.red);
+        Ray ray = new Ray(transform.position, dir);
+        Debug.DrawRay(transform.position, dir, Color.red);
 
-        if (Physics.Raycast(ray, 1f, groundlayerMask))
+        if (Physics.Raycast(ray, 1.5f, groundlayerMask))
         {
             return true;
         }
@@ -79,10 +80,10 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CheckNextGround(Vector2 direction)
     {
-        Ray ray = new Ray(transform.position + (new Vector3(direction.x, -0.5f, direction.y)), Vector3.down);
-        //Debug.DrawRay(transform.position - (new Vector3(0,0.5f,0)), Vector3.down, Color.red);
+        Ray ray = new Ray(transform.position + (new Vector3(direction.x, 0, direction.y)), Vector3.down);
+        Debug.DrawRay(transform.position, Vector3.down, Color.red);
 
-        if (Physics.Raycast(ray, 1f, groundlayerMask))
+        if (Physics.Raycast(ray, 0.6f, groundlayerMask))
         {
             return true;
         }

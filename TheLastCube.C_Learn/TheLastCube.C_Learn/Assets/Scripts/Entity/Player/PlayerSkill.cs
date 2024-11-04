@@ -7,7 +7,7 @@ public class PlayerSkill : MonoBehaviour
 {
     private PlayerController cubeController;
 
-    private Transform pastPosition;
+    private Vector3 pastPosition;
 
     private void Awake()
     {
@@ -25,14 +25,14 @@ public class PlayerSkill : MonoBehaviour
         if (active)
         {
             Debug.Log("Position Save");
-            pastPosition.position = gameObject.transform.position;
+            pastPosition = gameObject.transform.position;
             return;
         }
         else
         {
             Debug.Log("Load Past Position");
-            this.gameObject.transform.position = pastPosition.transform.position;
-            pastPosition.position = Vector3.zero;
+            this.gameObject.transform.position = pastPosition;
+            pastPosition = Vector3.zero;
             return;
         }
     }
