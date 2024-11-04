@@ -155,9 +155,10 @@ public class MapEidtorController : MonoBehaviour
                 return;
 
             MapEditorBlock block = curhitblock.GetComponent<MapEditorBlock>();
-            if ((int)block.Data.InteractionType < 100)
+            if (!block.Data.eventBlock)
                 return;
 
+            MapEditorManager.Instance.MapData.EventBlock = block;
             basePopup = Managers.UI.CreateUI(UIType.MapInteractionEditorUI);
         }
     }

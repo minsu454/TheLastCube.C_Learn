@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartBlock: {fileID: 0}
   EndBlock: {fileID: 0}
+  EventBlock: {fileID: 0}
   MapScaleX: 30
   MapScaleZ: 30
   MapScaleY: 10

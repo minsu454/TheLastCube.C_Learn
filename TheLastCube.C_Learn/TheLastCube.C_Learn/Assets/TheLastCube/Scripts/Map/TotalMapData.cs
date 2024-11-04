@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -17,6 +18,7 @@ public class TotalMapData : MonoBehaviour
 
     public MapEditorBlock StartBlock;
     public MapEditorBlock EndBlock;
+    public MapEditorBlock EventBlock;
 
     [Range(1, 30)] public int MapScaleX = 10;      //left, right
     [Range(1, 30)] public int MapScaleZ = 10;      //forward, back
@@ -136,13 +138,22 @@ public class TotalMapData : MonoBehaviour
         foreach (var blockData in blockListData.list)
         {
             MapEditorBlock mapBlock = mapFloorList[blockData.floor].Return(blockData.Pos);
-            mapBlock.SetData(blockData);
-
+            
             if (blockData.MoveType == BlockMoveType.Start)
                 StartBlock = mapBlock;
             else if (blockData.MoveType == BlockMoveType.End)
                 EndBlock = mapBlock;
+            else if (blockData.eventBlock)
+            {
+                foreach (var eventBlockData in blockData.eventBlockList)
+                {
+                    MapEditorBlock eventBlock = mapFloorList[(int)eventBlockData.Key.y].Return(eventBlockData.Key);
+                    eventBlock.Parent = mapBlock;
+                    eventBlock.SetData(eventBlockData.Value);
+                }
+            }
 
+            mapBlock.SetData(blockData);
             AddSave(blockData.floor, mapBlock);
         }
     }

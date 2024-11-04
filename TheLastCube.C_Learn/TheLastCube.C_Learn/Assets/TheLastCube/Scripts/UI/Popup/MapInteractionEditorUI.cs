@@ -49,6 +49,8 @@ public class MapInteractionEditorUI : BasePopup
         MapEditorManager.Instance.MapData.ShowUpFloorEvent -= OnSeeUpFloor;
         MapEditorManager.Instance.MapData.HideCurFloorEvent -= OnHideCurFloor;
 
+        MapEditorManager.Instance.MapData.EventBlock = null;
+
         base.Close();
     }
 }
