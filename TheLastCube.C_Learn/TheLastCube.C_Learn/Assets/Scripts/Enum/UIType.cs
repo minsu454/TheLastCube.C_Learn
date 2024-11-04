@@ -1,5 +1,21 @@
-
+//UIManager에 넘겨줄 오브젝트들(프리팹들)
 public enum UIType
 {
-    //UIManager에 넘겨줄 오브젝트들(프리팹들)
+    MapEditorUI = 0,
+    MapLookUI,
+    InGameUI,
+
+    FileBrowserPopup = 10,
+
 }
+
+public enum GroundType
+{
+    MapEditorUI = 0,
+    MapLookUI,
+    InGameUI,
+
+    FileBrowserPopup = 10,
+
+}
+

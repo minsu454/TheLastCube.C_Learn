@@ -1,0 +1,28 @@
+using UnityEngine;
+using System.Collections.Generic;
+using ObjectPool;
+
+public class MapFloor : MonoBehaviour
+{
+    private readonly Dictionary<Vector3, MapBlock> mapfloorDic = new Dictionary<Vector3, MapBlock>();
+
+    private const string poolName = "NoneMapBlock";
+
+    public void Create(int mapScaleX, int mapScaleZ, int curfloor, Transform parent)
+    {
+        for (int x = 0; x < mapScaleX; x++)
+        {
+            for (int z = 0; z < mapScaleZ; z++)
+            {
+                GameObject go = ObjectPoolContainer.Instance.Pop(poolName);
+                MapBlock mapBlock = go.GetComponent<MapBlock>();
+                mapBlock.transform.parent = parent;
+                Vector3 pos = new Vector3(x, curfloor, z);
+                mapBlock.Init(pos);
+
+                go.SetActive(true);
+                mapfloorDic.Add(pos, mapBlock);
+            }
+        }
+    }
+}
