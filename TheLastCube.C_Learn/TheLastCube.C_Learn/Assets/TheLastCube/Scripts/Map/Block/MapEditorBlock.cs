@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 
 public class MapEditorBlock : MapBlock
 {
     public void SetGround(Material material, BlockColorType colorType)
     {
+        if (data.eventBlock)
+            return;
+
         if (material == null)
         {
             ResetBlock();
@@ -52,6 +56,23 @@ public class MapEditorBlock : MapBlock
 
         SetGroundMaterial(InteractionRenderer, material);
         data.InteractionType = interactionType;
+    }
+
+    public void SetEvent(Material material, BlockEventType eventType)
+    {
+        if (data.ColorType != BlockColorType.None)
+            return;
+
+        if (material == null)
+        {
+            GroundRenderer.materials = new Material[0];
+            data.eventBlock = false;
+        }
+        else
+        {
+            GroundRenderer.material = material;
+            data.eventBlock = true;
+        }
     }
 
     private void SetGroundMaterial(MeshRenderer renderer, Material material)
