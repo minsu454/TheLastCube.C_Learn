@@ -135,4 +135,12 @@ public class MapEidtorController : MonoBehaviour
             mouseRightBtn = false;
         }
     }
+
+    public void OnMouseMiddleBtn(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            //Managers.UI.CreateUI(UIType.)
+        }
+    }
 }

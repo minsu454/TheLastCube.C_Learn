@@ -2,6 +2,7 @@
 public enum UIType
 {
     MapEditorUI = 0,
+    MapInteractionEditorUI,
     MapLookUI,
     FileBrowserPopup,
     ChoiceFloorPopup,

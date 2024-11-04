@@ -22,7 +22,7 @@ public class MapEditorUI : BasePopup
     [Header("UIScreenView")]
     [SerializeField] private UIScreenView blockBaseColorScreenView;
     [SerializeField] private UIScreenView blockMoveScreenView;
-    [SerializeField] private UIScreenView blockPaintScreenView;
+    [SerializeField] private UIScreenView blockInteractionScreenView;
 
     public override void Init()
     {
@@ -35,7 +35,7 @@ public class MapEditorUI : BasePopup
 
         blockBaseColorScreenView.CreateItem<BlockColorType>();
         blockMoveScreenView.CreateItem<BlockMoveType>();
-        blockPaintScreenView.CreateItem<BlockInteractionType>();
+        blockInteractionScreenView.CreateItem<BlockInteractionType>();
 
         MapEditorManager.Instance.MapData.ShowUpFloorEvent += OnSeeUpFloor;
         MapEditorManager.Instance.MapData.HideCurFloorEvent += OnHideCurFloor;
@@ -65,11 +65,6 @@ public class MapEditorUI : BasePopup
         string initialFilename = "SaveData_" + DateTime.Now.ToString(("MM_dd_HH_mm_ss")) + ".json";
 
         StartCoroutine(ShowSaveDialogCoroutine(initialFilename));
-    }
-
-    public void SeeMapLookUI()
-    {
-        Managers.UI.CreateUI(UIType.MapLookUI);
     }
 
     /// <summary>
@@ -111,5 +106,18 @@ public class MapEditorUI : BasePopup
         {
             MapEditorManager.Instance.LoadData(FileBrowser.Result[0]);
         }
+    }
+
+    public void SeeMapLookUI()
+    {
+        Managers.UI.CreateUI(UIType.MapLookUI);
+    }
+
+    public override void Close()
+    {
+        MapEditorManager.Instance.MapData.ShowUpFloorEvent -= OnSeeUpFloor;
+        MapEditorManager.Instance.MapData.HideCurFloorEvent -= OnHideCurFloor;
+
+        base.Close();
     }
 }
