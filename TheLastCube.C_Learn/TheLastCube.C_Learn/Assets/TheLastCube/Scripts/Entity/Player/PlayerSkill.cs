@@ -10,6 +10,11 @@ public class PlayerSkill : MonoBehaviour
     private Vector3 pastPosition;
     private Quaternion pastRotation;
 
+    [SerializeField] private int skill1MaxCount = 6;
+    [SerializeField] private int skill2MaxCount = 5;
+
+    public int skill1Count = 1;
+
     private void Awake()
     {
         cubeController = GetComponent<PlayerController>();        
@@ -21,11 +26,17 @@ public class PlayerSkill : MonoBehaviour
         cubeController.OnSkillEvent += skill2;
     }
 
+    public void CheckSkiilType()
+    {
+
+    }
+
     private void skill1(bool active)
     {
         if (active)
         {
             Debug.Log("Position Save");
+            skill1Count = skill1MaxCount;
             pastPosition = gameObject.transform.position;
             pastRotation = gameObject.transform.rotation;
             return;
@@ -33,6 +44,7 @@ public class PlayerSkill : MonoBehaviour
         else
         {
             Debug.Log("Load Past Position");
+            skill1Count = -1;
             this.gameObject.transform.position = pastPosition;
             this.gameObject.transform.rotation = pastRotation;
             pastPosition = Vector3.zero;

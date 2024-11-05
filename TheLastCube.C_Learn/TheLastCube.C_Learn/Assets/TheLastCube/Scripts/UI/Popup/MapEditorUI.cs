@@ -56,6 +56,15 @@ public class MapEditorUI : BasePopup
     {
         floorText.text = (value + 1).ToString();
     }
+    public void SeeUpFloorBtn()
+    {
+        MapEditorManager.Instance.MapData.ShowUpFloor();
+    }
+
+    public void HideCurFloorBtn()
+    {
+        MapEditorManager.Instance.MapData.HideCurFloor();
+    }
 
     /// <summary>
     /// 저장 버튼

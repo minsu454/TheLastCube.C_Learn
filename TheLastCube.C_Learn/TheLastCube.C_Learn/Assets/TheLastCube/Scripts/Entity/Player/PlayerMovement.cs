@@ -18,8 +18,6 @@ public class PlayerMovement : MonoBehaviour
     private float rotateRate;
     private int rollBackInt=10;
 
-    [SerializeField] private int skillCount;
-
     private void Awake()
     {
         cubeController = GetComponent<PlayerController>();
@@ -143,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator RollDown(Vector3 ancher, Vector3 axis)
     {
+        if (cubeController.playerSkill.skill1Count <= 0) yield break;
         isMoving = true;
 
         Vector3 downVec = ((transform.position -  ancher) * 2) / rotateRate;
@@ -154,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position -= downVec;
             yield return new WaitForFixedUpdate();
         }
+        cubeController.playerSkill.skill1Count -= 1;
 
         isMoving = false;
     }

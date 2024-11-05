@@ -9,6 +9,7 @@ public class PlayerController : TopDownController
 {
     [SerializeField] private int skillCount;
     public PlayerQuadController playerQuadController;
+    public PlayerSkill playerSkill;
     private Vector2 direction = Vector2.zero;
     public bool skillActive = false;
     public bool yellowCheck = false;
