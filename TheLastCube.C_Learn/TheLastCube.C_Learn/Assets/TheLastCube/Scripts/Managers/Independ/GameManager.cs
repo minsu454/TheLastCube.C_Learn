@@ -45,8 +45,6 @@ public class GameManager : MonoBehaviour
         string json = File.ReadAllText(path);
         TotalMapData totalMapData = JsonUtility.FromJson<TotalMapData>(json);
 
-        Debug.Log(totalMapData.name);
-
         foreach (BlockData blockData in totalMapData.list)
         {
             int prefabIdx = BlockFactory.MapBlockPrefabIndex(blockData.MoveType);

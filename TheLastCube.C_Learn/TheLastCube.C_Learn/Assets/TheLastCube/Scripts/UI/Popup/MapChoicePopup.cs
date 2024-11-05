@@ -34,4 +34,9 @@ public class MapChoicePopup : BasePopup
 
         Close(SceneType.InGame);
     }
+
+    public void MapEditorBtn()
+    {
+        Close(SceneType.MapEditor);
+    }
 }

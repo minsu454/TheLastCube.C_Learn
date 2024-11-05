@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartSceneUI : BasePopup
+public class Title : BasePopup
 {
     public override void Init()
     {
@@ -18,18 +18,4 @@ public class StartSceneUI : BasePopup
     {
         Managers.UI.CreateUI(UIType.HelpPopup);
     }
-
-
-    public void OnClickOptionBtn()
-    {
-        Managers.UI.CreateUI(UIType.OptionPopup);
-    }
-
-    public void OnClickInGamePopup()
-    {
-        Managers.UI.CreateUI(UIType.InGamePopup);
-    }
-    
-
-    
 }
