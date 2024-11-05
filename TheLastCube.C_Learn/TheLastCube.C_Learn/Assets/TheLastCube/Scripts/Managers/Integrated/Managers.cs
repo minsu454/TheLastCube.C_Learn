@@ -20,12 +20,6 @@ public sealed class Managers : MonoBehaviour
     {
         Screen.SetResolution(1920, 1080, false);
 
-        if (instance != null)
-        {
-            //만약 이미 인스턴스가 있다면 생성되려는 인스턴스의 게임오브젝트 파괴
-            Destroy(instance.gameObject);
-            return;
-        }
 
         //처음 게임 scene이 로드되기 전 instance가 null이기 때문에 해당 코드를 실행
         GameObject gameObject = new GameObject("Managers");

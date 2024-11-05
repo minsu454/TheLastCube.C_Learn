@@ -56,10 +56,10 @@ public class MapEditorManager : MonoBehaviour
         MapData.Init();
     }
 
-    public void SetMaterial(Enum type)
+    public void SetMaterial(object type)
     {
-        EnumType = type;
-        CurMaterial = Managers.Material.Return(type);
+        EnumType = (Enum)type;
+        CurMaterial = Managers.Material.Return(EnumType);
     }
 
     public bool CanSave()
