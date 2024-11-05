@@ -20,7 +20,6 @@ public class TopDownController : MonoBehaviour
     {
         OnSpecialMoveEvent?.Invoke(direction);
     }
-
     public void CallSkillEvent(bool active)
     {
         OnSkillEvent?.Invoke(active);

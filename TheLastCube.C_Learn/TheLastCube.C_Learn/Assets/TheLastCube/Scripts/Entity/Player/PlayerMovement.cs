@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving = false;
 
     [SerializeField]private float rotateSpeed;
+    [SerializeField]private int maxCheckDistance = 5;
+
     private float rotateRate;
     private int rollBackInt=10;
 
@@ -25,20 +27,21 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rotateRate = 90 / rotateSpeed;
-        moveAfterPosition = transform.position;//보류
 
         cubeController.OnMoveEvent += Move;
+        cubeController.OnSpecialMoveEvent += SpecialMove;
     }
 
 
     private void Move(Vector2 direction)
     {
+        bool redskillActive = cubeController.redSkill;
+
         if (isMoving)
         {
-            //Debug.Log("Err Moving!");
             return;
         }
-        //Debug.Log(direction);
+
         if (CheckWall(direction))
         {
             return;
@@ -46,11 +49,10 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 ancher = transform.position + (new Vector3(direction.x, -1, direction.y)) * 0.5f;//회전시킬 위치
         Vector3 axis = Vector3.Cross(Vector3.up, new Vector3(direction.x, 0, direction.y));//두선과 수직인 회전시킬 축을 찾기
-        //Debug.Log($"axis :  {axis}");
 
         if (!CheckNextGround(direction))
         {
-            if (cubeController.skillActive)
+            if (redskillActive)
             {
                 StartCoroutine(RollDown(ancher, axis));
                 return;
@@ -59,8 +61,22 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (redskillActive)
+        {
+            return;
+        }
+
         StartCoroutine(Roll(ancher, axis));
-        
+    }
+
+    private void SpecialMove(Vector2 direction)
+    {
+        if (isMoving)
+        {
+            return;
+        }
+
+        StartCoroutine(CheckRoad(direction));
     }
 
     private bool CheckWall(Vector2 direction)
@@ -69,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         Ray ray = new Ray(transform.position, dir);
         Debug.DrawRay(transform.position, dir, Color.red);
 
-        if (Physics.Raycast(ray, 1.5f, groundlayerMask))
+        if (Physics.Raycast(ray, 1.4f, groundlayerMask))
         {
             return true;
         }
@@ -91,6 +107,17 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
+    public bool CheckGround()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+
+        if (Physics.Raycast(ray, 0.6f, groundlayerMask))
+        {
+            return true;
+        }
+        return false;
+    }
+
     private MapBlock ReturnMapBlock()
     {
         RaycastHit hit;
@@ -109,7 +136,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isMoving = true;
         
-
         for (int i = 0; i < rotateRate; i++)
         {
             transform.RotateAround(ancher, axis, rotateSpeed);//지정한 점을 통과하는 벡터를 중심으로 회전 
@@ -156,5 +182,27 @@ public class PlayerMovement : MonoBehaviour
         cubeController.playerSkill.skill1Count -= 1;
 
         isMoving = false;
+    }
+
+    IEnumerator CheckRoad(Vector2 direction)
+    {
+        isMoving = true;
+        for (int i = 0; i < maxCheckDistance; i++)
+        {
+            if (CheckNextGround(direction) && !CheckWall(direction))
+            {
+                transform.position += new Vector3(direction.x, 0, direction.y);
+
+                cubeController.playerQuadController.BlockInteract(ReturnMapBlock());
+                yield return YieldCache.WaitForSeconds(0.01f);
+            }
+            else
+            {
+                break;
+            }
+        }
+        isMoving = false;
+        cubeController.skillActive = false; //노란 큐브의 능력은 사용 시 바로 해제
+        cubeController.yellowSkill = false;
     }
 }

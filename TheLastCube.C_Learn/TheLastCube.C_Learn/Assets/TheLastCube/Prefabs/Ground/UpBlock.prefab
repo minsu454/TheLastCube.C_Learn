@@ -152,7 +152,7 @@ MonoBehaviour:
   GroundRenderer: {fileID: 1591070446557597255}
   MoveRenderer: {fileID: 3554135813829456857}
   InteractionRenderer: {fileID: 32673509803661286}
-  Speed: 1
+  Speed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
