@@ -11,12 +11,18 @@ public class PlayerController : TopDownController
     public PlayerQuadController playerQuadController;
     private Vector2 direction = Vector2.zero;
     public bool skillActive = false;
+    public bool yellowCheck = false;
 
     private void FixedUpdate()
     {
         if (!isPressing)
         {
             return;            
+        }
+        if (yellowCheck)
+        {
+            CallSpecialMoveEvent(direction);
+            return;
         }
 
         CallMoveEvent(direction);

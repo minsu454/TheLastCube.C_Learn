@@ -17,4 +17,18 @@ public static class BlockFactory
 
         return mapBlock;
     }
+
+    public static int MapBlockEventPrefabIndex(BlockEventType type)
+    {
+        int index = -1;
+
+        switch (type)
+        {
+            case BlockEventType.Create:
+                index = (int)BlockPrefabNameType.Createventblock;
+                break;
+        }
+
+        return index;
+    }
 }
