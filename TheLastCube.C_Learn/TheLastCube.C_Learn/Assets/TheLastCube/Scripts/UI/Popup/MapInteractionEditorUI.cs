@@ -11,7 +11,7 @@ public class MapInteractionEditorUI : BasePopup
     [SerializeField] private UIArrowButton floorInteractionUI;
     [SerializeField] private UIArrowButton blockInteractionEventPaletteUI;
 
-    [Header("UIScreenView")]
+    [Header("UIScrollView")]
     [SerializeField] private UIScrollView blockInteractionEventScrollView;
 
     public override void Init()

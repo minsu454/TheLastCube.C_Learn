@@ -19,7 +19,7 @@ public class MapEditorUI : BasePopup
     [SerializeField] private UIArrowButton blockPaletteUI;
     [SerializeField] private UIArrowButton blockInteractionPaletteUI;
 
-    [Header("UIScreenView")]
+    [Header("UIScrollView")]
     [SerializeField] private UIScrollView blockBaseColorScrollView;
     [SerializeField] private UIScrollView blockMoveScrollView;
     [SerializeField] private UIScrollView blockInteractionScrollView;
