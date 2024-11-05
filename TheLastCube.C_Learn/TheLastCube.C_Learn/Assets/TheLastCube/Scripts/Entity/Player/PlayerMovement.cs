@@ -93,18 +93,18 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    private BlockInteractionType CheckBottomGroundType()
+    private MapBlock ReturnMapBlock()
     {
         RaycastHit hit;
-        BlockInteractionType blockInteractionType;
+        MapBlock mapBlock;
 
         Ray ray = new Ray(transform.position, Vector3.down);
 
         Physics.Raycast(ray, out hit, 0.6f);
         bottomGround = hit.collider.gameObject;
-        blockInteractionType = bottomGround.GetComponent<MapBlock>().Data.InteractionType;
+        mapBlock = bottomGround.GetComponent<MapBlock>();
 
-        return blockInteractionType;
+        return mapBlock;
     }
 
     IEnumerator Roll(Vector3 ancher, Vector3 axis)
@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
         isMoving = false;
         
-        cubeController.playerQuadController.BlockInteract(CheckBottomGroundType());
+        cubeController.playerQuadController.BlockInteract(ReturnMapBlock());
     }
 
     IEnumerator RollBack(Vector3 ancher, Vector3 axis)

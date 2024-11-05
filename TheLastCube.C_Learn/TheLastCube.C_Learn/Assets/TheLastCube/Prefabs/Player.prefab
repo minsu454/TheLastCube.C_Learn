@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerQuadType: 0
-  index: 0
-  normalQuadRenderer: {fileID: 0}
+  index: 3
+  normalQuadMaterial: {fileID: 2100000, guid: 4bae8046700dd964888337811e6a8357, type: 2}
 --- !u!1 &4340966096289349281
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerQuadType: 0
   index: 0
-  normalQuadRenderer: {fileID: 0}
+  normalQuadMaterial: {fileID: 2100000, guid: 4bae8046700dd964888337811e6a8357, type: 2}
 --- !u!1 &5860564429070195984
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,8 +364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerQuadType: 0
-  index: 0
-  normalQuadRenderer: {fileID: 0}
+  index: 2
+  normalQuadMaterial: {fileID: 2100000, guid: 4bae8046700dd964888337811e6a8357, type: 2}
 --- !u!1 &7074666607088475652
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,8 +486,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerQuadType: 0
-  index: 0
-  normalQuadRenderer: {fileID: 0}
+  index: 5
+  normalQuadMaterial: {fileID: 2100000, guid: 4bae8046700dd964888337811e6a8357, type: 2}
 --- !u!1 &7644556033180204462
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,8 +608,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerQuadType: 0
-  index: 0
-  normalQuadRenderer: {fileID: 0}
+  index: 4
+  normalQuadMaterial: {fileID: 2100000, guid: 4bae8046700dd964888337811e6a8357, type: 2}
 --- !u!1 &8584059088215435714
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,8 +730,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerQuadType: 0
-  index: 0
-  normalQuadRenderer: {fileID: 0}
+  index: 1
+  normalQuadMaterial: {fileID: 2100000, guid: 4bae8046700dd964888337811e6a8357, type: 2}
 --- !u!1 &9145631087019377776
 GameObject:
   m_ObjectHideFlags: 0

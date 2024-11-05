@@ -7,13 +7,13 @@ public class Quad : MonoBehaviour
     private Renderer _renderer;
     public BlockInteractionType playerQuadType;
 
-    public int index;
-    public Renderer normalQuadRenderer;
+    [SerializeField] private int index;
+    public Material normalQuadMaterial;
 
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
-        _renderer.material = normalQuadRenderer.material;
+        _renderer.material = normalQuadMaterial;
     }
 
     public void ChangeQuadRenderer(BlockInteractionType blockInteractionType)
@@ -43,6 +43,6 @@ public class Quad : MonoBehaviour
     public void ResetQuad()
     {
         playerQuadType = BlockInteractionType.None;
-        _renderer.material = normalQuadRenderer.material;
+        _renderer.material = normalQuadMaterial;
     }
 }

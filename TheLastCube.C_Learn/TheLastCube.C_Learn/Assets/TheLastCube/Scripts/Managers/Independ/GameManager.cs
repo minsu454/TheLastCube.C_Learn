@@ -1,4 +1,5 @@
 using ObjectPool;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEditor.SceneManagement;
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     private Vector3 playerSpawnPos;
 
+    private readonly Dictionary<MapBlock, List<IMapEventBlock>> eventBlockDict = new Dictionary<MapBlock, List<IMapEventBlock>>();
+
     private void Awake()
     {
         CreateMap();
@@ -56,14 +59,19 @@ public class GameManager : MonoBehaviour
                 playerSpawnPos = blockData.Pos + Vector3.up;
             else if (blockData.eventBlock)
             {
+                List<IMapEventBlock> list = new List<IMapEventBlock>();
+
                 foreach (var eventBlockData in blockData.eventBlockList)
                 {
-                    GameObject eventClone = Instantiate(mapBlockPrefab[(int)BlockPrefabNameType.MapBlock]);
-                    MapBlock eventBlock = eventClone.GetComponent<MapBlock>();
+                    int eventPrefabIdx = BlockFactory.MapBlockEventPrefabIndex(eventBlockData.Value);
+                    GameObject eventClone = Instantiate(mapBlockPrefab[eventPrefabIdx]);
+                    IMapEventBlock eventBlock = eventClone.GetComponent<IMapEventBlock>();
 
                     eventClone.transform.position = eventBlockData.Key;
                     eventBlock.SetData(eventBlockData.Value);
+                    list.Add(eventBlock);
                 }
+                eventBlockDict.Add(block, list);
             }
         }
     }
@@ -72,5 +80,20 @@ public class GameManager : MonoBehaviour
     {
         GameObject go = Instantiate(playerPrefab);
         go.transform.position = playerSpawnPos;
+    }
+
+    public void MapBlockEventAction(MapBlock mapBlock)
+    {
+        if (!eventBlockDict.TryGetValue(mapBlock, out var list)) 
+        {
+            Debug.LogError("none dictionary key");
+            return;
+        }
+        
+        Debug.Log(list.Count);
+        for(int i =0;i<list.Count; i++)
+        {
+            list[i].OnEvent();
+        }
     }
 }

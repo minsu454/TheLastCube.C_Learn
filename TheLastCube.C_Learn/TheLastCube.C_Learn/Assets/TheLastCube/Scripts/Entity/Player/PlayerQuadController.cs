@@ -7,8 +7,9 @@ public class PlayerQuadController : MonoBehaviour
     public Quad[] quads = new Quad[6];
     public int index = -1;
 
-    public void BlockInteract(BlockInteractionType blockInteractionType)
+    public void BlockInteract(MapBlock mapBlock)
     {
+        BlockInteractionType blockInteractionType = mapBlock.Data.InteractionType;
         if (blockInteractionType == BlockInteractionType.None) return;//상호작용 내용이 없으면
 
         if(blockInteractionType == BlockInteractionType.Delete)
@@ -27,8 +28,10 @@ public class PlayerQuadController : MonoBehaviour
             if((int)quads[index].playerQuadType - 10 == (int)blockInteractionType - 100)//enum이 하나라도 바뀌면 바뀌어야한다.
             {
                 //특별 상호작용 발동
-                quads[index].ChangeQuadRenderer(blockInteractionType);
+                //BlockInteraction();
                 Debug.Log($"interact100 {quads[index].playerQuadType}");
+                quads[index].ResetQuad();
+                GameManager.Instance.MapBlockEventAction(mapBlock);
             }
         }
         else if ((int)blockInteractionType >= 10)
