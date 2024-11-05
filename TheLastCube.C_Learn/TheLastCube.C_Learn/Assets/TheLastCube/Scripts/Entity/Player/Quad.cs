@@ -21,4 +21,28 @@ public class Quad : MonoBehaviour
         playerQuadType = blockInteractionType;
         _renderer.material = Managers.Material.Return(blockInteractionType);
     }
+
+    public void interactQuadRenderer(BlockInteractionType blockInteractionType)
+    {
+        int caseIndex = (int)blockInteractionType - 100;
+
+        switch (caseIndex)
+        {
+            case 0://red
+                //상호작용 필요
+                ResetQuad();
+                break;
+            case 1://blue
+                //
+                ResetQuad();
+                break;
+            default : Debug.Log("Need to Add script"); break;
+        }
+    }
+
+    public void ResetQuad()
+    {
+        playerQuadType = BlockInteractionType.None;
+        _renderer.material = normalQuadRenderer.material;
+    }
 }

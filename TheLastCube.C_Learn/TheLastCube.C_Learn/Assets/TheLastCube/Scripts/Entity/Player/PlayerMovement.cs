@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Vector3 moveAfterPosition;
+    private GameObject bottomGround;
 
     private PlayerController cubeController;
     public LayerMask groundlayerMask;
@@ -92,9 +93,24 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
+    private BlockInteractionType CheckBottomGroundType()
+    {
+        RaycastHit hit;
+        BlockInteractionType blockInteractionType;
+
+        Ray ray = new Ray(transform.position, Vector3.down);
+
+        Physics.Raycast(ray, out hit, 0.6f);
+        bottomGround = hit.collider.gameObject;
+        blockInteractionType = bottomGround.GetComponent<MapBlock>().Data.InteractionType;
+
+        return blockInteractionType;
+    }
+
     IEnumerator Roll(Vector3 ancher, Vector3 axis)
     {
         isMoving = true;
+        
 
         for (int i = 0; i < rotateRate; i++)
         {
@@ -103,8 +119,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isMoving = false;
-        //블록 정보 필요*******************************************
-        cubeController.playerQuadController.BlockInteract(BlockInteractionType.KeyRed);
+        
+        cubeController.playerQuadController.BlockInteract(CheckBottomGroundType());
     }
 
     IEnumerator RollBack(Vector3 ancher, Vector3 axis)

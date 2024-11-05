@@ -36,4 +36,23 @@ public class PlayerSkill : MonoBehaviour
             return;
         }
     }
+
+    private void skill2(bool active)
+    {
+        if (active)
+        {
+            int upIndex = cubeController.playerQuadController.CheckUP();
+            if (cubeController.playerQuadController.quads[upIndex].playerQuadType == BlockInteractionType.KeyYellow)
+            {
+                Debug.Log("Yellow Skill On");
+                cubeController.yellowCheck = true;
+            }
+        }
+        else
+        {
+            Debug.Log("Skill2 Off");
+            cubeController.yellowCheck = false;
+            return;
+        }
+    }
 }
