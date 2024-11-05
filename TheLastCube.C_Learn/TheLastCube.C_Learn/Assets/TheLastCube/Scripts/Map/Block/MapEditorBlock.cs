@@ -11,7 +11,6 @@ public class MapEditorBlock : MapBlock
 
     public void Init(int floor, Vector3 pos)
     {
-        data = new BlockData();
         data.floor = floor;
         data.Pos = pos;
         data.upCount = 0;

@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// 블록타입
 /// </summary>
 public enum BlockEventType

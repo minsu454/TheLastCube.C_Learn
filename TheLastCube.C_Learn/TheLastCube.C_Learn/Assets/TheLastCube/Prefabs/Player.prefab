@@ -691,7 +691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundlayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   rotateSpeed: 3
   skillCount: 0
 --- !u!114 &2578501388449521154
@@ -707,6 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillCount: 0
+  playerQuadController: {fileID: 0}
   skillActive: 0
 --- !u!114 &1739935843478075865
 MonoBehaviour:
