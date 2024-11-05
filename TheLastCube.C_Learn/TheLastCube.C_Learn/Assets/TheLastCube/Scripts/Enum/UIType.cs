@@ -12,6 +12,7 @@ public enum UIType
     MapChoicePopup,
     OptionPopup,
     StartSceneUI,
-    HelpPopup
+    HelpPopup,
+    InGamePopup
 
 }
