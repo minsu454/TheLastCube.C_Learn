@@ -2,7 +2,7 @@ using Common.Event;
 
 public sealed class DataManager : IManager
 {
-    private string fileName = "2Stage";
+    private string fileName = "3Stage";
     public string FileName { get { return fileName; } }
 
     public void Init()

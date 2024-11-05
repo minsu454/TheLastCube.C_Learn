@@ -1,3 +1,4 @@
+using Common.Yield;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,7 +34,7 @@ public class PlayerSpecialMovement : MonoBehaviour
         }
         //Debug.Log(direction);
         
-        CheckRoad(direction);
+        StartCoroutine(CheckRoad(direction));
     }
 
     private bool CheckNextWall(Vector2 direction)
@@ -64,18 +65,26 @@ public class PlayerSpecialMovement : MonoBehaviour
         return false;
     }
 
-    private void CheckRoad(Vector2 direction)
+    IEnumerator CheckRoad(Vector2 direction)
     {
+        isMoving = true;
+        Debug.Log("Y1");
         for(int i = 0; i< maxCheckDistance ; i++)
         {
             if (CheckNextGround(direction) && !CheckNextWall(direction))
             {
                 transform.position += new Vector3(direction.x,0,direction.y);
+                yield return YieldCache.WaitForSeconds(0.01f);
+                Debug.Log("Y2");
             }
             else
             {
+                Debug.Log("Y3");
                 break;
             }
         }
+        isMoving = false;
+        cubeController.skillActive = false;
+        cubeController.yellowCheck = false;
     }
 }

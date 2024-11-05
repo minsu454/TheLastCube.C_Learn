@@ -10,7 +10,6 @@ public class TopDownController : MonoBehaviour
     public event Action<Vector2> OnSpecialMoveEvent;
     public event Action<bool> OnSkillEvent;
 
-    protected bool isMoving = false;
     protected bool isPressing = false;
 
     public void CallMoveEvent(Vector2 direction)
