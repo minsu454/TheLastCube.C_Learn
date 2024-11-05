@@ -1,3 +1,4 @@
+using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -5,9 +6,11 @@ public sealed class Managers : MonoBehaviour
 {
     private static Managers instance;
 
+    public static DataManager Data { get { return instance.dataManager; } }
     public static UIManager UI { get { return instance.uiManager; } }
     public static MaterialContainer Material { get { return instance.materialContainer; } }
 
+    private DataManager dataManager = new DataManager();
     private UIManager uiManager;
     private MaterialContainer materialContainer;
 
@@ -29,6 +32,8 @@ public sealed class Managers : MonoBehaviour
         instance = gameObject.AddComponent<Managers>();
         //Managers라는 빈 게임옵젝 만들고 Managers 컴포넌트를 붙임.
         DontDestroyOnLoad(gameObject);
+
+        instance.dataManager.Init();
 
         instance.uiManager = CreateManager<UIManager>(gameObject.transform);
         instance.materialContainer = CreateManager<MaterialContainer>(gameObject.transform);

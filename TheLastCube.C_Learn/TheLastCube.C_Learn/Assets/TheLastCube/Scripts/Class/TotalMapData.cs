@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class BlockListData
+public class TotalMapData
 {
     public string name;
     public int maxFloor;

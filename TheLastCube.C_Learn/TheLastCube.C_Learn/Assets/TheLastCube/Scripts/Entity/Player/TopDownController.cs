@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class TopDownController : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
+    public event Action<Vector2> OnSpecialMoveEvent;
     public event Action<bool> OnSkillEvent;
 
     protected bool isMoving = false;
@@ -15,6 +16,10 @@ public class TopDownController : MonoBehaviour
     public void CallMoveEvent(Vector2 direction)
     {
         OnMoveEvent?.Invoke(direction);
+    }
+    public void CallSpecialMoveEvent(Vector2 direction)
+    {
+        OnSpecialMoveEvent?.Invoke(direction);
     }
 
     public void CallSkillEvent(bool active)
