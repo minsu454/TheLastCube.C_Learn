@@ -11,8 +11,11 @@ public class PlayerController : TopDownController
     public PlayerQuadController playerQuadController;
     public PlayerSkill playerSkill;
     private Vector2 direction = Vector2.zero;
+
+
     public bool skillActive = false;
-    public bool yellowCheck = false;
+    public bool redSkill = false;
+    public bool yellowSkill = false;
 
     private void FixedUpdate()
     {
@@ -20,7 +23,7 @@ public class PlayerController : TopDownController
         {
             return;            
         }
-        if (yellowCheck)
+        if (yellowSkill)
         {
             CallSpecialMoveEvent(direction);
             return;
@@ -49,9 +52,18 @@ public class PlayerController : TopDownController
     {
         if (value.isPressed)
         {
-            Debug.Log("Skill Active");
-            skillActive = !skillActive;
-            CallSkillEvent(skillActive);
+            if (skillActive)
+            {
+                skillActive = false;
+                CallSkillEvent(skillActive);
+            }
+            else
+            {
+                if (!playerSkill.CheckSkiilType()) return;
+                skillActive = true;
+
+                CallSkillEvent(skillActive);
+            }            
         }
     }
 }

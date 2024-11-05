@@ -20,22 +20,31 @@ public class PlayerSkill : MonoBehaviour
         cubeController = GetComponent<PlayerController>();        
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public bool CheckSkiilType()
     {
-        cubeController.OnSkillEvent += skill2;
-    }
+        int upIndex = cubeController.playerQuadController.CheckUP();
 
-    public void CheckSkiilType()
-    {
-
+        switch (cubeController.playerQuadController.quads[upIndex].playerQuadType)
+        {
+            case BlockInteractionType.None: Debug.Log("None"); return false;
+            case BlockInteractionType.KeyRed:
+                cubeController.OnSkillEvent += skill1;
+                return true;
+            case BlockInteractionType.KeyBlue:
+                return true;
+            case BlockInteractionType.KeyYellow:
+                cubeController.OnSkillEvent += skill2;
+                return true;
+            default: return false;
+        }
     }
 
     private void skill1(bool active)
     {
+        cubeController.redSkill = active;
+
         if (active)
         {
-            Debug.Log("Position Save");
             skill1Count = skill1MaxCount;
             pastPosition = gameObject.transform.position;
             pastRotation = gameObject.transform.rotation;
@@ -43,36 +52,31 @@ public class PlayerSkill : MonoBehaviour
         }
         else
         {
-            Debug.Log("Load Past Position");
             skill1Count = -1;
             this.gameObject.transform.position = pastPosition;
             this.gameObject.transform.rotation = pastRotation;
             pastPosition = Vector3.zero;
             pastRotation = Quaternion.identity;
+
+            cubeController.OnSkillEvent -= skill1;
             return;
         }
     }
 
     private void skill2(bool active)
     {
+        cubeController.yellowSkill = active;
+
         if (active)
         {
-            int upIndex = cubeController.playerQuadController.CheckUP();
-            if (cubeController.playerQuadController.quads[upIndex].playerQuadType == BlockInteractionType.KeyRed)
-            {
-                Debug.Log("Yellow Skill On");
-                cubeController.yellowCheck = true;
-            }
-            else
-            {
-                Debug.Log("Not right Key");
-                cubeController.skillActive = false;
-            }
+            Debug.Log("Yellow Skill On");
+            cubeController.yellowSkill = true;
+
         }
         else
         {
             Debug.Log("Skill2 Off");
-            cubeController.yellowCheck = false;
+            cubeController.yellowSkill = false;
             return;
         }
     }
