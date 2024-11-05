@@ -152,8 +152,7 @@ MonoBehaviour:
   GroundRenderer: {fileID: 1591070446557597255}
   MoveRenderer: {fileID: 3554135813829456857}
   InteractionRenderer: {fileID: 32673509803661286}
-  UpValue: 0
-  Speed: 5
+  Speed: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -213,11 +212,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 1, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8303561777800922983
 GameObject:
