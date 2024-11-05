@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Transform targetTr;
+    private Vector3 pivot = new Vector3(0, 10, -10);
+
+    public void Init(GameObject target)
     {
-        
+        targetTr = target.transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
-        
+        transform.position = targetTr.position + pivot;
     }
 }
