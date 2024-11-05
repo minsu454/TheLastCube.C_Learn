@@ -7,18 +7,27 @@ using UnityEngine;
 
 public class UIScrollViewButton : MonoBehaviour
 {
-    private object enumType;
-    [SerializeField] private TextMeshProUGUI text;
+    private object key;
+    [SerializeField] private TextMeshProUGUI text1;
+    [SerializeField] private TextMeshProUGUI text2;
     public event Action<object> OnClickEvent;
     
-    public void Init(object enumType)
+    public void Init(object key)
     {
-        this.enumType = enumType;
-        text.text = enumType.ToString();
+        this.key = key;
+        text1.text = key.ToString();
+    }
+
+    public void Init(object key, string str)
+    {
+        this.key = key;
+
+        text1.text = key.ToString();
+        text2.text = str;
     }
 
     public void OnButton()
     {
-        OnClickEvent?.Invoke(enumType);
+        OnClickEvent?.Invoke(key);
     }
 }

@@ -20,4 +20,20 @@ public class UIScrollView : MonoBehaviour
                 btn.OnClickEvent += onClickEvent;
         }
     }
+
+    public void CreateItem(string[] arr1, string[] arr2, Action<object> onClickEvent = null)
+    {
+        if (arr1.Length != arr2.Length)
+            return;
+
+        for (int i = 0; i < arr1.Length; i++)
+        {
+            GameObject go = Instantiate(slotPrefab, transform);
+            UIScrollViewButton btn = go.GetComponent<UIScrollViewButton>();
+            btn.Init(arr1[i], arr2[i]);
+
+            if (onClickEvent != null)
+                btn.OnClickEvent += onClickEvent;
+        }
+    }
 }

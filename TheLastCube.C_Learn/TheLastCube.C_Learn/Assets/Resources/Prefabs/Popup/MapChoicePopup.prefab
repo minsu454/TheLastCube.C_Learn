@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462427006c7cb354a995c20ea178126a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapScrollView: {fileID: 8141161156781219607}
 --- !u!1 &1549224581279524362
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +245,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1200, y: 725}
+  m_SizeDelta: {x: 1200, y: 675}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5975177625520913477
 CanvasRenderer:
@@ -424,7 +425,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -591.5, y: 0}
+  m_AnchoredPosition: {x: -591.49994, y: 0}
   m_SizeDelta: {x: 284, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8141161156781219607
@@ -439,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6759b25c40bec04f9ae8f72c4835254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 3513969364424317629, guid: 8feb3748d39861f4da2b3403232a1b56,
+  slotPrefab: {fileID: 3513969364424317629, guid: 8ae18764dde00764d9e0e392575629b0,
     type: 3}
 --- !u!114 &1212029393978688527
 MonoBehaviour:
