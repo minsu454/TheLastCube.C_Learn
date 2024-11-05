@@ -802,3 +802,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   maxCheckDistance: 5
+  moveSpeed: 50
