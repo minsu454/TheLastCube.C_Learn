@@ -52,6 +52,16 @@ public class PlayerSkill : MonoBehaviour
         }
         else
         {
+            if (cubeController.playerMovement.CheckGround())
+            {
+                skill1Count = -1;
+                pastPosition = Vector3.zero;
+                pastRotation = Quaternion.identity;
+
+                cubeController.OnSkillEvent -= skill1;
+                return;
+            }
+
             skill1Count = -1;
             this.gameObject.transform.position = pastPosition;
             this.gameObject.transform.rotation = pastRotation;

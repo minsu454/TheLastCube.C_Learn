@@ -27,6 +27,7 @@ public class SaveData : MonoBehaviour
         while (PlayerPrefs.HasKey($"{i}Stage")) 
         {
             Debug.Log($"{i}Stage is Clear.");
+            i++;
         }
     }
 

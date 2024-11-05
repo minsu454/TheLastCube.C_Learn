@@ -668,6 +668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillCount: 0
+  playerMovement: {fileID: 2457458297961241018}
   playerQuadController: {fileID: 4456036411191264677}
   playerSkill: {fileID: 1787884343005097465}
   skillActive: 0

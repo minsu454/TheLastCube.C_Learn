@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : TopDownController
 {
     [SerializeField] private int skillCount;
+    public PlayerMovement playerMovement;
     public PlayerQuadController playerQuadController;
     public PlayerSkill playerSkill;
     private Vector2 direction = Vector2.zero;
