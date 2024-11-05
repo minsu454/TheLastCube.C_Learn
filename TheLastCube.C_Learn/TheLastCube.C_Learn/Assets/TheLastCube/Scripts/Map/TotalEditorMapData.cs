@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
-public class TotalMapData : MonoBehaviour
+public class TotalEditorMapData : MonoBehaviour
 {
     private readonly Dictionary<int, HashSet<MapEditorBlock>> saveDic = new Dictionary<int, HashSet<MapEditorBlock>>();
     public Dictionary<int, HashSet<MapEditorBlock>> SaveDic { get { return saveDic; } }
@@ -126,7 +126,7 @@ public class TotalMapData : MonoBehaviour
         saveDic.Clear();
     }
 
-    public void LoadData(BlockListData blockListData)
+    public void LoadData(TotalMapData blockListData)
     {
         Clear();
 
