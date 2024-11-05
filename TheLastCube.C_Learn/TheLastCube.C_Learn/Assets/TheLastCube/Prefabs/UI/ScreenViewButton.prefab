@@ -143,8 +143,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4717713930288941209}
+  - component: {fileID: 5948458070786499790}
   - component: {fileID: 8431701303541036650}
-  - component: {fileID: 5815182364348238523}
   - component: {fileID: 1142403380348929372}
   - component: {fileID: 2832006358595007502}
   m_Layer: 5
@@ -174,15 +174,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 280, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8431701303541036650
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3513969364424317629}
-  m_CullTransparentMesh: 1
---- !u!114 &5815182364348238523
+--- !u!114 &5948458070786499790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,10 +183,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3513969364424317629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e7565bf19e63f4b893c039e355eec4, type: 3}
+  m_Script: {fileID: 11500000, guid: 73d1fe3af56661a4fbc89f4c8146995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 955654282512096180}
+--- !u!222 &8431701303541036650
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3513969364424317629}
+  m_CullTransparentMesh: 1
 --- !u!114 &1142403380348929372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,8 +269,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5815182364348238523}
-        m_TargetAssemblyTypeName: UIScreenViewButton, Assembly-CSharp
+      - m_Target: {fileID: 5948458070786499790}
+        m_TargetAssemblyTypeName: UIScrollViewButton, Assembly-CSharp
         m_MethodName: OnButton
         m_Mode: 1
         m_Arguments:

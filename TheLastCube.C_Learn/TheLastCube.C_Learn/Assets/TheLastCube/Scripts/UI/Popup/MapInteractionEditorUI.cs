@@ -12,7 +12,7 @@ public class MapInteractionEditorUI : BasePopup
     [SerializeField] private UIArrowButton blockInteractionEventPaletteUI;
 
     [Header("UIScreenView")]
-    [SerializeField] private UIScreenView blockInteractionEventScreenView;
+    [SerializeField] private UIScrollView blockInteractionEventScrollView;
 
     public override void Init()
     {
@@ -21,12 +21,17 @@ public class MapInteractionEditorUI : BasePopup
         floorInteractionUI.Init();
         blockInteractionEventPaletteUI.Init();
 
-        blockInteractionEventScreenView.CreateItem<BlockEventType>();
+        blockInteractionEventScrollView.CreateItem<BlockEventType>(CustomClickEvent);
 
         MapEditorManager.Instance.MapData.ShowUpFloorEvent += OnSeeUpFloor;
         MapEditorManager.Instance.MapData.HideCurFloorEvent += OnHideCurFloor;
 
         floorText.text = MapEditorManager.Instance.MapData.ReturnCurFloor().ToString();
+    }
+
+    public void CustomClickEvent(object type)
+    {
+        MapEditorManager.Instance.SetMaterial(type);
     }
 
     public void OnSeeUpFloor(int value)

@@ -4,24 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class UIScreenView : MonoBehaviour
+public class UIScrollView : MonoBehaviour
 {
     [SerializeField] private GameObject slotPrefab;
 
-    public void CreateItem<T>() where T : Enum
+    public void CreateItem<T>(Action<object> onClickEvent = null) where T : Enum
     {
         foreach (T type in Enum.GetValues(typeof(T)))
         {
             GameObject go = Instantiate(slotPrefab, transform);
-            UIScreenViewButton btn = go.GetComponent<UIScreenViewButton>();
+            UIScrollViewButton btn = go.GetComponent<UIScrollViewButton>();
             btn.Init(type);
 
-            btn.OnClickEvent += CustomClickEvent;
+            if(onClickEvent != null)
+                btn.OnClickEvent += onClickEvent;
         }
-    }
-
-    public void CustomClickEvent(Enum type)
-    {
-        MapEditorManager.Instance.SetMaterial(type);
     }
 }

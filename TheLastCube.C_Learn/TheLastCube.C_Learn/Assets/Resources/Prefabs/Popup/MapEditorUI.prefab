@@ -2042,9 +2042,9 @@ MonoBehaviour:
   floorInteractionUI: {fileID: 5489980573968629760}
   blockPaletteUI: {fileID: 3798071175279113761}
   blockInteractionPaletteUI: {fileID: 5459272715033503188}
-  blockBaseColorScreenView: {fileID: 740153604340095220}
-  blockMoveScreenView: {fileID: 5958795997222237800}
-  blockInteractionScreenView: {fileID: 8175565516714188328}
+  blockBaseColorScrollView: {fileID: 740153604340095220}
+  blockMoveScrollView: {fileID: 5958795997222237800}
+  blockInteractionScrollView: {fileID: 8175565516714188328}
 --- !u!223 &5321423341306079484
 Canvas:
   m_ObjectHideFlags: 0

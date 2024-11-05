@@ -591,7 +591,7 @@ MonoBehaviour:
   floorText: {fileID: 7528566690385015073}
   floorInteractionUI: {fileID: 2959076303322070562}
   blockInteractionEventPaletteUI: {fileID: 5055789824726853649}
-  blockInteractionEventScreenView: {fileID: 3178841300848410821}
+  blockInteractionEventScrollView: {fileID: 3178841300848410821}
 --- !u!223 &2155765282776134549
 Canvas:
   m_ObjectHideFlags: 0

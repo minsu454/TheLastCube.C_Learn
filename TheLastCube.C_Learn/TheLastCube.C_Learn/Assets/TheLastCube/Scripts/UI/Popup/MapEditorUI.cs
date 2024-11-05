@@ -20,9 +20,9 @@ public class MapEditorUI : BasePopup
     [SerializeField] private UIArrowButton blockInteractionPaletteUI;
 
     [Header("UIScreenView")]
-    [SerializeField] private UIScreenView blockBaseColorScreenView;
-    [SerializeField] private UIScreenView blockMoveScreenView;
-    [SerializeField] private UIScreenView blockInteractionScreenView;
+    [SerializeField] private UIScrollView blockBaseColorScrollView;
+    [SerializeField] private UIScrollView blockMoveScrollView;
+    [SerializeField] private UIScrollView blockInteractionScrollView;
 
     public override void Init()
     {
@@ -32,14 +32,19 @@ public class MapEditorUI : BasePopup
         floorInteractionUI.Init();
         blockPaletteUI.Init();
         blockInteractionPaletteUI.Init();
-
-        blockBaseColorScreenView.CreateItem<BlockColorType>();
-        blockMoveScreenView.CreateItem<BlockMoveType>();
-        blockInteractionScreenView.CreateItem<BlockInteractionType>();
+        
+        blockBaseColorScrollView.CreateItem<BlockColorType>(CustomClickEvent);
+        blockMoveScrollView.CreateItem<BlockMoveType>(CustomClickEvent);
+        blockInteractionScrollView.CreateItem<BlockInteractionType>(CustomClickEvent);
 
         MapEditorManager.Instance.MapData.ShowUpFloorEvent += OnSeeUpFloor;
         MapEditorManager.Instance.MapData.HideCurFloorEvent += OnHideCurFloor;
 
+    }
+
+    public void CustomClickEvent(object type)
+    {
+        MapEditorManager.Instance.SetMaterial(type);
     }
 
     public void OnSeeUpFloor(int value)

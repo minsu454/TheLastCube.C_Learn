@@ -5,13 +5,13 @@ using System.Reflection.Emit;
 using TMPro;
 using UnityEngine;
 
-public class UIScreenViewButton : MonoBehaviour
+public class UIScrollViewButton : MonoBehaviour
 {
-    private Enum enumType;
+    private object enumType;
     [SerializeField] private TextMeshProUGUI text;
-    public event Action<Enum> OnClickEvent;
+    public event Action<object> OnClickEvent;
     
-    public void Init(Enum enumType)
+    public void Init(object enumType)
     {
         this.enumType = enumType;
         text.text = enumType.ToString();
