@@ -25,6 +25,10 @@ public class StartSceneUI : BasePopup
         Managers.UI.CreateUI(UIType.OptionPopup);
     }
 
+    public void OnClickInGamePopup()
+    {
+        Managers.UI.CreateUI(UIType.InGamePopup);
+    }
     
 
     

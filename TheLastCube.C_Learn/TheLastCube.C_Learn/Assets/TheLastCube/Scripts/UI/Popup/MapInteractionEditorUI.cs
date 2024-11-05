@@ -11,8 +11,8 @@ public class MapInteractionEditorUI : BasePopup
     [SerializeField] private UIArrowButton floorInteractionUI;
     [SerializeField] private UIArrowButton blockInteractionEventPaletteUI;
 
-    [Header("UIScreenView")]
-    [SerializeField] private UIScreenView blockInteractionEventScreenView;
+    [Header("UIScrollView")]
+    [SerializeField] private UIScrollView blockInteractionEventScrollView;
 
     public override void Init()
     {
@@ -21,7 +21,7 @@ public class MapInteractionEditorUI : BasePopup
         floorInteractionUI.Init();
         blockInteractionEventPaletteUI.Init();
 
-        blockInteractionEventScreenView.CreateItem<BlockEventType>();
+        blockInteractionEventScrollView.CreateItem<BlockEventType>(CustomClickEvent);
 
         MapEditorManager.Instance.MapData.ShowUpFloorEvent += OnSeeUpFloor;
         MapEditorManager.Instance.MapData.HideCurFloorEvent += OnHideCurFloor;
@@ -29,12 +29,17 @@ public class MapInteractionEditorUI : BasePopup
         floorText.text = MapEditorManager.Instance.MapData.ReturnCurFloor().ToString();
     }
 
-    private void OnSeeUpFloor(int value)
+    public void CustomClickEvent(object type)
+    {
+        MapEditorManager.Instance.SetMaterial(type);
+    }
+
+    public void OnSeeUpFloor(int value)
     {
         floorText.text = (value + 1).ToString();
     }
 
-    private void OnHideCurFloor(int value)
+    public void OnHideCurFloor(int value)
     {
         floorText.text = (value + 1).ToString();
     }
@@ -42,16 +47,6 @@ public class MapInteractionEditorUI : BasePopup
     public void SeeMapLookUI()
     {
         Managers.UI.CreateUI(UIType.MapLookUI);
-    }
-
-    public void SeeUpFloorBtn()
-    {
-        MapEditorManager.Instance.MapData.ShowUpFloor();
-    }
-
-    public void HideCurFloorBtn()
-    {
-        MapEditorManager.Instance.MapData.HideCurFloor();
     }
 
     public override void Close()

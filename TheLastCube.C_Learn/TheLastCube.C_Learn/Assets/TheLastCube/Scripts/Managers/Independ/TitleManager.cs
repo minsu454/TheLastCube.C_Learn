@@ -8,6 +8,4 @@ public class TitleManager : MonoBehaviour
     {
         Managers.UI.CreateUI(UIType.StartSceneUI);
     }
-
-   
 }
