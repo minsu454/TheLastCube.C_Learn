@@ -610,6 +610,7 @@ GameObject:
   - component: {fileID: 4456036411191264677}
   - component: {fileID: 520171569935346692}
   - component: {fileID: 3215829120092187660}
+  - component: {fileID: 8948558264427508983}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -654,7 +655,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   rotateSpeed: 3
-  skillCount: 0
 --- !u!114 &2578501388449521154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillCount: 0
   playerQuadController: {fileID: 4456036411191264677}
+  playerSkill: {fileID: 1787884343005097465}
   skillActive: 0
   yellowCheck: 0
 --- !u!114 &1739935843478075865
@@ -714,6 +715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ffc0a182d1701244a28ec966038930a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skill1MaxCount: 6
+  skill2MaxCount: 5
+  skill1Count: -1
 --- !u!114 &4456036411191264677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,3 +786,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8948558264427508983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9145631087019377776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61554d85230b7394bbed9580340d5398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundlayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  maxCheckDistance: 5

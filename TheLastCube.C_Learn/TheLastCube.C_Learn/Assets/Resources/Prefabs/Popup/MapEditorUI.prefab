@@ -2547,7 +2547,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8869904430650043659}
         m_TargetAssemblyTypeName: MapEditorUI, Assembly-CSharp
-        m_MethodName: OnSeeUpFloor
+        m_MethodName: SeeUpFloorBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3104,7 +3104,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8869904430650043659}
         m_TargetAssemblyTypeName: MapEditorUI, Assembly-CSharp
-        m_MethodName: OnHideCurFloor
+        m_MethodName: HideCurFloorBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
