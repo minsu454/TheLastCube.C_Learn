@@ -89,7 +89,7 @@ public class MapEditorUI : BasePopup
             string path = FileBrowser.Result[0];
 
             string name = Path.GetFileNameWithoutExtension(path);           //파일명만 따오는 함수
-            string json = MapEditorManager.Instance.DataToJson(path);
+            string json = MapEditorManager.Instance.DataToJson(name);
 
             System.IO.File.WriteAllText(path, json);
         }

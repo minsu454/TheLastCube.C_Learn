@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class MapEditorManager : MonoBehaviour
         }
     }
 
-    public TotalMapData MapData { get; private set; }
+    public TotalEditorMapData MapData { get; private set; }
 
     [Header("ObjectPool")]
     [SerializeField] private GameObject mapBlockPrefab;
@@ -43,7 +44,7 @@ public class MapEditorManager : MonoBehaviour
 
     private void Awake()
     {
-        MapData = GetComponent<TotalMapData>();
+        MapData = GetComponent<TotalEditorMapData>();
 
         mapBlockPrefab.CreateObjectPool(9000);
 
@@ -76,7 +77,7 @@ public class MapEditorManager : MonoBehaviour
     /// </summary>
     public string DataToJson(string name)
     {
-        BlockListData blockListData = new BlockListData();
+        TotalMapData blockListData = new TotalMapData();
         blockListData.list = new List<BlockData>();
         
         blockListData.name = name;
@@ -86,6 +87,7 @@ public class MapEditorManager : MonoBehaviour
         {
             foreach (var mapBlock in list)
             {
+                mapBlock.Data.eventBlockList = mapBlock.eventBlockDic.Values.ToList();
                 blockListData.list.Add(mapBlock.Data);
             }
         }
@@ -101,7 +103,7 @@ public class MapEditorManager : MonoBehaviour
     public void LoadData(string path)
     {
         string json = File.ReadAllText(path);
-        BlockListData blockListData = JsonUtility.FromJson<BlockListData>(json);
+        TotalMapData blockListData = JsonUtility.FromJson<TotalMapData>(json);
 
         try
         {

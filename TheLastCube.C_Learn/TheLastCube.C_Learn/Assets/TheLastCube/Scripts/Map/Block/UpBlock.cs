@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UpBlock : MonoBehaviour
+public class UpBlock : MapBlock
 {
     [Header("UpBlock Value Setting")]
-    [SerializeField] private int UpValue;
     [SerializeField] private int Speed;
     [SerializeField] private LayerMask playerLayer;
 
@@ -24,7 +23,7 @@ public class UpBlock : MonoBehaviour
         Debug.Log("올라옴");
         if (IsPlayer(other))
         {
-            targetPosition = new Vector3(transform.position.x, transform.position.y + UpValue, transform.position.z);
+            targetPosition = new Vector3(transform.position.x, transform.position.y + data.upCount, transform.position.z);
             Move = true;
             other.transform.SetParent(transform); 
         }

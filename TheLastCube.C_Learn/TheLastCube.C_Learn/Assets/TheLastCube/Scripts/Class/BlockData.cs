@@ -10,9 +10,24 @@ public class BlockData
 
     public int upCount;
     public bool eventBlock;
-    public readonly List<MapEditorBlock> eventBlockList = new List<MapEditorBlock>();
+
+    public List<EventBlockDic> eventBlockList = new List<EventBlockDic>();
 
     public BlockColorType ColorType = BlockColorType.None;
     public BlockMoveType MoveType = BlockMoveType.None;
     public BlockInteractionType InteractionType = BlockInteractionType.None;
+    public BlockEventType EventType = BlockEventType.None;
+}
+
+[Serializable]
+public class EventBlockDic
+{
+    public Vector3 Key;
+    public BlockEventType Value;
+
+    public EventBlockDic(Vector3 Key, BlockEventType Value)
+    {
+        this.Key = Key;
+        this.Value = Value;
+    }
 }

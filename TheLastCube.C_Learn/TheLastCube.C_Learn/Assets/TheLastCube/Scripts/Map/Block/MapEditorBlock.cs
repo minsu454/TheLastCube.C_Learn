@@ -1,11 +1,26 @@
 using System;
+using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class MapEditorBlock : MapBlock
 {
+    public Dictionary<Vector3, EventBlockDic> eventBlockDic = new Dictionary<Vector3, EventBlockDic>();
+
+    public MapEditorBlock Parent;
+
+    public void Init(int floor, Vector3 pos)
+    {
+        data.floor = floor;
+        data.Pos = pos;
+        data.upCount = 0;
+
+        transform.position = pos;
+    }
+
     public void SetGround(Material material, BlockColorType colorType)
     {
-        if (data.eventBlock)
+        if (data.EventType != BlockEventType.None)
             return;
 
         if (material == null)
@@ -54,6 +69,8 @@ public class MapEditorBlock : MapBlock
         if (data.ColorType == BlockColorType.None)
             return;
 
+        data.eventBlock = (int)interactionType >= 100;
+
         SetGroundMaterial(InteractionRenderer, material);
         data.InteractionType = interactionType;
     }
@@ -63,16 +80,36 @@ public class MapEditorBlock : MapBlock
         if (data.ColorType != BlockColorType.None)
             return;
 
+        if (MapEditorManager.Instance.MapData.EventBlock == null)
+            return;
+
         if (material == null)
         {
+            if (Parent != MapEditorManager.Instance.MapData.EventBlock)
+                return;
+
+            var dic = MapEditorManager.Instance.MapData.EventBlock.eventBlockDic;
+            if (dic.ContainsKey(data.Pos))
+            {
+                dic.Remove(data.Pos);
+                Parent = null;
+            }
+
             GroundRenderer.materials = new Material[0];
-            data.eventBlock = false;
         }
         else
         {
+            var dic = MapEditorManager.Instance.MapData.EventBlock.eventBlockDic;
+            if (!dic.TryGetValue(data.Pos, out var evnetBlockList))
+            {
+                dic.Add(data.Pos, new EventBlockDic(data.Pos, eventType));
+            }
+
             GroundRenderer.material = material;
-            data.eventBlock = true;
+            Parent = MapEditorManager.Instance.MapData.EventBlock;
         }
+
+        data.EventType = eventType;
     }
 
     private void SetGroundMaterial(MeshRenderer renderer, Material material)
@@ -116,6 +153,10 @@ public class MapEditorBlock : MapBlock
         data.ColorType = BlockColorType.None;
         data.MoveType = BlockMoveType.None;
         data.InteractionType = BlockInteractionType.None;
+        data.EventType = BlockEventType.None;
+
+        data.eventBlock = false;
+        data.eventBlockList.Clear();
     }
 }
 
