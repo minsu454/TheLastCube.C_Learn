@@ -7,17 +7,23 @@ public class BrokenWall : MonoBehaviour
     [SerializeField] private float PassingSpeed; 
     [SerializeField] private LayerMask playerLayer;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (IsPlayer(collision.collider))
+        if (IsPlayer(other))
         {
-            float PlayerSpeed = collision.relativeVelocity.magnitude;
-            Debug.Log("충돌이 감지 되었습니다");
-
-            if (PlayerSpeed > PassingSpeed)
+            Rigidbody rb = other.attachedRigidbody;
+            if (rb != null)
             {
-                Physics.IgnoreCollision(collision.collider, GetComponent<Collider>()); 
-                Debug.Log("통과했습니다");
+                float PlayerSpeed = rb.velocity.magnitude;
+                Debug.Log("Rigidbody velocity: " + rb.velocity);
+                Debug.Log("PlayerSpeed: " + PlayerSpeed);
+                Debug.Log("충돌이 감지 되었습니다");
+
+                if (PlayerSpeed > PassingSpeed)
+                {
+                    Physics.IgnoreCollision(other.GetComponent<Collider>(), GetComponent<Collider>());
+                    Debug.Log("통과했습니다");
+                }
             }
         }
     }
