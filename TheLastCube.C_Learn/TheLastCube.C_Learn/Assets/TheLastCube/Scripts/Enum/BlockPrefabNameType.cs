@@ -5,5 +5,7 @@ public enum BlockPrefabNameType
 {
     MapBlock = 0,
     UpBlock,
-    Createventblock
+    Createventblock,
+    BreakBlock,
+
 }

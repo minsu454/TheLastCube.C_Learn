@@ -1,8 +1,6 @@
 using System.Linq.Expressions;
 using UnityEngine;
 
-
-
 public class MapBlock : MonoBehaviour
 {
     public BlockData data = new BlockData();
@@ -29,13 +27,6 @@ public class MapBlock : MonoBehaviour
             InteractionRenderer.material = Managers.Material.Return(data.InteractionType);
         }
     }
-    public void SetData(BlockEventType eventType)
-    {
-        data.EventType = eventType;
-        GroundRenderer.material = Managers.Material.Return(data.EventType);
-        gameObject.SetActive(false);
-    }
-
 
     public void BlockInteraction()
     {

@@ -7,4 +7,5 @@ public enum BlockMoveType
     Start,
     End,
     Up,
+    Break,
 }
