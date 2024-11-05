@@ -29,12 +29,12 @@ public class MapInteractionEditorUI : BasePopup
         floorText.text = MapEditorManager.Instance.MapData.ReturnCurFloor().ToString();
     }
 
-    public void OnSeeUpFloor(int value)
+    private void OnSeeUpFloor(int value)
     {
         floorText.text = (value + 1).ToString();
     }
 
-    public void OnHideCurFloor(int value)
+    private void OnHideCurFloor(int value)
     {
         floorText.text = (value + 1).ToString();
     }
@@ -42,6 +42,16 @@ public class MapInteractionEditorUI : BasePopup
     public void SeeMapLookUI()
     {
         Managers.UI.CreateUI(UIType.MapLookUI);
+    }
+
+    public void SeeUpFloorBtn()
+    {
+        MapEditorManager.Instance.MapData.ShowUpFloor();
+    }
+
+    public void HideCurFloorBtn()
+    {
+        MapEditorManager.Instance.MapData.HideCurFloor();
     }
 
     public override void Close()
