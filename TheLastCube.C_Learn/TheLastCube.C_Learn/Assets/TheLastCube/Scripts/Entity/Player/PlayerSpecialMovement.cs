@@ -11,7 +11,7 @@ public class PlayerSpecialMovement : MonoBehaviour
     public LayerMask groundlayerMask;
     private bool isMoving = false;
 
-    public int checkDistance;
+    public int maxCheckDistance = 5;
 
     private void Awake()
     {
@@ -32,15 +32,8 @@ public class PlayerSpecialMovement : MonoBehaviour
             return;
         }
         //Debug.Log(direction);
-        if (CheckNextWall(direction))
-        {
-            return;
-        }
-
-        if (!CheckNextGround(direction))
-        {
-            
-        }
+        
+        CheckRoad(direction);
     }
 
     private bool CheckNextWall(Vector2 direction)
@@ -73,11 +66,11 @@ public class PlayerSpecialMovement : MonoBehaviour
 
     private void CheckRoad(Vector2 direction)
     {
-        for(int i = 0; i< checkDistance ; i++)
+        for(int i = 0; i< maxCheckDistance ; i++)
         {
             if (CheckNextGround(direction) && !CheckNextWall(direction))
             {
-                //transform.position += direction;
+                transform.position += new Vector3(direction.x,0,direction.y);
             }
             else
             {
