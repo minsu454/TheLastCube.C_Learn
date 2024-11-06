@@ -26,8 +26,11 @@ public class PlayerQuadController : MonoBehaviour
 
         if(blockInteractionType == BlockInteractionType.Delete)
         {
-            UseEffect();
-            quads[index].ResetQuad();
+            if (quads[index].playerQuadType != BlockInteractionType.None)
+            {
+                UseEffect();
+                quads[index].ResetQuad();
+            }
             
             return;
         }
