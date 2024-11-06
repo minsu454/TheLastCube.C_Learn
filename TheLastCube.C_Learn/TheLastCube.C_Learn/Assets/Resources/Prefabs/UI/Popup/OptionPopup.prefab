@@ -258,7 +258,19 @@ MonoBehaviour:
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2639791435425714890}
+        m_TargetAssemblyTypeName: UISoundBar, Assembly-CSharp
+        m_MethodName: OnBGMScrollbar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1891609680820499275
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 388cde49282eac24ebb8e322f17e7181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiSoundBar: {fileID: 2639791435425714890}
 --- !u!1 &4896641840616819015
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1516199006400287695}
   - component: {fileID: 8084311030328253628}
+  - component: {fileID: 8212238404338288957}
   - component: {fileID: 8160550475105937639}
   m_Layer: 5
   m_Name: BackGround
@@ -800,6 +814,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4896641840616819015}
   m_CullTransparentMesh: 1
+--- !u!114 &8212238404338288957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896641840616819015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b60f3e200f81984ebad9e61cbc073af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmScrollbar: {fileID: 0}
+  sfxScrollbar: {fileID: 0}
 --- !u!114 &8160550475105937639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,6 +903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8050825372752751683}
+  - component: {fileID: 2639791435425714890}
   - component: {fileID: 4681220171690979675}
   - component: {fileID: 1492742138424110321}
   m_Layer: 5
@@ -906,6 +935,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 900, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2639791435425714890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187319167334100867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b60f3e200f81984ebad9e61cbc073af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmScrollbar: {fileID: 5977453402591356101}
+  sfxScrollbar: {fileID: 402665228932253194}
 --- !u!222 &4681220171690979675
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1070,7 +1113,19 @@ MonoBehaviour:
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2639791435425714890}
+        m_TargetAssemblyTypeName: UISoundBar, Assembly-CSharp
+        m_MethodName: OnSFXScrollbar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6434156049233787676
 GameObject:
   m_ObjectHideFlags: 0
