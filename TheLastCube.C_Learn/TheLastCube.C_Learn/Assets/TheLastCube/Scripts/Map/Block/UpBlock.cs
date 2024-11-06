@@ -1,4 +1,5 @@
 using Common.Event;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,6 +14,7 @@ public class UpBlock : MapBlock
     private Vector3 targetPosition;
     private Vector3 originalPosition;
     private bool Move = false;
+    private Action dispatchEvent;
 
     private void Start()
     {
@@ -26,6 +28,7 @@ public class UpBlock : MapBlock
         {
             targetPosition = new Vector3(transform.position.x, transform.position.y + data.upCount, transform.position.z);
             Move = true;
+            dispatchEvent += OnDispatch;
             other.transform.SetParent(transform); 
         }
     }
@@ -36,7 +39,8 @@ public class UpBlock : MapBlock
         {
             other.transform.SetParent(null);
             targetPosition = originalPosition;
-            Move = false;
+            Move = true;
+            dispatchEvent -= OnDispatch;
         }
     }
 
@@ -45,17 +49,21 @@ public class UpBlock : MapBlock
         return playerLayer == (playerLayer | (1 << other.gameObject.layer));
     }
 
+    private void OnDispatch()
+    {
+        EventManager.Dispatch(GameEventType.LockPlayerMove, Move);
+    }
+
     private void Update()
     {
         if (Move == true)
         {
-            EventManager.Dispatch(GameEventType.LockPlayerMove, Move);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, Speed * Time.deltaTime);
             if (transform.position == targetPosition)
             {
                 Move = false;
             }
-            EventManager.Dispatch(GameEventType.LockPlayerMove, Move);
+            dispatchEvent?.Invoke();
         }
     }
 }
