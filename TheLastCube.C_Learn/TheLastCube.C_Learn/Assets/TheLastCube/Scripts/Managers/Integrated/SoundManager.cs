@@ -80,7 +80,7 @@ public sealed class SoundManager : MonoBehaviour, IManager
         bgmSource.volume = 0.3f;
 
         sfxSource.playOnAwake = false;
-        sfxSource.volume = 0.3f;    
+        sfxSource.volume = 1f;    
 
         SceneManagerEx.OnLoadCompleted(OnLoadCompleted);
     }

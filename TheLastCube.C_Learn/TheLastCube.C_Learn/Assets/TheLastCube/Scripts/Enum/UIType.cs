@@ -8,6 +8,7 @@ public enum UIType
 
     MapChoicePopup = 10,
     HelpPopup,
+    OptionPopup,
 
     PausePopup = 20,
     ClearPopup

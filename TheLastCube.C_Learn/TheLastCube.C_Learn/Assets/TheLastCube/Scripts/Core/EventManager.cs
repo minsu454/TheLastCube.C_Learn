@@ -8,6 +8,7 @@ namespace Common.Event
 
     public static class EventManager
     {
+
         //eventListener저장해주는 Dictionary
         private static readonly Dictionary<GameEventType, List<EventListener>> eventListenerDic = new Dictionary<GameEventType, List<EventListener>>();
 
