@@ -28,6 +28,7 @@ public class UIScrollViewButton : MonoBehaviour
 
     public void OnButton()
     {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         OnClickEvent?.Invoke(key);
     }
 }

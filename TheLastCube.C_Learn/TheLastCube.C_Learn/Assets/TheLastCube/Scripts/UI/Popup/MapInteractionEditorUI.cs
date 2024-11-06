@@ -31,6 +31,7 @@ public class MapInteractionEditorUI : BasePopup
 
     public void CustomClickEvent(object type)
     {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         MapEditorManager.Instance.SetMaterial(type);
     }
 

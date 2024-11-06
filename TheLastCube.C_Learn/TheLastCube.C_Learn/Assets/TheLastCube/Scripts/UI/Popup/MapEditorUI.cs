@@ -58,11 +58,13 @@ public class MapEditorUI : BasePopup
     }
     public void SeeUpFloorBtn()
     {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         MapEditorManager.Instance.MapData.ShowUpFloor();
     }
 
     public void HideCurFloorBtn()
     {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         MapEditorManager.Instance.MapData.HideCurFloor();
     }
 
@@ -74,6 +76,7 @@ public class MapEditorUI : BasePopup
         if (!MapEditorManager.Instance.CanSave())
             return;
 
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         Managers.UI.CreateUI(UIType.FileBrowserPopup, false);
 
         string initialFilename = "SaveData_" + DateTime.Now.ToString(("MM_dd_HH_mm_ss")) + ".json";
@@ -86,6 +89,7 @@ public class MapEditorUI : BasePopup
     /// </summary>
     public void Load()
     {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         Managers.UI.CreateUI(UIType.FileBrowserPopup, false);
 
         StartCoroutine(ShowLoadDialogCoroutine());
@@ -124,6 +128,7 @@ public class MapEditorUI : BasePopup
 
     public void SeeMapLookUI()
     {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         Managers.UI.CreateUI(UIType.MapLookUI);
     }
 
