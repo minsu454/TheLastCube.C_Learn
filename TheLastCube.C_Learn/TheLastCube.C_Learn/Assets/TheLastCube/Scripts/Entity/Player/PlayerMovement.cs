@@ -273,4 +273,9 @@ public class PlayerMovement : MonoBehaviour
         cubeController.skillActive = false; //노란 큐브의 능력은 사용 시 바로 해제
         cubeController.yellowSkill = false;
     }
+
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(GameEventType.LockPlayerMove, LockMove);
+    }
 }

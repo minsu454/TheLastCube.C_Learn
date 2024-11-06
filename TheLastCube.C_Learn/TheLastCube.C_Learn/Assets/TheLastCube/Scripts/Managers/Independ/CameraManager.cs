@@ -2,6 +2,7 @@ using Common.Event;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraManager : MonoBehaviour
 {
@@ -40,8 +41,16 @@ public class CameraManager : MonoBehaviour
 
     private void OnChangeViewPoint(object args)
     {
+        if (EventSystem.current.IsPointerOverGameObject()) //UI 반환
+            return;
+
         pivotIdx = ++pivotIdx % pivot.Count;
         transform.position = targetTr.position + pivot[pivotIdx];
         transform.LookAt(targetTr);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.ChangeViewPoint, OnChangeViewPoint);
     }
 }
