@@ -21,11 +21,23 @@ public class MapChoicePopup : BasePopup
         string[] fileNameArr = Directory.EnumerateFiles(path, "*.json")
                                 .Select(file => Path.GetFileNameWithoutExtension(file))
                                 .ToArray();
-
         string[] clearArr = new string[fileNameArr.Length];
-        Array.Fill(clearArr, "");
+        
+        for (int i = 0; i < fileNameArr.Length; i++)
+        {
+            if (SaveData.GetClearData(fileNameArr[i]))
+            {
+                clearArr[i] = "Clear";
+            }
+            else 
+            {
+                clearArr[i] = "";
+            }
+            
+        }
 
         mapScrollView.CreateItem(fileNameArr, clearArr, CustomClickEvent);
+            
     }
 
     public void CustomClickEvent(object type)
