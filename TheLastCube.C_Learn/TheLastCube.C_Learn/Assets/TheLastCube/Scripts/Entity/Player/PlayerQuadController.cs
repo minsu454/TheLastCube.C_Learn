@@ -132,7 +132,7 @@ public class PlayerQuadController : MonoBehaviour
         return index;
     }
 
-    public void UseEffect()
+    public void UseEffect(int color = -1)
     {
         int index = CheckBottom();
 
@@ -159,6 +159,17 @@ public class PlayerQuadController : MonoBehaviour
             default:
                 break;
         }
+
+        Color effectColor = new Color(); 
+        switch (color)
+        {
+            case -1: effectColor = Color.white; break;
+            case 0: effectColor = Color.red; break;
+            case 1: effectColor = Color.blue; break;
+            case 2: effectColor = Color.yellow; break;
+        }
+        var mainModuul = playerController.Effect.GetComponent<ParticleSystem>().main;
+        mainModuul.startColor = effectColor;
 
         playerController.Effect.SetActive(true);
     }
