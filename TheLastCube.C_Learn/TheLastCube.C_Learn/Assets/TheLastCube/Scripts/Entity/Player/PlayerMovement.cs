@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -36,9 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void LockMove(object args)
     {
-        
         isMoving = (bool)args;
-        Debug.Log("LockMove");
     }
 
     private void Move(Vector2 direction)
@@ -49,12 +48,6 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-
-        if (ReturnMapBlock() == null)
-        {
-            return;
-        }
-        BlockMoveType blockMoveType = ReturnMapBlock().data.MoveType;
 
         if (CheckWall(direction))
         {
@@ -68,7 +61,21 @@ public class PlayerMovement : MonoBehaviour
         {
             if (redskillActive)
             {
+                Debug.Log("RedSkill On");
                 StartCoroutine(RollDown(ancher, axis));
+                return;
+            }
+
+            if (ReturnMapBlock() == null)
+            {
+                return;
+            }
+
+            BlockMoveType blockMoveType = ReturnMapBlock().data.MoveType;
+
+            if (CheckNextGround2(direction))
+            {
+                StartCoroutine(Roll(ancher, axis, 1));
             }
             else if (blockMoveType != BlockMoveType.Up)
             {
@@ -123,6 +130,19 @@ public class PlayerMovement : MonoBehaviour
 
         return false;
     }
+    private bool CheckNextGround2(Vector2 direction)
+    {
+        Ray ray = new Ray(transform.position + (new Vector3(direction.x, 0, direction.y)), Vector3.down);
+        Debug.DrawRay(transform.position, Vector3.down, Color.red);
+
+        if (Physics.Raycast(ray, 1.6f, groundlayerMask))
+        {
+            //cubeController.playerQuadController.BlockInteract(BlockInteractionType.None);
+            return true;
+        }
+
+        return false;
+    }
 
     public bool CheckGround()
     {
@@ -167,6 +187,22 @@ public class PlayerMovement : MonoBehaviour
         cubeController.playerQuadController.BlockInteract(ReturnMapBlock());
     }
 
+    IEnumerator Roll(Vector3 ancher, Vector3 axis, int ver)
+    {
+        isMoving = true;
+
+        for (int i = 0; i < rotateRate; i++)
+        {
+            transform.RotateAround(ancher, axis, rotateSpeed);//지정한 점을 통과하는 벡터를 중심으로 회전 
+            yield return YieldCache.WaitForSeconds(0.01f);
+        }
+        transform.DOMoveY(transform.position.y -1, 0.5f);
+
+        isMoving = false;
+
+        cubeController.playerQuadController.BlockInteract(ReturnMapBlock());
+    }
+
     IEnumerator RollBack(Vector3 ancher, Vector3 axis)
     {
         Debug.Log(isMoving);
@@ -193,6 +229,8 @@ public class PlayerMovement : MonoBehaviour
         isMoving = true;
 
         Vector3 downVec = ((transform.position -  ancher - new Vector3(0,0.25f,0)) * 2) / rotateRate;
+
+        //transform.DOMove(transform.position - (transform.position - ancher - new Vector3(0, 0.25f, 0)) * 2, 0.5f).SetEase(Ease.InOutQuart);
 
         for (int i = 0; i < rotateRate; i++)
         {
