@@ -12,7 +12,6 @@ public class EndBlock : MapBlock
     {
         if (IsPlayer(other))
         {
-            Debug.Log("클리어");
             Managers.UI.CreateUI(UIType.ClearPopup);
         }
     }

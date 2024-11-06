@@ -23,7 +23,6 @@ public class UpBlock : MapBlock
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("올라옴");
         if (IsPlayer(other))
         {
             targetPosition = new Vector3(transform.position.x, transform.position.y + data.upCount, transform.position.z);

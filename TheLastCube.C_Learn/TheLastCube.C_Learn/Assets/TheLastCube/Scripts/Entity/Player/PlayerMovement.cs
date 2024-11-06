@@ -61,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (redskillActive)
             {
-                Debug.Log("RedSkill On");
                 StartCoroutine(RollDown(ancher, axis));
                 return;
             }
@@ -79,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (blockMoveType != BlockMoveType.Up)
             {
-                Debug.Log(blockMoveType);
                 StartCoroutine(RollBack(ancher, axis));
             }
             return;
@@ -107,7 +105,18 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 dir = new Vector3(direction.x, 0, direction.y);
         Ray ray = new Ray(transform.position, dir);
-        Debug.DrawRay(transform.position, dir, Color.red);
+        //Debug.DrawRay(transform.position, dir, Color.red);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1.4f))
+        {
+            MapBlock wall = hit.collider.gameObject.GetComponent<MapBlock>();
+
+            if (wall.data.MoveType == BlockMoveType.Break)
+            {
+                wall.gameObject.SetActive(false);
+            }
+        }
 
         if (Physics.Raycast(ray, 1.4f, groundlayerMask))
         {
@@ -120,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
     private bool CheckNextGround(Vector2 direction)
     {
         Ray ray = new Ray(transform.position + (new Vector3(direction.x, 0, direction.y)), Vector3.down);
-        Debug.DrawRay(transform.position, Vector3.down, Color.red);
+        //Debug.DrawRay(transform.position, Vector3.down, Color.red);
 
         if (Physics.Raycast(ray, 0.6f, groundlayerMask))
         {
@@ -133,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
     private bool CheckNextGround2(Vector2 direction)
     {
         Ray ray = new Ray(transform.position + (new Vector3(direction.x, 0, direction.y)), Vector3.down);
-        Debug.DrawRay(transform.position, Vector3.down, Color.red);
+        //Debug.DrawRay(transform.position, Vector3.down, Color.red);
 
         if (Physics.Raycast(ray, 1.6f, groundlayerMask))
         {
@@ -205,7 +214,6 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator RollBack(Vector3 ancher, Vector3 axis)
     {
-        Debug.Log(isMoving);
         isMoving = true;       
 
 
@@ -248,6 +256,7 @@ public class PlayerMovement : MonoBehaviour
         isMoving = true;
         for (int i = 0; i < maxCheckDistance; i++)
         {
+
             if (CheckNextGround(direction) && !CheckWall(direction))
             {
                 transform.position += new Vector3(direction.x, 0, direction.y);
