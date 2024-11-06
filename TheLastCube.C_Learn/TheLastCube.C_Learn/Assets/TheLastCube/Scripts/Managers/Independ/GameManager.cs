@@ -1,7 +1,9 @@
 using ObjectPool;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -35,7 +37,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         CreateMap();
-        CreatePlayer();
+        GameObject playerObj = CreatePlayer();
+        CreateCameraManager(playerObj);
     }
 
     private void CreateMap()
@@ -44,8 +47,6 @@ public class GameManager : MonoBehaviour
 
         string json = File.ReadAllText(path);
         TotalMapData totalMapData = JsonUtility.FromJson<TotalMapData>(json);
-
-        Debug.Log(totalMapData.name);
 
         foreach (BlockData blockData in totalMapData.list)
         {
@@ -76,10 +77,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void CreatePlayer()
+    private GameObject CreatePlayer()
     {
         GameObject go = Instantiate(playerPrefab);
         go.transform.position = playerSpawnPos;
+
+        return go;
+    }
+
+    private void CreateCameraManager(GameObject playerObj)
+    {
+        CameraManager cameraManager = Camera.main.AddComponent<CameraManager>();
+        cameraManager.Init(playerObj);
     }
 
     public void MapBlockEventAction(MapBlock mapBlock)

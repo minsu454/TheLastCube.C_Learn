@@ -9,6 +9,12 @@ public class MapEditorBlock : MapBlock
 
     public MapEditorBlock Parent;
 
+    public void SetData(BlockEventType eventType)
+    {
+        data.EventType = eventType;
+        GroundRenderer.material = Managers.Material.Return(data.EventType);
+    }
+
     public void Init(int floor, Vector3 pos)
     {
         data.floor = floor;

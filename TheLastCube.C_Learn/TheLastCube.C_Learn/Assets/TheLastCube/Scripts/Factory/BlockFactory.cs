@@ -10,6 +10,9 @@ public static class BlockFactory
             case BlockMoveType.Up:
                 mapBlock = (int)BlockPrefabNameType.UpBlock;
                 break;
+            case BlockMoveType.Break:
+                mapBlock = (int)BlockPrefabNameType.BreakBlock;
+                break;
             default:
                 mapBlock = (int)BlockPrefabNameType.MapBlock;
                 break;

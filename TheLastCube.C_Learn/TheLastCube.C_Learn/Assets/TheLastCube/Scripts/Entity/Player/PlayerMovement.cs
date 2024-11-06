@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rotateRate = 90 / rotateSpeed;
-        moveAfterPosition = transform.position;//보류
 
         cubeController.OnMoveEvent += Move;
         cubeController.OnSpecialMoveEvent += SpecialMove;
@@ -108,6 +107,17 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
+    public bool CheckGround()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+
+        if (Physics.Raycast(ray, 0.6f, groundlayerMask))
+        {
+            return true;
+        }
+        return false;
+    }
+
     private MapBlock ReturnMapBlock()
     {
         RaycastHit hit;
@@ -126,7 +136,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isMoving = true;
         
-
         for (int i = 0; i < rotateRate; i++)
         {
             transform.RotateAround(ancher, axis, rotateSpeed);//지정한 점을 통과하는 벡터를 중심으로 회전 
@@ -183,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
             if (CheckNextGround(direction) && !CheckWall(direction))
             {
                 transform.position += new Vector3(direction.x, 0, direction.y);
+
                 cubeController.playerQuadController.BlockInteract(ReturnMapBlock());
                 yield return YieldCache.WaitForSeconds(0.01f);
             }
@@ -192,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         isMoving = false;
-        cubeController.skillActive = false;
+        cubeController.skillActive = false; //노란 큐브의 능력은 사용 시 바로 해제
         cubeController.yellowSkill = false;
     }
 }

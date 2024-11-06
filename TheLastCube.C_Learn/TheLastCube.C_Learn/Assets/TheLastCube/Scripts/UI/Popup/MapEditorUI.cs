@@ -134,4 +134,9 @@ public class MapEditorUI : BasePopup
 
         base.Close();
     }
+
+    public void BackBtn()
+    {
+        Close(SceneType.Title);
+    }
 }
