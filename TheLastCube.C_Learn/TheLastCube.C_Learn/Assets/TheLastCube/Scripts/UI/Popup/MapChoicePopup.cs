@@ -30,7 +30,6 @@ public class MapChoicePopup : BasePopup
 
     public void CustomClickEvent(object type)
     {
-        Managers.Sound.PlaySFX(SfxType.UIButton);
         EventManager.Dispatch(GameEventType.StageChoice, type);
 
         Close(SceneType.InGame);
@@ -38,7 +37,6 @@ public class MapChoicePopup : BasePopup
 
     public void MapEditorBtn()
     {
-        Managers.Sound.PlaySFX(SfxType.UIButton);
         Close(SceneType.MapEditor);
     }
 }

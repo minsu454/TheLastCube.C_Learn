@@ -10,5 +10,5 @@ public enum UIType
     HelpPopup,
 
     PausePopup = 20,
-
+    ClearPopup
 }
