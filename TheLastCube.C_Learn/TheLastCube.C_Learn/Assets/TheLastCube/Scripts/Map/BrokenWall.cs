@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class BrokenWall : MonoBehaviour
 {
-    [SerializeField] private float PassingSpeed; 
     [SerializeField] private LayerMask playerLayer;
 
     private void OnTriggerEnter(Collider other)
     {
         if (IsPlayer(other))
         {
-            Rigidbody rb = other.attachedRigidbody;
-            if (rb != null)
+            PlayerController playerController = other.GetComponent<PlayerController>();
+            if (playerController != null)
             {
-                float PlayerSpeed = rb.velocity.magnitude;
-                Debug.Log("Rigidbody velocity: " + rb.velocity);
-                Debug.Log("PlayerSpeed: " + PlayerSpeed);
+                Debug.Log("스킬:"+ playerController.skillActive);
                 Debug.Log("충돌이 감지 되었습니다");
 
-                if (PlayerSpeed > PassingSpeed)
+                if (playerController.skillActive && playerController.yellowSkill)
                 {
                     Physics.IgnoreCollision(other.GetComponent<Collider>(), GetComponent<Collider>());
                     Debug.Log("통과했습니다");
@@ -32,5 +29,5 @@ public class BrokenWall : MonoBehaviour
     {
         return playerLayer == (playerLayer | (1 << other.gameObject.layer));
     }
-
 }
+
