@@ -28,7 +28,8 @@ public class BreakBlock : MapBlock
 
     private void OnDisable()
     {
-        StopCoroutine(coroutine);
+        if(coroutine != null)
+            StopCoroutine(coroutine);
 
         GroundRenderer.enabled = true;
         myCollider.enabled = true;
