@@ -11,6 +11,7 @@ public class PlayerController : TopDownController
     public PlayerMovement playerMovement;
     public PlayerQuadController playerQuadController;
     public PlayerSkill playerSkill;
+    public GameObject Effect;
     private Vector2 direction = Vector2.zero;
 
     public bool skillActive = false;
