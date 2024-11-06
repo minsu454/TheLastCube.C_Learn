@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class SaveData : MonoBehaviour
+public static class SaveData 
 {
-    public void SaveCurrentStage()
+    public static void SaveCurrentStage()
     {
         string currentStage = Managers.Data.FileName;
         PlayerPrefs.SetInt(currentStage, 1);
@@ -16,12 +16,12 @@ public class SaveData : MonoBehaviour
     //    PlayerPrefs.SetInt(stagename, 1);
     //}
 
-    public bool GetClearData(string stagename)
+    public static bool GetClearData(string stagename)
     {
         return PlayerPrefs.HasKey(stagename);
     }
 
-    public void GetAllClearData()
+    public static void GetAllClearData()
     {
         int i = 1;
         while (PlayerPrefs.HasKey($"{i}Stage")) 
@@ -31,7 +31,7 @@ public class SaveData : MonoBehaviour
         }
     }
 
-    public void DeleteAllData()
+    public static void DeleteAllData()
     {
         PlayerPrefs.DeleteAll();
     }
