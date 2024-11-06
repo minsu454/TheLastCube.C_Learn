@@ -16,6 +16,7 @@ public class BasePopup : MonoBehaviour
     /// </summary>
     public virtual void Close()
     {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         Managers.UI.CloseUI();
     }
 
@@ -24,6 +25,7 @@ public class BasePopup : MonoBehaviour
     /// </summary>
     protected void Close(SceneType type)
     {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
         Managers.UI.CloseUI(() => SceneManagerEx.LoadScene(type));
     }
 }
