@@ -13,6 +13,9 @@ public static class BlockFactory
             case BlockMoveType.Break:
                 mapBlock = (int)BlockPrefabNameType.BreakBlock;
                 break;
+            case BlockMoveType.End:
+                mapBlock = (int)BlockPrefabNameType.EndBlock;
+                break;
             default:
                 mapBlock = (int)BlockPrefabNameType.MapBlock;
                 break;
