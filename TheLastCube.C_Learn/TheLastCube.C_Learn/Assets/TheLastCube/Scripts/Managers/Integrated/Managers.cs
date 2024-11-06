@@ -9,10 +9,12 @@ public sealed class Managers : MonoBehaviour
     public static DataManager Data { get { return instance.dataManager; } }
     public static UIManager UI { get { return instance.uiManager; } }
     public static MaterialContainer Material { get { return instance.materialContainer; } }
+    public static SoundManager Sound { get { return instance.soundManager; } }
 
     private DataManager dataManager = new DataManager();
     private UIManager uiManager;
     private MaterialContainer materialContainer;
+    private SoundManager soundManager;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     //위 생성자보다 먼저 실행하게 됨 생명주기에서 awake보다 우선 실행
@@ -31,6 +33,7 @@ public sealed class Managers : MonoBehaviour
 
         instance.uiManager = CreateManager<UIManager>(gameObject.transform);
         instance.materialContainer = CreateManager<MaterialContainer>(gameObject.transform);
+        instance.soundManager = CreateManager<SoundManager>(gameObject.transform);
     }
 
 
