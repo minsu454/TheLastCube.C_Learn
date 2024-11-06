@@ -18,14 +18,10 @@ public class BreakBlock : MapBlock
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController != null)
             {
-                Debug.Log("스킬:" + playerController.skillActive);
-                Debug.Log("충돌이 감지 되었습니다");
-
                 if (playerController.skillActive && playerController.yellowSkill)
                 {
                     Managers.Sound.PlaySFX(SfxType.BreakBlock);
                     gameObject.SetActive(false);
-                    Debug.Log("통과했습니다");
                 }
             }
         }
