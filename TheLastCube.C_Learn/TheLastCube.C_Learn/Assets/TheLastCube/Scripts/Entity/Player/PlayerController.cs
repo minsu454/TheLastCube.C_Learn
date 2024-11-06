@@ -1,3 +1,4 @@
+using Common.Event;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -66,5 +67,10 @@ public class PlayerController : TopDownController
                 CallSkillEvent(skillActive);
             }            
         }
+    }
+
+    public void OnClick(InputValue value)
+    {
+        EventManager.Dispatch(GameEventType.ChangeViewPoint, null);
     }
 }
