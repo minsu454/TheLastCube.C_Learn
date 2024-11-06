@@ -7,5 +7,5 @@ public enum BlockPrefabNameType
     UpBlock,
     Createventblock,
     BreakBlock,
-
+    EndBlock
 }
