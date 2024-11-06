@@ -8,7 +8,6 @@ public class ClearPopup : BasePopup
     public override void Init()
     {
         Time.timeScale = 0f;
-        Managers.Sound.PlaySFX(SfxType.End);
         SaveData.SaveCurrentStage();
     }
     public void OnClickRetryBtn()
