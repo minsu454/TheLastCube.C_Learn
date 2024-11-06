@@ -4,4 +4,5 @@
 public enum GameEventType
 {
     StageChoice = 0,
+    LockPlayerMove
 }

@@ -1,3 +1,4 @@
+using Common.Event;
 using Common.Yield;
 using System;
 using System.Collections;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         cubeController = GetComponent<PlayerController>();
+        EventManager.Subscribe(GameEventType.LockPlayerMove, LockMove);
     }
     private void Start()
     {
@@ -32,6 +34,12 @@ public class PlayerMovement : MonoBehaviour
         cubeController.OnSpecialMoveEvent += SpecialMove;
     }
 
+    private void LockMove(object args)
+    {
+        
+        isMoving = (bool)args;
+        Debug.Log("LockMove");
+    }
 
     private void Move(Vector2 direction)
     {
@@ -55,9 +63,12 @@ public class PlayerMovement : MonoBehaviour
             if (redskillActive)
             {
                 StartCoroutine(RollDown(ancher, axis));
-                return;
             }
-            StartCoroutine(RollBack(ancher, axis));
+            else if (ReturnMapBlock().data.MoveType != BlockMoveType.Up)
+            {
+                Debug.Log(ReturnMapBlock().data.MoveType);
+                StartCoroutine(RollBack(ancher, axis));
+            }
             return;
         }
 
@@ -127,15 +138,15 @@ public class PlayerMovement : MonoBehaviour
 
         Physics.Raycast(ray, out hit, 0.6f);
         bottomGround = hit.collider.gameObject;
-        mapBlock = bottomGround.GetComponent<MapBlock>();
+        bottomGround.TryGetComponent<MapBlock>(out mapBlock);
 
         return mapBlock;
     }
 
     IEnumerator Roll(Vector3 ancher, Vector3 axis)
     {
-        isMoving = true;
-        
+        isMoving = true;        
+
         for (int i = 0; i < rotateRate; i++)
         {
             transform.RotateAround(ancher, axis, rotateSpeed);//지정한 점을 통과하는 벡터를 중심으로 회전 
@@ -149,7 +160,9 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator RollBack(Vector3 ancher, Vector3 axis)
     {
-        isMoving = true;
+        Debug.Log(isMoving);
+        isMoving = true;       
+
 
         for (int i = 0; i < rollBackInt; i++)//회전이후 축이 틀어지지 않도록 고정된 int값을 사용.
         {
@@ -170,8 +183,7 @@ public class PlayerMovement : MonoBehaviour
         if (cubeController.playerSkill.skill1Count <= 0) yield break;
         isMoving = true;
 
-        Vector3 downVec = ((transform.position -  ancher) * 2) / rotateRate;
-        moveAfterPosition = transform.position + ancher * 2;
+        Vector3 downVec = ((transform.position -  ancher) * 2 + new Vector3(0,0.5f,0)) / rotateRate;
 
         for (int i = 0; i < rotateRate; i++)
         {

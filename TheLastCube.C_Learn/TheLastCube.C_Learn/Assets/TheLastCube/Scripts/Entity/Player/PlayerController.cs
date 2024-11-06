@@ -13,7 +13,6 @@ public class PlayerController : TopDownController
     public PlayerSkill playerSkill;
     private Vector2 direction = Vector2.zero;
 
-
     public bool skillActive = false;
     public bool redSkill = false;
     public bool yellowSkill = false;

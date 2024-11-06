@@ -1,3 +1,4 @@
+using Common.Event;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -53,6 +54,7 @@ public class UpBlock : MapBlock
             {
                 Move = false;
             }
+            EventManager.Dispatch(GameEventType.LockPlayerMove, Move);
         }
     }
 }
