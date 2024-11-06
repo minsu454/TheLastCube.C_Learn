@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerQuadController : MonoBehaviour
 {
+    private PlayerController playerController;
+
     public Quad[] quads = new Quad[6];
     public int index = -1;
+
+    private void Start()
+    {
+        playerController = GetComponent<PlayerController>();    
+    }
 
     public void BlockInteract(MapBlock mapBlock)
     {
@@ -18,7 +26,7 @@ public class PlayerQuadController : MonoBehaviour
 
         if(blockInteractionType == BlockInteractionType.Delete)
         {
-            
+            UseEffect();
             quads[index].ResetQuad();
             
             return;
@@ -30,7 +38,7 @@ public class PlayerQuadController : MonoBehaviour
             {
                 //특별 상호작용 발동
                 //BlockInteraction();
-                Debug.Log($"interact100 {quads[index].playerQuadType}");
+                UseEffect();
                 quads[index].ResetQuad();
                 GameManager.Instance.MapBlockEventAction(mapBlock);
             }
@@ -38,8 +46,8 @@ public class PlayerQuadController : MonoBehaviour
         else if ((int)blockInteractionType >= 10)
         {
             //상호작용
+            UseEffect();
             quads[index].ChangeQuadRenderer(blockInteractionType);
-            Debug.Log($"interact10 {quads[index].playerQuadType}");
         }
     }
 
@@ -122,5 +130,47 @@ public class PlayerQuadController : MonoBehaviour
             return -1;
         }
         return index;
+    }
+
+    public void UseEffect(int color = -1)
+    {
+        int index = CheckBottom();
+
+        switch (index)
+        {
+            case 0:
+                playerController.Effect.transform.localPosition = new Vector3(0,0,-0.49f);
+                break;
+            case 1:
+                playerController.Effect.transform.localPosition = new Vector3(0, 0, 0.49f);
+                break;
+            case 2:
+                playerController.Effect.transform.localPosition = new Vector3(0, 0.49f, 0);
+                break;
+            case 3:
+                playerController.Effect.transform.localPosition = new Vector3(0, -0.49f, 0);
+                break;
+            case 4:
+                playerController.Effect.transform.localPosition = new Vector3(-0.49f, 0, 0);
+                break;
+            case 5:
+                playerController.Effect.transform.localPosition = new Vector3(0.49f, 0, 0);
+                break;
+            default:
+                break;
+        }
+
+        Color effectColor = new Color(); 
+        switch (color)
+        {
+            case -1: effectColor = Color.white; break;
+            case 0: effectColor = Color.red; break;
+            case 1: effectColor = Color.blue; break;
+            case 2: effectColor = Color.yellow; break;
+        }
+        var mainModuul = playerController.Effect.GetComponent<ParticleSystem>().main;
+        mainModuul.startColor = effectColor;
+
+        playerController.Effect.SetActive(true);
     }
 }

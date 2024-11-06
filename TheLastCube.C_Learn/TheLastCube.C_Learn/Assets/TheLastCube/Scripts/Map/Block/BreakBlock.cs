@@ -23,6 +23,7 @@ public class BreakBlock : MapBlock
 
                 if (playerController.skillActive && playerController.yellowSkill)
                 {
+                    Managers.Sound.PlaySFX(SfxType.BreakBlock);
                     gameObject.SetActive(false);
                     Debug.Log("통과했습니다");
                 }

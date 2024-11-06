@@ -672,6 +672,7 @@ MonoBehaviour:
   playerMovement: {fileID: 2457458297961241018}
   playerQuadController: {fileID: 4456036411191264677}
   playerSkill: {fileID: 1787884343005097465}
+  Effect: {fileID: 5559514543679086131}
   skillActive: 0
   redSkill: 0
   yellowSkill: 0
@@ -887,6 +888,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 097b52bd13ac83d4eac0d6289a68a909, type: 3}
+--- !u!1 &5559514543679086131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5611578221500116690, guid: 097b52bd13ac83d4eac0d6289a68a909,
+    type: 3}
+  m_PrefabInstance: {fileID: 56024157427151073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8927321661060541908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8873004327940185397, guid: 097b52bd13ac83d4eac0d6289a68a909,
