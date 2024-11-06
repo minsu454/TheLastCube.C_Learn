@@ -9,19 +9,20 @@ public class PlayerQuadController : MonoBehaviour
 
     public void BlockInteract(MapBlock mapBlock)
     {
+        if(mapBlock == null) return;
+
+        Debug.Log(CheckBottom());
+
         BlockInteractionType blockInteractionType = mapBlock.Data.InteractionType;
         if (blockInteractionType == BlockInteractionType.None) return;//상호작용 내용이 없으면
 
         if(blockInteractionType == BlockInteractionType.Delete)
         {
-            for (int i = 0; i < 6; i++)
-            {
-                quads[i].ResetQuad();
-            }
+            
+            quads[index].ResetQuad();
+            
             return;
         }
-
-        Debug.Log(CheckBottom());
 
         if ((int)blockInteractionType >= 100)
         {

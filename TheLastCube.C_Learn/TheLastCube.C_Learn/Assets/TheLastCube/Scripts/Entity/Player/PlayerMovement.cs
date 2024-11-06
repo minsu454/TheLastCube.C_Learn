@@ -50,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (ReturnMapBlock() == null)
+        {
+            return;
+        }
+        BlockMoveType blockMoveType = ReturnMapBlock().data.MoveType;
+
         if (CheckWall(direction))
         {
             return;
@@ -64,9 +70,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine(RollDown(ancher, axis));
             }
-            else if (ReturnMapBlock().data.MoveType != BlockMoveType.Up)
+            else if (blockMoveType != BlockMoveType.Up)
             {
-                Debug.Log(ReturnMapBlock().data.MoveType);
+                Debug.Log(blockMoveType);
                 StartCoroutine(RollBack(ancher, axis));
             }
             return;
@@ -136,11 +142,14 @@ public class PlayerMovement : MonoBehaviour
 
         Ray ray = new Ray(transform.position, Vector3.down);
 
-        Physics.Raycast(ray, out hit, 0.6f);
-        bottomGround = hit.collider.gameObject;
-        bottomGround.TryGetComponent<MapBlock>(out mapBlock);
+        if (Physics.Raycast(ray, out hit, 0.6f))
+        {
+            bottomGround = hit.collider.gameObject;
+            bottomGround.TryGetComponent<MapBlock>(out mapBlock);
+            return mapBlock;
+        }
 
-        return mapBlock;
+        return null;
     }
 
     IEnumerator Roll(Vector3 ancher, Vector3 axis)
@@ -183,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
         if (cubeController.playerSkill.skill1Count <= 0) yield break;
         isMoving = true;
 
-        Vector3 downVec = ((transform.position -  ancher) * 2 + new Vector3(0,0.5f,0)) / rotateRate;
+        Vector3 downVec = ((transform.position -  ancher - new Vector3(0,0.25f,0)) * 2) / rotateRate;
 
         for (int i = 0; i < rotateRate; i++)
         {
