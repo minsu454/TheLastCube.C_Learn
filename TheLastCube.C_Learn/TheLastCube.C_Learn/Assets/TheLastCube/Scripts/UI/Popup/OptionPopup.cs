@@ -5,5 +5,12 @@ using UnityEngine.UI;
 
 public class OptionPopup : BasePopup
 {
-    
+    [SerializeField] private UISoundBar uiSoundBar;
+
+    public override void Init()
+    {
+        base.Init();
+
+        uiSoundBar.Init();
+    }
 }

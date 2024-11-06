@@ -31,6 +31,20 @@ public sealed class SoundManager : MonoBehaviour, IManager
         bgmSource.Play();
     }
 
+    public void SetVolume(string name, float volume)
+    {
+        if (name == "BGM")
+        {
+            bgmSource.volume = volume;
+            PlayerPrefs.SetFloat("BGM", volume);
+        }
+        else if (name == "SFX")
+        {
+            sfxSource.volume = volume;
+            PlayerPrefs.SetFloat("SFX", volume);
+        }
+    }
+
     /// <summary>
     /// 씬 로드 시 호출해주는 함수
     /// </summary>
@@ -80,7 +94,10 @@ public sealed class SoundManager : MonoBehaviour, IManager
         bgmSource.volume = 0.3f;
 
         sfxSource.playOnAwake = false;
-        sfxSource.volume = 1f;    
+        sfxSource.volume = 1f;
+
+        bgmSource.volume = PlayerPrefs.GetFloat("BGM", 1);
+        sfxSource.volume = PlayerPrefs.GetFloat("SFX", 1);
 
         SceneManagerEx.OnLoadCompleted(OnLoadCompleted);
     }
