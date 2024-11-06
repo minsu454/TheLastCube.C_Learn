@@ -109,6 +109,17 @@ public class PlayerMovement : MonoBehaviour
         Ray ray = new Ray(transform.position, dir);
         Debug.DrawRay(transform.position, dir, Color.red);
 
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1.4f))
+        {
+            MapBlock wall = hit.collider.gameObject.GetComponent<MapBlock>();
+
+            if (wall.data.MoveType == BlockMoveType.Break)
+            {
+                wall.gameObject.SetActive(false);
+            }
+        }
+
         if (Physics.Raycast(ray, 1.4f, groundlayerMask))
         {
             return true;
@@ -248,6 +259,7 @@ public class PlayerMovement : MonoBehaviour
         isMoving = true;
         for (int i = 0; i < maxCheckDistance; i++)
         {
+
             if (CheckNextGround(direction) && !CheckWall(direction))
             {
                 transform.position += new Vector3(direction.x, 0, direction.y);

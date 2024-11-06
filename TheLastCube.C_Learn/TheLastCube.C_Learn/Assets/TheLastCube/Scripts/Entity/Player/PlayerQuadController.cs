@@ -38,7 +38,7 @@ public class PlayerQuadController : MonoBehaviour
             {
                 //특별 상호작용 발동
                 //BlockInteraction();
-                UseEffect();
+                UseEffect((int)blockInteractionType - 100);
                 quads[index].ResetQuad();
                 GameManager.Instance.MapBlockEventAction(mapBlock);
             }
@@ -46,7 +46,7 @@ public class PlayerQuadController : MonoBehaviour
         else if ((int)blockInteractionType >= 10)
         {
             //상호작용
-            UseEffect();
+            UseEffect((int)blockInteractionType-10);
             quads[index].ChangeQuadRenderer(blockInteractionType);
         }
     }
@@ -167,6 +167,7 @@ public class PlayerQuadController : MonoBehaviour
             case 0: effectColor = Color.red; break;
             case 1: effectColor = Color.blue; break;
             case 2: effectColor = Color.yellow; break;
+            default: effectColor = Color.black; break;
         }
         var mainModuul = playerController.Effect.GetComponent<ParticleSystem>().main;
         mainModuul.startColor = effectColor;
@@ -174,3 +175,4 @@ public class PlayerQuadController : MonoBehaviour
         playerController.Effect.SetActive(true);
     }
 }
+
