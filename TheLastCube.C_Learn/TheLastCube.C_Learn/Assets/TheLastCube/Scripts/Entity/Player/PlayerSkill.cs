@@ -11,7 +11,6 @@ public class PlayerSkill : MonoBehaviour
     private Quaternion pastRotation;
 
     [SerializeField] private int skill1MaxCount = 6;
-    [SerializeField] private int skill2MaxCount = 5;
 
     public int skill1Count = 1;
 
@@ -84,13 +83,11 @@ public class PlayerSkill : MonoBehaviour
 
         if (active)
         {
-            Debug.Log("Yellow Skill On");
             cubeController.yellowSkill = true;
 
         }
         else
         {
-            Debug.Log("Skill2 Off");
             cubeController.yellowSkill = false;
             return;
         }

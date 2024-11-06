@@ -19,7 +19,7 @@ public class PlayerQuadController : MonoBehaviour
     {
         if(mapBlock == null) return;
 
-        Debug.Log(CheckBottom());
+        CheckBottom();
 
         BlockInteractionType blockInteractionType = mapBlock.Data.InteractionType;
         if (blockInteractionType == BlockInteractionType.None) return;//상호작용 내용이 없으면
