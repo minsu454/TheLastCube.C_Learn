@@ -50,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (ReturnMapBlock() == null)
+        {
+            return;
+        }
+        BlockMoveType blockMoveType = ReturnMapBlock().data.MoveType;
+
         if (CheckWall(direction))
         {
             return;
@@ -64,13 +70,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine(RollDown(ancher, axis));
             }
-            else if(ReturnMapBlock() == null)
+            else if (blockMoveType != BlockMoveType.Up)
             {
-
-            }
-            else if (ReturnMapBlock().data.MoveType != BlockMoveType.Up)
-            {
-                Debug.Log(ReturnMapBlock().data.MoveType);
+                Debug.Log(blockMoveType);
                 StartCoroutine(RollBack(ancher, axis));
             }
             return;

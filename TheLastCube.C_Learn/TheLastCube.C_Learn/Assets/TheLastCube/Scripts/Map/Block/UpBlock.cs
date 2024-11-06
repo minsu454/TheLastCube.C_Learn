@@ -36,7 +36,7 @@ public class UpBlock : MapBlock
         {
             other.transform.SetParent(null);
             targetPosition = originalPosition;
-            Move = true;
+            Move = false;
         }
     }
 
@@ -49,6 +49,7 @@ public class UpBlock : MapBlock
     {
         if (Move == true)
         {
+            EventManager.Dispatch(GameEventType.LockPlayerMove, Move);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, Speed * Time.deltaTime);
             if (transform.position == targetPosition)
             {
