@@ -1006,7 +1006,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4647873397309557071}
         m_TargetAssemblyTypeName: PausePopup, Assembly-CSharp
-        m_MethodName: Close
+        m_MethodName: GoHelpPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
