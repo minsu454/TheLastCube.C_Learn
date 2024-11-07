@@ -11,6 +11,6 @@ public class OptionPopup : BasePopup
     {
         base.Init();
 
-        //uiSoundBar.Init();
+        uiSoundBar.Init();
     }
 }
