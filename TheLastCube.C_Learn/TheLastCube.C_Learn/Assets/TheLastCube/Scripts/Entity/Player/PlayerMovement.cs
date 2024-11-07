@@ -126,17 +126,13 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1.4f))
         {
-            BreakBlock wall = hit.collider.gameObject.GetComponent<BreakBlock>();
+            BreakBlock wall;
+            if (!hit.collider.gameObject.TryGetComponent<BreakBlock>(out wall)) return true;
 
             if (wall.data.MoveType == BlockMoveType.Break)
             {
                 wall.Broken();
             }
-        }
-
-        if (Physics.Raycast(ray, 1.4f, groundlayerMask))
-        {
-            return true;
         }
 
         return false;
