@@ -44,7 +44,7 @@ The Last Cube라는 스팀게임을 모작하였습니다.
 
 [팀장]
 
-[강민수](https://github.com/minsu454/minsu454.github.io)
+[강민수](https://github.com/minsu454)
 
 [팀원]
 
