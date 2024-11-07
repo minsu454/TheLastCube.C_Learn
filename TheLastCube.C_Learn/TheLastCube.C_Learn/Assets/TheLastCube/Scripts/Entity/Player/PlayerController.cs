@@ -55,6 +55,7 @@ public class PlayerController : TopDownController
 
     public void OnSkill(InputValue value)
     {
+        if (playerMovement.Moving()) return;
         if (value.isPressed)
         {
             if (skillActive)

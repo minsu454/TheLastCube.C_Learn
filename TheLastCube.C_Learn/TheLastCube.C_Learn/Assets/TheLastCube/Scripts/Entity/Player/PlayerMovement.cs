@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerController cubeController;
     public LayerMask groundlayerMask;
-    private bool isMoving = false;
+    private bool isMoving = false;        
 
     [SerializeField]private float rotateSpeed;
     [SerializeField]private int maxCheckDistance = 5;
@@ -102,6 +102,22 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool CheckWall(Vector2 direction)
+    {
+        Vector3 dir = new Vector3(direction.x, 0, direction.y);
+        Ray ray = new Ray(transform.position, dir);
+        //Debug.DrawRay(transform.position, dir, Color.red);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, 1.4f, groundlayerMask))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool CheckWall2(Vector2 direction)
     {
         Vector3 dir = new Vector3(direction.x, 0, direction.y);
         Ray ray = new Ray(transform.position, dir);
@@ -257,7 +273,7 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < maxCheckDistance; i++)
         {
 
-            if (CheckNextGround(direction) && !CheckWall(direction))
+            if (CheckNextGround(direction) && !CheckWall2(direction))
             {
                 transform.position += new Vector3(direction.x, 0, direction.y);
 
@@ -277,5 +293,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.Unsubscribe(GameEventType.LockPlayerMove, LockMove);
+    }
+
+    public bool Moving()
+    {
+        return isMoving;
     }
 }
