@@ -149,6 +149,7 @@ public class TotalEditorMapData : MonoBehaviour
                 {
                     MapEditorBlock eventBlock = mapFloorList[(int)eventBlockData.Key.y].Return(eventBlockData.Key);
                     eventBlock.Parent = mapBlock;
+                    mapBlock.eventBlockDic.Add(eventBlockData.Key, eventBlockData);
                     eventBlock.SetData(eventBlockData.Value);
                 }
             }

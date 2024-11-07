@@ -703,7 +703,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Desktop
   m_DefaultActionMap: Cube
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -720,7 +720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill1MaxCount: 6
-  skill2MaxCount: 5
   skill1Count: -1
 --- !u!114 &4456036411191264677
 MonoBehaviour:

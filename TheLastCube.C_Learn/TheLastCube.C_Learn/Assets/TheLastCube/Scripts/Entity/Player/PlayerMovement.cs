@@ -110,11 +110,11 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1.4f))
         {
-            MapBlock wall = hit.collider.gameObject.GetComponent<MapBlock>();
+            BreakBlock wall = hit.collider.gameObject.GetComponent<BreakBlock>();
 
             if (wall.data.MoveType == BlockMoveType.Break)
             {
-                wall.gameObject.SetActive(false);
+                wall.Broken();
             }
         }
 
@@ -272,5 +272,10 @@ public class PlayerMovement : MonoBehaviour
         isMoving = false;
         cubeController.skillActive = false; //노란 큐브의 능력은 사용 시 바로 해제
         cubeController.yellowSkill = false;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(GameEventType.LockPlayerMove, LockMove);
     }
 }
