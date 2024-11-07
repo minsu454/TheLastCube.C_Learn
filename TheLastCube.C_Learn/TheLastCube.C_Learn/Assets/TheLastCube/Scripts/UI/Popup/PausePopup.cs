@@ -30,6 +30,12 @@ public class PausePopup : BasePopup
         Time.timeScale = 1f;
         base.Close();
     }
+
+    public void GoHelpPopup()
+    {
+        Managers.Sound.PlaySFX(SfxType.UIButton);
+        Managers.UI.CreateUI(UIType.HelpPopup);
+    }
 }
 
 
