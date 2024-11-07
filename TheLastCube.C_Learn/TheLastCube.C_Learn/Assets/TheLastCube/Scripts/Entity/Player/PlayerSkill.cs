@@ -12,8 +12,6 @@ public class PlayerSkill : MonoBehaviour
 
     [SerializeField] private int skill1MaxCount = 6;
 
-    public int skill1Count = 1;
-
     private void Awake()
     {
         cubeController = GetComponent<PlayerController>();        
@@ -46,7 +44,7 @@ public class PlayerSkill : MonoBehaviour
         {
             Managers.Sound.PlaySFX(SfxType.End);
             cubeController.playerQuadController.UseEffect((int)BlockInteractionType.KeyRed - 10);
-            skill1Count = skill1MaxCount;
+            cubeController.redSkillCount = skill1MaxCount;
             pastPosition = gameObject.transform.position;
             pastRotation = gameObject.transform.rotation;
             return;
@@ -55,7 +53,7 @@ public class PlayerSkill : MonoBehaviour
         {
             if (cubeController.playerMovement.CheckGround())
             {
-                skill1Count = -1;
+                cubeController.redSkillCount = -1;
                 pastPosition = Vector3.zero;
                 pastRotation = Quaternion.identity;
 
@@ -64,7 +62,7 @@ public class PlayerSkill : MonoBehaviour
                 return;
             }
 
-            skill1Count = -1;
+            cubeController.redSkillCount = -1;
             this.gameObject.transform.position = pastPosition;
             this.gameObject.transform.rotation = pastRotation;
             pastPosition = Vector3.zero;

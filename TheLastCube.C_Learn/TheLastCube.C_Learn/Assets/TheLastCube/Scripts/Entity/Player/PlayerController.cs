@@ -19,6 +19,9 @@ public class PlayerController : TopDownController
     public bool redSkill = false;
     public bool yellowSkill = false;
 
+    public int redSkillMaxCount;
+    public int redSkillCount;
+
     private void FixedUpdate()
     {
         if (!isPressing)

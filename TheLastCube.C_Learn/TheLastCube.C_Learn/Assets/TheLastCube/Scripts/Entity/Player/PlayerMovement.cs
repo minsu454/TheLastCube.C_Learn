@@ -233,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator RollDown(Vector3 ancher, Vector3 axis)
     {
-        if (cubeController.playerSkill.skill1Count <= 0) yield break;
+        if (cubeController.redSkillCount <= 0) yield break;
         isMoving = true;
 
         Vector3 downVec = ((transform.position -  ancher - new Vector3(0,0.25f,0)) * 2) / rotateRate;
@@ -246,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position -= downVec;
             yield return new WaitForFixedUpdate();
         }
-        cubeController.playerSkill.skill1Count -= 1;
+        cubeController.redSkillCount -= 1;
 
         isMoving = false;
     }
