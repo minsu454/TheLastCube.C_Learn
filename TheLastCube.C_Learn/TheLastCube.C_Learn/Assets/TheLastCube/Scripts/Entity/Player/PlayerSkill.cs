@@ -44,7 +44,7 @@ public class PlayerSkill : MonoBehaviour
 
         if (active)
         {
-            Managers.Sound.PlaySFX(SfxType.End);
+            Managers.Sound.PlaySFX(SfxType.Skill);
             cubeController.playerQuadController.UseEffect((int)BlockInteractionType.KeyRed - 10);
             skill1Count = skill1MaxCount;
             pastPosition = gameObject.transform.position;
@@ -65,8 +65,8 @@ public class PlayerSkill : MonoBehaviour
             }
 
             skill1Count = -1;
-            this.gameObject.transform.position = pastPosition;
-            this.gameObject.transform.rotation = pastRotation;
+            transform.position = pastPosition;
+            transform.rotation = pastRotation;
             pastPosition = Vector3.zero;
             pastRotation = Quaternion.identity;
 
@@ -80,7 +80,7 @@ public class PlayerSkill : MonoBehaviour
     {
         cubeController.yellowSkill = active;
 
-        Managers.Sound.PlaySFX(SfxType.End);
+        Managers.Sound.PlaySFX(SfxType.Skill);
         cubeController.playerQuadController.UseEffect((int)BlockInteractionType.KeyYellow-10);
 
         if (active)

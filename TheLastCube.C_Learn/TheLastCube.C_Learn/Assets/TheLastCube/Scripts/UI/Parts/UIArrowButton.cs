@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 public class UIArrowButton : MonoBehaviour
 {
-    [SerializeField] private ArrowDirType arrowDirType;
-    [SerializeField] private Transform arrow;   //화살 위치
-    [SerializeField] private int distance;      
+    [SerializeField] private ArrowDirType arrowDirType;     //화살 방향타입
+    [SerializeField] private Transform arrow;               //화살
+    [SerializeField] private int distance;                  //이동 거리
 
-    private Vector3 movePos;
+    private Vector3 movePos;                    //움직이는 방향
     private bool isOnUI = true;                 //내려가있나 올라와있나 체크 변수
 
+    /// <summary>
+    /// 초기화 함수
+    /// </summary>
     public void Init()
     {
         switch (arrowDirType)
@@ -34,6 +37,9 @@ public class UIArrowButton : MonoBehaviour
         movePos *= distance;
     }
 
+    /// <summary>
+    /// 해당 창 움직이는 함수
+    /// </summary>
     public void OnArrowMove()
     {
         MoveArrow();

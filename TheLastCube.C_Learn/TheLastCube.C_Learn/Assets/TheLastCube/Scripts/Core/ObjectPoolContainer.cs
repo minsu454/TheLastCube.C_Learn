@@ -19,8 +19,11 @@ namespace ObjectPool {
             }
         }
 
-        public Dictionary<string, ObjectPool> objectPoolDic = new Dictionary<string, ObjectPool>();
+        public Dictionary<string, ObjectPool> objectPoolDic = new Dictionary<string, ObjectPool>();     //오브젝트풀들 담는 Dictionary
 
+        /// <summary>
+        /// 오브젝트풀에 오브젝트 생성해주는 함수
+        /// </summary>
         public void CreateObjectPool(string poolName, GameObject prefab, int preloadCount, Transform poolTr = null)
         {
             if (objectPoolDic.ContainsKey(poolName))
@@ -35,6 +38,9 @@ namespace ObjectPool {
             objectPoolDic.Add(poolName, pool);
         }
 
+        /// <summary>
+        /// 오브젝트풀에서 오브젝트 가져오는 함수
+        /// </summary>
         public GameObject Pop(string poolName)
         {
             if (string.IsNullOrEmpty(poolName))
@@ -49,7 +55,10 @@ namespace ObjectPool {
 
             return pool.GetObject();
         }
-
+        
+        /// <summary>
+        /// 오브젝트풀에 반환해주는 함수
+        /// </summary>
         public void Return(GameObject obj)
         {
             string poolName = obj.name;
@@ -63,21 +72,12 @@ namespace ObjectPool {
             obj.gameObject.SetActive(false);
             pool.objectStack.Push(obj);
         }
-
-        public Vector2 ReturnImageSize(string poolName)
-        {
-            if (!objectPoolDic.TryGetValue(poolName, out ObjectPool pool))
-            {
-                Debug.LogError($"Cannot found pool Name: {poolName}");
-                return Vector2.zero;
-            }
-
-            var spriteRenderer = pool.bassPrefab.GetComponent<SpriteRenderer>();
-            return spriteRenderer.bounds.size;
-        }
     }
 
     public static class Utility {
+        /// <summary>
+        /// 오브젝트풀에 오브젝트 생성해주는 함수
+        /// </summary>
         public static void CreateObjectPool(this GameObject obj, int preloadCount, Transform poolTr = null)
         {
             ObjectPoolContainer.Instance.CreateObjectPool(obj.name, obj, preloadCount, poolTr);

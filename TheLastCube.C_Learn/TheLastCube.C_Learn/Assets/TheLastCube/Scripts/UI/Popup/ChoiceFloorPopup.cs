@@ -4,7 +4,7 @@ using UnityEngine.Windows;
 
 public class ChoiceFloorPopup : BasePopup
 {
-    [SerializeField] private UIInputField inputField;
+    [SerializeField] private UIInputField inputField;   //층수 입력필드
     public event Action<int> ReturnValueEvent;
 
     public override void Init()
@@ -16,6 +16,9 @@ public class ChoiceFloorPopup : BasePopup
         inputField.SetValuecompleteEvent += OnCompleted;
     }
 
+    /// <summary>
+    /// inputField 값 설정 조건을 주는 함수
+    /// </summary>
     private int OnSetValue(string s)
     {
         int value = int.Parse(s) - 1;
@@ -26,6 +29,9 @@ public class ChoiceFloorPopup : BasePopup
         return value + 1;
     }
 
+    /// <summary>
+    /// inputField 값 설정이 끝났을 때 실행해주는 함수
+    /// </summary>
     private void OnCompleted()
     {
         int value = inputField.Value;
@@ -35,11 +41,5 @@ public class ChoiceFloorPopup : BasePopup
         ReturnValueEvent?.Invoke(value);
 
         Close();
-    }
-
-    public override void Close()
-    {
-
-        base.Close();
     }
 }

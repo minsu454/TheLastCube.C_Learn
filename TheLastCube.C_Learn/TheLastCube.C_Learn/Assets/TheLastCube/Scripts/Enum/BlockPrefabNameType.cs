@@ -1,5 +1,5 @@
 /// <summary>
-/// 블록타입
+/// 블록 프리팹 저장타입
 /// </summary>
 public enum BlockPrefabNameType
 {

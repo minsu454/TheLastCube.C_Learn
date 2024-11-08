@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OptionPopup : BasePopup
 {
-    [SerializeField] private UISoundBar uiSoundBar;
+    [SerializeField] private UISoundBar uiSoundBar;     //사운드 바
 
     public override void Init()
     {

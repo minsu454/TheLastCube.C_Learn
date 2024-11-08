@@ -31,6 +31,9 @@ public sealed class SoundManager : MonoBehaviour, IManager
         bgmSource.Play();
     }
 
+    /// <summary>
+    /// 블륨 설정 함수
+    /// </summary>
     public void SetVolume(string name, float volume)
     {
         if (name == "BGM")

@@ -32,15 +32,15 @@ public class MapEditorManager : MonoBehaviour
     public TotalEditorMapData MapData { get; private set; }
 
     [Header("ObjectPool")]
-    [SerializeField] private GameObject mapBlockPrefab;
+    [SerializeField] private GameObject mapBlockPrefab;     //맵블록 프리팹
 
     [Header("Map")]
-    public GameObject MapEditorGo;
-    public GameObject MapLookGo;    
+    public GameObject MapEditorGo;                          //맵 에디터에서 쓰는 GameObject
+    public GameObject MapLookGo;                            //맵을 3d로 볼때 쓰는 GameObject
 
 
-    public Enum EnumType { get; private set; }
-    public Material CurMaterial { get; private set; }
+    public Enum EnumType { get; private set; }              //내가 선택한 enum타입
+    public Material CurMaterial { get; private set; }       //내가 선택한 material
 
     private void Awake()
     {
@@ -54,12 +54,18 @@ public class MapEditorManager : MonoBehaviour
         MapData.Init();
     }
 
+    /// <summary>
+    /// Material 설정해주는 함수
+    /// </summary>
     public void SetMaterial(object type)
     {
         EnumType = (Enum)type;
         CurMaterial = Managers.Material.Return(EnumType);
     }
 
+    /// <summary>
+    /// 세이브 가능한지 알려주는 함수
+    /// </summary>
     public bool CanSave()
     {
         if (MapData.StartBlock == null || MapData.EndBlock == null)

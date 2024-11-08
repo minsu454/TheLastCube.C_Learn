@@ -27,12 +27,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject[] mapBlockPrefab;
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject[] mapBlockPrefab;       //블록프리팹 Array
+    [SerializeField] private GameObject playerPrefab;           //플레이어 프리팹
 
-    private Vector3 playerSpawnPos;
+    private Vector3 playerSpawnPos;                             //플레이어 스폰 위치
 
-    private readonly Dictionary<MapBlock, List<IMapEventBlock>> eventBlockDict = new Dictionary<MapBlock, List<IMapEventBlock>>();
+    private readonly Dictionary<MapBlock, List<IMapEventBlock>> eventBlockDict = new Dictionary<MapBlock, List<IMapEventBlock>>();  //블록 이벤트 Dictionary
 
     private void Awake()
     {
@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
         CreateCameraManager(playerObj);
     }
 
+    /// <summary>
+    /// 맵 생성해주는 함수
+    /// </summary>
     private void CreateMap()
     {
         string path = $"{Application.streamingAssetsPath}/MapData/{Managers.Data.FileName}.json";
@@ -77,6 +80,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 플레이어 생성해주는 함수
+    /// </summary>
     private GameObject CreatePlayer()
     {
         GameObject go = Instantiate(playerPrefab);
@@ -85,12 +91,18 @@ public class GameManager : MonoBehaviour
         return go;
     }
 
+    /// <summary>
+    /// 카메라 매니저 설정해주는 함수
+    /// </summary>
     private void CreateCameraManager(GameObject playerObj)
     {
         CameraManager cameraManager = Camera.main.AddComponent<CameraManager>();
         cameraManager.Init(playerObj);
     }
 
+    /// <summary>
+    /// 맵 블록 이벤트 실행 함수
+    /// </summary>
     public void MapBlockEventAction(MapBlock mapBlock)
     {
         if (!eventBlockDict.TryGetValue(mapBlock, out var list)) 

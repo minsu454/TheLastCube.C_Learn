@@ -6,10 +6,13 @@ public class MapBlock : MonoBehaviour
     public BlockData data = new BlockData();
     public BlockData Data { get { return data; } }
 
-    [SerializeField] protected MeshRenderer GroundRenderer;
-    [SerializeField] protected MeshRenderer MoveRenderer;
-    [SerializeField] protected MeshRenderer InteractionRenderer;
+    [SerializeField] protected MeshRenderer GroundRenderer;         //블록 renderer
+    [SerializeField] protected MeshRenderer MoveRenderer;           //블록 움직이는 renderer
+    [SerializeField] protected MeshRenderer InteractionRenderer;    //블록 상호작용 renderer
 
+    /// <summary>
+    /// 데이터 설정하는 함수
+    /// </summary>
     public virtual void SetData(BlockData data)
     {
         this.data = data;
@@ -26,28 +29,6 @@ public class MapBlock : MonoBehaviour
         {
             InteractionRenderer.material = Managers.Material.Return(data.InteractionType);
         }
-    }
-
-    public void BlockInteraction()
-    {
-        if (!data.eventBlock)
-        {
-            return;
-        }
-
-        foreach(var d in data.eventBlockList)
-        {
-            
-        }
-
-        //foreach (var eventBlockData in blockData.eventBlockList)
-        //{
-        //    GameObject eventClone = Instantiate(mapBlockPrefab[(int)BlockPrefabNameType.MapBlock]);
-        //    MapBlock eventBlock = eventClone.GetComponent<MapBlock>();
-
-        //    eventClone.transform.position = eventBlockData.Key;
-        //    eventBlock.SetData(eventBlockData.Value);
-        //}
     }
 }
 

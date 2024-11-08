@@ -8,13 +8,13 @@ using UnityEngine;
 public class UpBlock : MapBlock
 {
     [Header("UpBlock Value Setting")]
-    [SerializeField] private int Speed;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private int Speed;                 //블록 속도
+    [SerializeField] private LayerMask playerLayer;     //플레이어 감지 레이어
 
-    private Vector3 targetPosition;
-    private Vector3 originalPosition;
-    private bool Move = false;
-    private Action dispatchEvent;
+    private Vector3 targetPosition;                     //타겟 포지션    
+    private Vector3 originalPosition;                   //기존 포지션
+    private bool Move = false;                          //움직이는 중인지 체크 변수
+    private Action dispatchEvent;                       
 
     private void Start()
     {
@@ -43,11 +43,17 @@ public class UpBlock : MapBlock
         }
     }
 
+    /// <summary>
+    /// 충돌한 레이어가 Player레이어인지 체크해주는 함수
+    /// </summary>
     private bool IsPlayer(Collider other)
     {
         return playerLayer == (playerLayer | (1 << other.gameObject.layer));
     }
 
+    /// <summary>
+    /// 플레이어 움직임을 잠궈주는 함수
+    /// </summary>
     private void OnDispatch()
     {
         EventManager.Dispatch(GameEventType.LockPlayerMove, Move);

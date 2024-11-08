@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class InGame : BasePopup
 {
+    /// <summary>
+    /// pause버튼
+    /// </summary>
     public void PauseButton()
     {
         Managers.Sound.PlaySFX(SfxType.UIButton);
