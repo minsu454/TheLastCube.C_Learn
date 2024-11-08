@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerController cubeController;
     public LayerMask groundlayerMask;
-    private bool isMoving = false;
+    private bool isMoving = false;        
 
     [SerializeField]private float rotateSpeed;
     [SerializeField]private int maxCheckDistance = 5;
@@ -108,19 +108,31 @@ public class PlayerMovement : MonoBehaviour
         //Debug.DrawRay(transform.position, dir, Color.red);
 
         RaycastHit hit;
+
+        if (Physics.Raycast(ray, 1.4f, groundlayerMask))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool CheckWall2(Vector2 direction)
+    {
+        Vector3 dir = new Vector3(direction.x, 0, direction.y);
+        Ray ray = new Ray(transform.position, dir);
+        //Debug.DrawRay(transform.position, dir, Color.red);
+
+        RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1.4f))
         {
-            BreakBlock wall = hit.collider.gameObject.GetComponent<BreakBlock>();
+            BreakBlock wall;
+            if (!hit.collider.gameObject.TryGetComponent<BreakBlock>(out wall)) return true;
 
             if (wall.data.MoveType == BlockMoveType.Break)
             {
                 wall.Broken();
             }
-        }
-
-        if (Physics.Raycast(ray, 1.4f, groundlayerMask))
-        {
-            return true;
         }
 
         return false;
@@ -233,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator RollDown(Vector3 ancher, Vector3 axis)
     {
-        if (cubeController.playerSkill.skill1Count <= 0) yield break;
+        if (cubeController.redSkillCount <= 0) yield break;
         isMoving = true;
 
         Vector3 downVec = ((transform.position -  ancher - new Vector3(0,0.25f,0)) * 2) / rotateRate;
@@ -246,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position -= downVec;
             yield return new WaitForFixedUpdate();
         }
-        cubeController.playerSkill.skill1Count -= 1;
+        cubeController.redSkillCount -= 1;
 
         isMoving = false;
     }
@@ -257,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < maxCheckDistance; i++)
         {
 
-            if (CheckNextGround(direction) && !CheckWall(direction))
+            if (CheckNextGround(direction) && !CheckWall2(direction))
             {
                 transform.position += new Vector3(direction.x, 0, direction.y);
 
@@ -277,5 +289,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.Unsubscribe(GameEventType.LockPlayerMove, LockMove);
+    }
+
+    public bool Moving()
+    {
+        return isMoving;
     }
 }
