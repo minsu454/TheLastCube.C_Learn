@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public sealed class MaterialContainer : MonoBehaviour, IManager
 {
-    private readonly Dictionary<Enum, Material> groundContainerDic = new Dictionary<Enum, Material>();
+    private readonly Dictionary<Enum, Material> materialContainerDic = new Dictionary<Enum, Material>();      //블록에 모든 Material ContainerDic
     //UI를 열게될 때마다 Stack에 추가됨.
 
     public void Init() // 생성 초기값
@@ -28,13 +28,16 @@ public sealed class MaterialContainer : MonoBehaviour, IManager
             string name = $"Materials/{stringEnum}/{stringType}";
 
             Material material = Resources.Load<Material>(name);
-            groundContainerDic.Add(type, material);
+            materialContainerDic.Add(type, material);
         }
     }
 
+    /// <summary>
+    /// Material 반환 함수
+    /// </summary>
     public Material Return(Enum type)
     {
-        if (!groundContainerDic.TryGetValue(type, out Material material))
+        if (!materialContainerDic.TryGetValue(type, out Material material))
         {
             Debug.LogError($"Is Not Key Dictionary : {type}");
             return null;

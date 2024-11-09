@@ -4,7 +4,7 @@ using UnityEngine;
 public class ActiveAutoFalse : MonoBehaviour
 {
     public float lifeTime = 1;          //지속시간
-    Coroutine coroutine;
+    Coroutine coroutine;                //코루틴
 
     private void OnEnable()
     {

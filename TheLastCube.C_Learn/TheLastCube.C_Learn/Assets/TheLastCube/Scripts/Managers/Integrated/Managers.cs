@@ -37,7 +37,9 @@ public sealed class Managers : MonoBehaviour
     }
 
 
-    // Hierarchy창에 Manager만들어주는 함수
+    /// <summary>
+    /// Hierarchy창에 Manager만들어주는 함수
+    /// </summary>
     private static T CreateManager<T>(Transform parent) where T : Component, IManager
     {
         GameObject gameObject = new GameObject(typeof(T).Name);

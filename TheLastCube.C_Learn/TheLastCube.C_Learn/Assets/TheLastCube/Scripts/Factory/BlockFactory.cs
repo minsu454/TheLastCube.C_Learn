@@ -2,6 +2,9 @@ using UnityEngine;
 
 public static class BlockFactory
 {
+    /// <summary>
+    /// GameManager에 넣어준 ObjectList의 인덱스를 가져오는 함수
+    /// </summary>
     public static int MapBlockPrefabIndex(BlockMoveType type)
     {
         int mapBlock;
@@ -24,6 +27,9 @@ public static class BlockFactory
         return mapBlock;
     }
 
+    /// <summary>
+    /// GameManager에 넣어준 ObjectList의 인덱스를 가져오는 함수
+    /// </summary>
     public static int MapBlockEventPrefabIndex(BlockEventType type)
     {
         int index = -1;

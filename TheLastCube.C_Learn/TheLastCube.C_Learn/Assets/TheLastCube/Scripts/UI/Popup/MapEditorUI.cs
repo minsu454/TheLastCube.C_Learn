@@ -9,20 +9,18 @@ using UnityEngine.UI;
 
 public class MapEditorUI : BasePopup
 {
-    [SerializeField] private GameObject NotSeeMapUI;
-
-    [SerializeField] private TMP_Text floorText;
+    [SerializeField] private TMP_Text floorText;        //층 text
 
     [Header("UIArrow")]
-    [SerializeField] private UIArrowButton saveDataUI;
-    [SerializeField] private UIArrowButton floorInteractionUI;
-    [SerializeField] private UIArrowButton blockPaletteUI;
-    [SerializeField] private UIArrowButton blockInteractionPaletteUI;
+    [SerializeField] private UIArrowButton saveDataUI;                  //세이브 데이터 있는 존
+    [SerializeField] private UIArrowButton floorInteractionUI;          //층 상호작용 설정하는 존
+    [SerializeField] private UIArrowButton blockPaletteUI;              //블록 색입히게 설정하는 존
+    [SerializeField] private UIArrowButton blockInteractionPaletteUI;   //블록 상호작용 설정하는 존
 
     [Header("UIScrollView")]
-    [SerializeField] private UIScrollView blockBaseColorScrollView;
-    [SerializeField] private UIScrollView blockMoveScrollView;
-    [SerializeField] private UIScrollView blockInteractionScrollView;
+    [SerializeField] private UIScrollView blockBaseColorScrollView;     //블록 색입히는 스크롤 뷰
+    [SerializeField] private UIScrollView blockMoveScrollView;          //블록의 움직임을 입히는 스크롤 뷰
+    [SerializeField] private UIScrollView blockInteractionScrollView;   //블록에 상호작용을 입히는 스크롤 뷰
 
     public override void Init()
     {
@@ -42,26 +40,42 @@ public class MapEditorUI : BasePopup
 
     }
 
+    /// <summary>
+    /// 스크롤 뷰에 버튼 입력 시 실행하는 이벤트 함수
+    /// </summary>
     public void CustomClickEvent(object type)
     {
         MapEditorManager.Instance.SetMaterial(type);
     }
 
+    /// <summary>
+    /// 위층으로 text바꿔주는 함수
+    /// </summary>
     public void OnSeeUpFloor(int value)
     {
         floorText.text = (value + 1).ToString();
     }
 
+    /// <summary>
+    /// 밑층으로 text바꿔주는 함수
+    /// </summary>
     public void OnHideCurFloor(int value)
     {
         floorText.text = (value + 1).ToString();
     }
+
+    /// <summary>
+    /// 위층 버튼 입력 함수
+    /// </summary>
     public void SeeUpFloorBtn()
     {
         Managers.Sound.PlaySFX(SfxType.UIButton);
         MapEditorManager.Instance.MapData.ShowUpFloor();
     }
 
+    /// <summary>
+    /// 아래층 버튼 입력 함수
+    /// </summary>
     public void HideCurFloorBtn()
     {
         Managers.Sound.PlaySFX(SfxType.UIButton);
@@ -126,6 +140,9 @@ public class MapEditorUI : BasePopup
         }
     }
 
+    /// <summary>
+    /// 3인칭 뷰로 보여주는 함수
+    /// </summary>
     public void SeeMapLookUI()
     {
         Managers.Sound.PlaySFX(SfxType.UIButton);
@@ -140,6 +157,9 @@ public class MapEditorUI : BasePopup
         base.Close();
     }
 
+    /// <summary>
+    /// 타이틀 씬으로 돌아가는 버튼 함수
+    /// </summary>
     public void BackBtn()
     {
         Close(SceneType.Title);

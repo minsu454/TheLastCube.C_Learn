@@ -5,16 +5,12 @@ using UnityEngine;
 
 public class MapEditorBlock : MapBlock
 {
-    public Dictionary<Vector3, EventBlockDic> eventBlockDic = new Dictionary<Vector3, EventBlockDic>();
+    public Dictionary<Vector3, EventBlockDic> eventBlockDic = new Dictionary<Vector3, EventBlockDic>();     //이벤트 시 들어올 블록 Dictaionary
+    public MapEditorBlock Parent;       //이벤트시 부모 블록
 
-    public MapEditorBlock Parent;
-
-    public void SetData(BlockEventType eventType)
-    {
-        data.EventType = eventType;
-        GroundRenderer.material = Managers.Material.Return(data.EventType);
-    }
-
+    /// <summary>
+    ///  초기화 함수
+    /// </summary>
     public void Init(int floor, Vector3 pos)
     {
         data.floor = floor;
@@ -24,6 +20,19 @@ public class MapEditorBlock : MapBlock
         transform.position = pos;
     }
 
+    /// <summary>
+    /// 이벤트 타입 데이터 저장
+    /// </summary>
+    /// <param name="eventType"></param>
+    public void SetData(BlockEventType eventType)
+    {
+        data.EventType = eventType;
+        GroundRenderer.material = Managers.Material.Return(data.EventType);
+    }
+
+    /// <summary>
+    /// 기본 Material을 설정하는 함수
+    /// </summary>
     public void SetGround(Material material, BlockColorType colorType)
     {
         if (data.EventType != BlockEventType.None)
@@ -41,6 +50,9 @@ public class MapEditorBlock : MapBlock
         data.ColorType = colorType;
     }
 
+    /// <summary>
+    /// 움직임 타입 Material을 설정하는 함수
+    /// </summary>
     public void SetMove(Material material, BlockMoveType moveType)
     {
         if (data.ColorType == BlockColorType.None)
@@ -62,6 +74,9 @@ public class MapEditorBlock : MapBlock
         }
     }
 
+    /// <summary>
+    /// 위로 올라가는 블록 세팅
+    /// </summary>
     private void OnSetFloorUp(int value)
     {
         data.upCount = value;
@@ -70,6 +85,9 @@ public class MapEditorBlock : MapBlock
         data.MoveType = BlockMoveType.Up;
     }
 
+    /// <summary>
+    /// 상호작용 타입 Material을 설정하는 함수
+    /// </summary>
     public void SetInteraction(Material material, BlockInteractionType interactionType)
     {
         if (data.ColorType == BlockColorType.None)
@@ -81,6 +99,9 @@ public class MapEditorBlock : MapBlock
         data.InteractionType = interactionType;
     }
 
+    /// <summary>
+    /// 이벤트 타입 Material을 설정하는 함수
+    /// </summary>
     public void SetEvent(Material material, BlockEventType eventType)
     {
         if (data.ColorType != BlockColorType.None)
@@ -118,6 +139,9 @@ public class MapEditorBlock : MapBlock
         data.EventType = eventType;
     }
 
+    /// <summary>
+    /// Material 설정해주는 함수
+    /// </summary>
     private void SetGroundMaterial(MeshRenderer renderer, Material material)
     {
         if (material == null)
@@ -130,6 +154,9 @@ public class MapEditorBlock : MapBlock
         }
     }
 
+    /// <summary>
+    /// 맵에 하나만 있어야하는 블록들 설정 함수
+    /// </summary>
     private void OnlyOneBlock(BlockMoveType curType, BlockMoveType compareType, ref MapEditorBlock compare)
     {
         if (curType == compareType)
@@ -148,6 +175,9 @@ public class MapEditorBlock : MapBlock
         }
     }
 
+    /// <summary>
+    /// 블록정보 리셋해주는 함수
+    /// </summary>
     public void ResetBlock()
     {
         GroundRenderer.materials = new Material[0];

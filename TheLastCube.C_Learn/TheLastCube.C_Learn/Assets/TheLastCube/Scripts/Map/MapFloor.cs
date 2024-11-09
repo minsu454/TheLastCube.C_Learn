@@ -4,10 +4,12 @@ using ObjectPool;
 
 public class MapFloor : MonoBehaviour
 {
-    private readonly Dictionary<Vector3, MapEditorBlock> mapfloorDic = new Dictionary<Vector3, MapEditorBlock>();
-
+    private readonly Dictionary<Vector3, MapEditorBlock> mapfloorDic = new Dictionary<Vector3, MapEditorBlock>();       //층에 있는 모든 블록 저장 Dictionary
     private const string poolName = "NoneMapBlock";
 
+    /// <summary>
+    /// 층하나를 생성해주는 함수
+    /// </summary>
     public void Create(int mapScaleX, int mapScaleZ, int curfloor, Transform parent)
     {
         for (int x = 0; x < mapScaleX; x++)
@@ -26,6 +28,9 @@ public class MapFloor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 해당 층에 있는 위치 오브젝트 반환 함수
+    /// </summary>
     public MapEditorBlock Return(Vector3 keyVec)
     {
         if (!mapfloorDic.TryGetValue(keyVec, out MapEditorBlock mapBlock))

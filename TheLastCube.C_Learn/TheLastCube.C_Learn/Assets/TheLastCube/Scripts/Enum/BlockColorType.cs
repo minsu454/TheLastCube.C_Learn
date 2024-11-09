@@ -1,8 +1,8 @@
 /// <summary>
-/// 블록타입
+/// 블록색깔타입
 /// </summary>
 public enum BlockColorType
 {
     None = 0,
-    Block,
+    Block,          //기본 블록
 }

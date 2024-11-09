@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BreakBlock : MapBlock
 {
-    [SerializeField] private LayerMask playerLayer;
     [SerializeField] private GameObject animatorGo;
     [SerializeField] private BoxCollider myCollider;
 
@@ -16,6 +15,9 @@ public class BreakBlock : MapBlock
         GroundRenderer.material = Managers.Material.Return(data.MoveType);
     }
 
+    /// <summary>
+    /// 블록 파괴
+    /// </summary>
     public void Broken()
     {
         animatorGo.SetActive(true);

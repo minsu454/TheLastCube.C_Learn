@@ -5,10 +5,10 @@ namespace ObjectPool
 {
     public class ObjectPool
     {
-        public readonly string poolName;
-        public readonly Stack<GameObject> objectStack = new Stack<GameObject>();
-        public readonly GameObject bassPrefab;
-        public readonly Transform poolTr;
+        public readonly string poolName;                                            //이름
+        public readonly Stack<GameObject> objectStack = new Stack<GameObject>();    //스텍
+        public readonly GameObject bassPrefab;                                      //기본 프리팹
+        public readonly Transform poolTr;                                           //생성 위치
 
         public ObjectPool(string poolName, GameObject bassPrefab, Transform poolTr, int preloadCount)
         {
@@ -19,6 +19,9 @@ namespace ObjectPool
             Preload(preloadCount);
         }
 
+        /// <summary>
+        /// ObjectPool을 생성할 때 해당 값만큼 생성해주는 함수
+        /// </summary>
         public bool Preload(int preloadCount)
         {
             for (int i = 0; i < preloadCount; i++)
@@ -31,6 +34,9 @@ namespace ObjectPool
             return true;
         }
 
+        /// <summary>
+        /// 오브젝트 생성해주는 함수
+        /// </summary>
         public GameObject CreateImpl()
         {
             if (bassPrefab == null)
@@ -45,6 +51,9 @@ namespace ObjectPool
             return newGo;
         }
 
+        /// <summary>
+        /// 오브젝트 내보내주는 함수
+        /// </summary>
         public GameObject GetObject()
         {
             GameObject go;
@@ -61,6 +70,9 @@ namespace ObjectPool
             return go;
         }
 
+        /// <summary>
+        /// 오브젝트 스택에 다시 넣어주는 함수
+        /// </summary>
         public void ReturnObject(GameObject go)
         {
             if (go == null)

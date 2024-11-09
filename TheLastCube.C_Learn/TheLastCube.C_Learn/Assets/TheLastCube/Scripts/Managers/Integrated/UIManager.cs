@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour, IManager
 {
-    private readonly Dictionary<Enum, GameObject> UIContainer = new Dictionary<Enum, GameObject>();
+    private readonly Dictionary<Enum, GameObject> UIContainerDic = new Dictionary<Enum, GameObject>();      //모든 UI 담아두는 Dictionary
     private readonly Stack<BasePopup> depth = new Stack<BasePopup>();
     //UI를 열게될 때마다 Stack에 추가됨.
 
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour, IManager
             if (go == null)
                 continue;
 
-            UIContainer.Add(type, go);
+            UIContainerDic.Add(type, go);
         }
     }
 
@@ -46,9 +46,12 @@ public class UIManager : MonoBehaviour, IManager
         CreateUI(type);
     }
 
+    /// <summary>
+    /// UI생성해주는 함수
+    /// </summary>
     public BasePopup CreateUI(Enum type, bool curPopupActive = true)
     {
-        if (!UIContainer.TryGetValue(type, out GameObject prefab))
+        if (!UIContainerDic.TryGetValue(type, out GameObject prefab))
         {
             Debug.LogWarning($"Is Not Scene base UI : {type}");
             return null;
@@ -69,6 +72,9 @@ public class UIManager : MonoBehaviour, IManager
         return afterUI;
     }
 
+    /// <summary>
+    /// UI닫아주는 함수
+    /// </summary>
     public void CloseUI(Action LoadScene = null)
     {
         if (LoadScene != null)

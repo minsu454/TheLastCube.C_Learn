@@ -5,32 +5,26 @@ using UnityEngine;
 
 public static class SaveData 
 {
+    /// <summary>
+    /// 현재 스테이지 저장해주는 함수
+    /// </summary>
     public static void SaveCurrentStage()
     {
         string currentStage = Managers.Data.FileName;
         PlayerPrefs.SetInt(currentStage, 1);
     }
 
-    //public void SaveClearData(string stagename)
-    //{
-    //    PlayerPrefs.SetInt(stagename, 1);
-    //}
-
+    /// <summary>
+    /// 클리어데이터 반환해주는 함수
+    /// </summary>
     public static bool GetClearData(string stagename)
     {
         return PlayerPrefs.HasKey(stagename);
     }
 
-    public static void GetAllClearData()
-    {
-        int i = 1;
-        while (PlayerPrefs.HasKey($"{i}Stage")) 
-        {
-            Debug.Log($"{i}Stage is Clear.");
-            i++;
-        }
-    }
-
+    /// <summary>
+    /// 모든 저장 데이터 지워주는 함수
+    /// </summary>
     public static void DeleteAllData()
     {
         PlayerPrefs.DeleteAll();

@@ -6,17 +6,19 @@ using UnityEngine.EventSystems;
 
 public class CameraManager : MonoBehaviour
 {
-    private Transform targetTr;
-    private List<Vector3> pivot = new List<Vector3>();
+    private Transform targetTr;                             //타겟
+    private List<Vector3> pivot = new List<Vector3>();      //카메라의 4방향 정보 저장 List
 
-    private int pivotIdx;
+    private int pivotIdx;                                   //피봇 인덱스
 
+    /// <summary>
+    /// 초기화 함수
+    /// </summary>
     public void Init(GameObject target)
     {
         targetTr = target.transform;
 
         PlayerController controller = target.GetComponent<PlayerController>();
-
         controller.OnMoveEvent += ResetCameraViewPoint;
 
         pivot.Add(new Vector3(0, 10, -10));
@@ -32,6 +34,9 @@ public class CameraManager : MonoBehaviour
         transform.position = targetTr.position + pivot[pivotIdx];
     }
 
+    /// <summary>
+    /// 카메라 시점 리셋해주는 함수
+    /// </summary>
     private void ResetCameraViewPoint(Vector2 vec)
     {
         pivotIdx = 0;
@@ -39,6 +44,9 @@ public class CameraManager : MonoBehaviour
         transform.LookAt(targetTr);
     }
 
+    /// <summary>
+    /// 카메라 시점 변환해주는 함수
+    /// </summary>
     private void OnChangeViewPoint(object args)
     {
         if (EventSystem.current.IsPointerOverGameObject()) //UI 반환

@@ -2,7 +2,7 @@ using Common.Event;
 
 public sealed class DataManager : IManager
 {
-    private string fileName;
+    private string fileName;    //맵이름
     public string FileName { get { return fileName; } }
 
     public void Init()
@@ -10,6 +10,9 @@ public sealed class DataManager : IManager
         EventManager.Subscribe(GameEventType.StageChoice, StageChoiceCompleted);
     }
 
+    /// <summary>
+    /// 스테이지 고를 때 맵이름 저장해주는 함수
+    /// </summary>
     public void StageChoiceCompleted(object args)
     {
         fileName = (string)args;
