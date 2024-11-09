@@ -7,7 +7,7 @@ public class PlayerSkill : MonoBehaviour
 {
     private PlayerController cubeController;
 
-    private Vector3 pastPosition;
+    private Vector3 pastPosition;//redskill 사용 시 필요
     private Quaternion pastRotation;
 
     [SerializeField] private int skill1MaxCount = 6;
@@ -19,10 +19,10 @@ public class PlayerSkill : MonoBehaviour
 
     public bool CheckSkiilType()
     {
-        int upIndex = cubeController.playerQuadController.CheckUP();
+        int upIndex = cubeController.playerQuadController.CheckUP();//위의 quad를 체크해서 스킬 발동
 
-        switch (cubeController.playerQuadController.quads[upIndex].playerQuadType)
-        {
+        switch (cubeController.playerQuadController.quads[upIndex].playerQuadType)//구린 구조임 (자세히 보면 실력이 하강함) interface 형식으로 바꿔야 할 것 같음
+        {//OnSkillEvent에 순간적으로 구독을 해주고 스킬 사용이 끝나면 구독을 취소 시킴 (하나의 스킬 키로 수행하고 싶어서)
             case BlockInteractionType.None: Debug.Log("None"); return false;
             case BlockInteractionType.KeyRed:
                 cubeController.OnSkillEvent += skill1;
@@ -42,8 +42,8 @@ public class PlayerSkill : MonoBehaviour
 
         if (active)
         {
-            Managers.Sound.PlaySFX(SfxType.End);
-            cubeController.playerQuadController.UseEffect((int)BlockInteractionType.KeyRed - 10);
+            Managers.Sound.PlaySFX(SfxType.End);//효과음
+            cubeController.playerQuadController.UseEffect((int)BlockInteractionType.KeyRed - 10);//파티클 사용
             cubeController.redSkillCount = skill1MaxCount;
             pastPosition = gameObject.transform.position;
             pastRotation = gameObject.transform.rotation;
@@ -51,7 +51,7 @@ public class PlayerSkill : MonoBehaviour
         }
         else
         {
-            if (cubeController.playerMovement.CheckGround())
+            if (cubeController.playerMovement.CheckGround())//스킬 사용 후 땅에서 발동 시 위치 유지
             {
                 cubeController.redSkillCount = -1;
                 pastPosition = Vector3.zero;
@@ -62,7 +62,7 @@ public class PlayerSkill : MonoBehaviour
                 return;
             }
 
-            cubeController.redSkillCount = -1;
+            cubeController.redSkillCount = -1;//초기화
             this.gameObject.transform.position = pastPosition;
             this.gameObject.transform.rotation = pastRotation;
             pastPosition = Vector3.zero;

@@ -21,9 +21,9 @@ public class PlayerQuadController : MonoBehaviour
 
         CheckBottom();
 
-        BlockInteractionType blockInteractionType = mapBlock.Data.InteractionType;
+        BlockInteractionType blockInteractionType = mapBlock.Data.InteractionType;//무슨 블록인지 확인
         if (blockInteractionType == BlockInteractionType.None) return;//상호작용 내용이 없으면
-
+        //아래 코드도 구림 자세히는 보지 말 것
         if(blockInteractionType == BlockInteractionType.Delete)
         {
             if (quads[index].playerQuadType != BlockInteractionType.None)
@@ -35,26 +35,26 @@ public class PlayerQuadController : MonoBehaviour
             return;
         }
 
-        if ((int)blockInteractionType >= 100)
+        if ((int)blockInteractionType >= 100)//Lock종류에 해당하는 경우
         {
-            if((int)quads[index].playerQuadType - 10 == (int)blockInteractionType - 100)//enum이 하나라도 바뀌면 바뀌어야한다.
+            if((int)quads[index].playerQuadType - 10 == (int)blockInteractionType - 100)//같은 색상인지 확인 -> enum을 같은 10,11,12 / 100,101,102 로 만들어서 가능
             {
                 //특별 상호작용 발동
                 //BlockInteraction();
                 UseEffect((int)blockInteractionType - 100);
                 quads[index].ResetQuad();
-                GameManager.Instance.MapBlockEventAction(mapBlock);
-            }
+                GameManager.Instance.MapBlockEventAction(mapBlock);// 특정 상호작용은 다른 사람이 만들어 놓은 이벤크에 구독만 해놓아서 사용
+            }//발동한 상호작용의 종류만을 전달해주고 그 값을 토대로 기능을 구현하는 것은 가른 곳
         }
-        else if ((int)blockInteractionType >= 10)
+        else if ((int)blockInteractionType >= 10)// 색상을 입히기만 하느 블록이면
         {
             //상호작용
-            UseEffect((int)blockInteractionType-10);
+            UseEffect((int)blockInteractionType-10); //lock과 비슷하게 숫자를 맞춤
             quads[index].ChangeQuadRenderer(blockInteractionType);
         }
     }
 
-    public int CheckBottom()
+    public int CheckBottom()//밥 아저씨 출동
     {
         Vector3 DU = transform.rotation * Vector3.down;//순서도 중요하다. 회전값에 벡터를 곱할 수 있지만, 벡터에 회전 값을 곱할 순 없다.
         Vector3 RL = transform.rotation * Vector3.right;
@@ -142,7 +142,7 @@ public class PlayerQuadController : MonoBehaviour
         switch (index)
         {
             case 0:
-                playerController.Effect.transform.localPosition = new Vector3(0,0,-0.49f);
+                playerController.Effect.transform.localPosition = new Vector3(0,0,-0.49f); // 파티클 변경 시 gpt 형이라 이렇게 해야함 2
                 break;
             case 1:
                 playerController.Effect.transform.localPosition = new Vector3(0, 0, 0.49f);
@@ -172,7 +172,7 @@ public class PlayerQuadController : MonoBehaviour
             case 2: effectColor = Color.yellow; break;
             default: effectColor = Color.black; break;
         }
-        var mainModuul = playerController.Effect.GetComponent<ParticleSystem>().main;
+        var mainModuul = playerController.Effect.GetComponent<ParticleSystem>().main; // 파티클 변경 시 gpt 형이라 이렇게 해야함 1
         mainModuul.startColor = effectColor;
 
         playerController.Effect.SetActive(true);
