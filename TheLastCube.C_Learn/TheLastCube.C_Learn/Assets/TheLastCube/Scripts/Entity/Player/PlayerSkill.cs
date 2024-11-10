@@ -42,7 +42,7 @@ public class PlayerSkill : MonoBehaviour
 
         if (active)
         {
-            Managers.Sound.PlaySFX(SfxType.End);//효과음
+            Managers.Sound.PlaySFX(SfxType.Skill);//효과음
             cubeController.playerQuadController.UseEffect((int)BlockInteractionType.KeyRed - 10);//파티클 사용
             cubeController.redSkillCount = skill1MaxCount;
             pastPosition = gameObject.transform.position;
@@ -78,7 +78,7 @@ public class PlayerSkill : MonoBehaviour
     {
         cubeController.yellowSkill = active;
 
-        Managers.Sound.PlaySFX(SfxType.End);
+        Managers.Sound.PlaySFX(SfxType.Skill);
         cubeController.playerQuadController.UseEffect((int)BlockInteractionType.KeyYellow-10);
 
         if (active)
