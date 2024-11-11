@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TheLastCube/Scenes/InGame.unity
     guid: a88f7b2f5338bf24fa2c4fe0f1c70ef6
+  - enabled: 1
+    path: Assets/TheLastCube/Scenes/Loading.unity
+    guid: 2b9ad7d78e5c8f64fba3cdfe803005d5
   m_configObjects: {}

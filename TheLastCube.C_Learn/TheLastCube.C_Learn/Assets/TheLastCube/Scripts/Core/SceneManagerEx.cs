@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
@@ -9,12 +10,26 @@ namespace Common.Scene
     {
         private static readonly Dictionary<SceneType, string> typeToStringDic = new Dictionary<SceneType, string>();   //씬타입 string 변환 저장해 놓는 Dictionary
 
+        private static string nextScene;
+
         /// <summary>
         /// 씬 로드 함수
         /// </summary>
         public static void LoadScene(SceneType type)
         {
-            SceneManager.LoadScene(GetSceneName(type));
+            nextScene = GetSceneName(type);
+            SceneManager.LoadScene("Loading");
+        }
+
+        /// <summary>
+        /// 씬 다음 씬 비동기 로드 함수
+        /// </summary>
+        public static AsyncOperation LoadNextSceneAsync()
+        {
+            AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
+            op.allowSceneActivation = false;
+
+            return op;
         }
 
         /// <summary>
