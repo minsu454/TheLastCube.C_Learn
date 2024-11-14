@@ -153,9 +153,6 @@ MonoBehaviour:
   GroundRenderer: {fileID: 1591070446557597255}
   MoveRenderer: {fileID: 3554135813829456857}
   InteractionRenderer: {fileID: 32673509803661286}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
   animatorGo: {fileID: 159907269014203748}
   myCollider: {fileID: 906496764958965446}
 --- !u!23 &1591070446557597255
@@ -368,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fa9ae4fdd1026fb4c8c3b4c2fd9a2470,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
