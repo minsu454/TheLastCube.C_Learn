@@ -15,7 +15,7 @@ The Last Cube라는 스팀게임을 모작하였습니다.
 ## 기술 스택
 
 - Unity 버전: [2022.3.17f1]
-- C# 버전: [C#-17]
+- C# 버전: [C# 8.0]
 - 와이어프레임: [Figma](https://www.figma.com/board/4yS4QcPx9fZlUlcRnjd0Qj/Untitled?node-id=0-1&node-type=canvas&t=iVjMpBgQTHTGRWol-0) 
 - 발표 자료 & 프로젝트 기술 소개: [Figma](https://www.figma.com/slides/PcNssgNxdjpysY2iSCPfe1/10%EC%A1%B0-%EC%9E%84%EC%8B%9C?node-id=1-540&node-type=slide&t=LzEqhpXrTLS6PG7T-0)
 
