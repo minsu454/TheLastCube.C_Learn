@@ -13,7 +13,7 @@
 The Last Cube라는 스팀게임을 모작하였습니다.
 특색이 있는 기믹들을 이용해 문제를 풀어나가는 게임입니다.
 
-## 🎥 시연 영상
+## 시연 영상
 
 ### https://www.youtube.com/watch?v=ln1o5hxuOsA
 
