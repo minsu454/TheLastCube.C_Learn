@@ -15,7 +15,7 @@ The Last Cube라는 스팀게임을 모작하였습니다.
 
 ## 시연 영상
 
-### https://www.youtube.com/watch?v=ln1o5hxuOsA
+[![데모 영상](https://www.youtube.com/watch?v=ln1o5hxuOsA/0.jpg)](https://www.youtube.com/watch?v=ln1o5hxuOsA) 
 
 ## 기술 스택
 
